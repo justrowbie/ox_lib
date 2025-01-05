@@ -55,6 +55,10 @@ export const debugInput = () => {
             max: 50,
             step: 2,
           },
+          {
+            type: 'textarea',
+            label: 'Text area',
+          }
         ],
       },
     },

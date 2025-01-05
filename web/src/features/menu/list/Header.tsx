@@ -4,19 +4,26 @@ import React from 'react';
 const useStyles = createStyles((theme) => ({
   container: {
     textAlign: 'center',
-    borderTopLeftRadius: theme.radius.md,
-    borderTopRightRadius: theme.radius.md,
-    backgroundColor: theme.colors.dark[6],
-    height: 60,
-    width: 384,
+    background: theme.colors.dark[7],
+    opacity: 0.9,
+    borderTopLeftRadius: 5,
+    borderTopRightRadius: 5,
+    padding: 30,
+    height: 40,
+    width: 350,
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
+    color: theme.colors.gray[0],
+    borderBottom: 'solid',
+    borderWidth: 2,
+    borderColor: theme.colors.gray[3]
   },
   heading: {
-    fontSize: 24,
+    fontSize: 14,
+    color: theme.colors.gray[3],
     textTransform: 'uppercase',
-    fontWeight: 500,
+    fontWeight: 600,
   },
 }));
 

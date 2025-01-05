@@ -12,12 +12,12 @@ const useStyles = createStyles((theme) => ({
   container: {
     width: 300,
     height: 'fit-content',
-    backgroundColor: theme.colors.dark[6],
-    color: theme.colors.dark[0],
+    background: 'rgba(16, 17, 19, 0.9)',
+    color: theme.colors.gray[3],
     padding: 12,
     borderRadius: theme.radius.sm,
     fontFamily: 'Roboto',
-    boxShadow: theme.shadows.sm,
+    boxShadow: theme.shadows.sm
   },
   title: {
     fontWeight: 500,
@@ -25,13 +25,13 @@ const useStyles = createStyles((theme) => ({
   },
   description: {
     fontSize: 12,
-    color: theme.colors.dark[2],
+    color: theme.colors.gray[3],
     fontFamily: 'Roboto',
     lineHeight: 'normal',
   },
   descriptionOnly: {
     fontSize: 14,
-    color: theme.colors.dark[2],
+    color: theme.colors.gray[3],
     fontFamily: 'Roboto',
     lineHeight: 'normal',
   },
@@ -126,13 +126,13 @@ const Notifications: React.FC = () => {
           iconColor = 'red.6';
           break;
         case 'success':
-          iconColor = 'teal.6';
+          iconColor = 'green.6';
           break;
         case 'warning':
           iconColor = 'yellow.6';
           break;
         default:
-          iconColor = 'blue.6';
+          iconColor = 'gray.6';
           break;
       }
     } else {
@@ -164,7 +164,7 @@ const Notifications: React.FC = () => {
                           animation: `${durationCircle} linear forwards reverse`,
                           animationDuration: `${duration}ms`,
                         },
-                        margin: -3,
+                        margin: -3
                       },
                     }}
                     label={

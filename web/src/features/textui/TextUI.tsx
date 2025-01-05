@@ -1,81 +1,123 @@
 import React from 'react';
 import { useNuiEvent } from '../../hooks/useNuiEvent';
-import { Box, createStyles, Group } from '@mantine/core';
+import { Box, createStyles, Flex, Group } from '@mantine/core';
 import ReactMarkdown from 'react-markdown';
 import ScaleFade from '../../transitions/ScaleFade';
 import remarkGfm from 'remark-gfm';
 import type { TextUiPosition, TextUiProps } from '../../typings';
 import MarkdownComponents from '../../config/MarkdownComponents';
-import LibIcon from '../../components/LibIcon';
 
 const useStyles = createStyles((theme, params: { position?: TextUiPosition }) => ({
   wrapper: {
     height: '100%',
     width: '100%',
-    position: 'absolute',
     display: 'flex',
+    position: 'relative',
+    flexDirection: 'column',
+    left: params.position === 'left-center' ? '1vh' : params.position === 'right-center' ? '-1vh' : 0,
+    top: params.position === 'top-center' ? '1vh' : params.position === 'bottom-center' ? '90vh' : '45vh',
     alignItems: 
-      params.position === 'top-center' ? 'baseline' :
-      params.position === 'bottom-center' ? 'flex-end' : 'center',
-    justifyContent: 
+      params.position === 'top-center' ? 'center' :
+      params.position === 'bottom-center' ? 'center' :
+      params.position === 'left-center' ? 'flex-start' : 
+      'flex-end',
+    justifyContent:
       params.position === 'right-center' ? 'flex-end' :
-      params.position === 'left-center' ? 'flex-start' : 'center',
+      params.position === 'left-center' ? 'flex-start' :
+      'center',
+    zIndex: 10000,
+    fontFamily: 'Roboto',
+    lineHeight: 'normal',
   },
   container: {
-    fontSize: 16,
-    padding: 12,
-    margin: 8,
-    backgroundColor: theme.colors.dark[6],
-    color: theme.colors.dark[0],
-    fontFamily: 'Roboto',
-    borderRadius: theme.radius.sm,
-    boxShadow: theme.shadows.sm,
+    width: 'fit-content',
+    fontSize: 14,
+    padding: 10,
+    background: theme.colors.dark[9],
+    opacity: 0.9,
+    color: theme.colors.gray[0],
+    boxShadow: theme.colors.gray[3],
+  },
+  buttonContainer: {
+    color: theme.colors.gray[0],
+    boxShadow: theme.colors.gray[3],
+  },
+  button: {
+    background: theme.colors.gray[3],
+    opacity: 0.8,
+    color: theme.colors.dark[9],
+    padding: '6.5px 14px 6.5px 14px',
+    textAlign:'center',
+    fontSize: 20,
+    fontWeight: 800,
   },
 }));
 
-const TextUI: React.FC = () => {
-  const [data, setData] = React.useState<TextUiProps>({
-    text: '',
-    position: 'right-center',
-  });
-  const [visible, setVisible] = React.useState(false);
+const TextUI: React.FC<{ data: TextUiProps; visible: boolean; onHidden: () => void }> = ({ data, visible, onHidden }) => {
   const { classes } = useStyles({ position: data.position });
 
-  useNuiEvent<TextUiProps>('textUi', (data) => {
-    if (!data.position) data.position = 'right-center'; // Default right position
-    setData(data);
-    setVisible(true);
-  });
-
-  useNuiEvent('textUiHide', () => setVisible(false));
+  React.useEffect(() => {
+    if (!visible) {
+      const timer = setTimeout(onHidden, 300); // Delay to match the fade-out animation duration
+      return () => clearTimeout(timer);
+    }
+  }, [visible, onHidden]);
 
   return (
-    <>
-      <Box className={classes.wrapper}>
-        <ScaleFade visible={visible}>
+    <Box className={classes.wrapper}>
+      <ScaleFade visible={visible}>
+        <Flex direction={'row'} align={'center'} gap={5}>
+          {data.button && (
+            <div className={classes.buttonContainer}>
+              <span className={classes.button}>{data.button}</span>
+            </div>
+          )}
           <Box style={data.style} className={classes.container}>
             <Group spacing={12}>
-              {data.icon && (
-                <LibIcon
-                  icon={data.icon}
-                  fixedWidth
-                  size="lg"
-                  animation={data.iconAnimation}
-                  style={{
-                    color: data.iconColor,
-                    alignSelf: !data.alignIcon || data.alignIcon === 'center' ? 'center' : 'start',
-                  }}
-                />
-              )}
               <ReactMarkdown components={MarkdownComponents} remarkPlugins={[remarkGfm]}>
                 {data.text}
               </ReactMarkdown>
             </Group>
           </Box>
-        </ScaleFade>
-      </Box>
-    </>
+        </Flex>
+      </ScaleFade>
+    </Box>
   );
 };
 
-export default TextUI;
+const TextUIContainer: React.FC = () => {
+  const [textUis, setTextUis] = React.useState<{ id: number; data: TextUiProps; visible: boolean }[]>([]);
+
+  useNuiEvent<TextUiProps>('textUi', (newData) => {
+    if (!newData.position) newData.position = 'right-center';
+
+    setTextUis((current) => [
+      ...current,
+      { id: Date.now(), data: newData, visible: true },
+    ]);
+  });
+
+  useNuiEvent('textUiHide', (id?: number) => {
+    if (id !== undefined) {
+      setTextUis((current) =>
+        current.map((ui) => (ui.id === id ? { ...ui, visible: false } : ui))
+      );
+    } else {
+      setTextUis((current) => current.map((ui) => ({ ...ui, visible: false })));
+    }
+  });
+
+  const handleHidden = (id: number) => {
+    setTextUis((current) => current.filter((ui) => ui.id !== id));
+  };
+
+  return (
+    <Flex direction={'column'} gap={5}>
+      {textUis.map(({ id, data, visible }) => (
+        <TextUI key={id} data={data} visible={visible} onHidden={() => handleHidden(id)} />
+      ))}
+    </Flex>
+  );
+};
+
+export default TextUIContainer;

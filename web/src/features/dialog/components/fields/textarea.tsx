@@ -24,6 +24,11 @@ const TextareaField: React.FC<Props> = (props) => {
       autosize={props.row.autosize}
       minRows={props.row.min}
       maxRows={props.row.max}
+      styles={{
+        input:{
+          backgroundColor: 'transparent'
+        },
+      }}
     />
   );
 };

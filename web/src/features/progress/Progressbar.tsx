@@ -1,16 +1,33 @@
 import React from 'react';
-import { Box, createStyles, Text } from '@mantine/core';
+import { Box, createStyles, Text, Grid } from '@mantine/core';
 import { useNuiEvent } from '../../hooks/useNuiEvent';
 import { fetchNui } from '../../utils/fetchNui';
 import ScaleFade from '../../transitions/ScaleFade';
 import type { ProgressbarProps } from '../../typings';
+import { relative } from 'path';
 
 const useStyles = createStyles((theme) => ({
   container: {
+    maxWidth: 350,
     width: 350,
-    height: 45,
-    borderRadius: theme.radius.sm,
-    backgroundColor: theme.colors.dark[5],
+    height: 10,
+    background: theme.colors.dark[9],
+    opacity: 0.9,
+    overflow: 'hidden',
+    borderRadius: 2,
+  },
+  bordercontainer: {
+    position: 'absolute',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: 360,
+    height: 20,
+    marginLeft: -5,
+    marginTop: -5,
+    borderStyle: 'solid',
+    borderColor: theme.colors.gray[3],
+    borderWidth: 2,
+    borderRadius: 5,
     overflow: 'hidden',
   },
   wrapper: {
@@ -24,25 +41,33 @@ const useStyles = createStyles((theme) => ({
   },
   bar: {
     height: '100%',
-    backgroundColor: theme.colors[theme.primaryColor][theme.fn.primaryShade()],
+    backgroundColor: theme.colors.dark[9],
+    background: theme.colors.gray[3],
+    backgroundSize: "2em 2em",
+    backgroundPosition: "center",
+    borderRadius: 2,
   },
   labelWrapper: {
+    width: 360,
+    height: 50,
+    marginTop: -35,
+    fontSize: 14,
     position: 'absolute',
     display: 'flex',
-    width: 350,
-    height: 45,
-    alignItems: 'center',
-    justifyContent: 'center',
   },
   label: {
-    maxWidth: 350,
-    padding: 8,
+    textAlign: 'left',
     textOverflow: 'ellipsis',
     overflow: 'hidden',
     whiteSpace: 'nowrap',
-    fontSize: 20,
     color: theme.colors.gray[3],
-    textShadow: theme.shadows.sm,
+  },
+  value: {
+    textAlign: 'right',
+    textOverflow: 'ellipsis',
+    overflow: 'hidden',
+    whiteSpace: 'nowrap',
+    color: theme.colors.gray[3],
   },
 }));
 
@@ -51,13 +76,27 @@ const Progressbar: React.FC = () => {
   const [visible, setVisible] = React.useState(false);
   const [label, setLabel] = React.useState('');
   const [duration, setDuration] = React.useState(0);
+  const [value, setValue] = React.useState(0);
 
-  useNuiEvent('progressCancel', () => setVisible(false));
+  useNuiEvent('progressCancel', () => {
+    setValue(99);
+    setVisible(false);
+  });
 
   useNuiEvent<ProgressbarProps>('progress', (data) => {
+    if (visible) return;
     setVisible(true);
+    setValue(0);
     setLabel(data.label);
     setDuration(data.duration);
+    const onePercent = data.duration * 0.01;
+    const updateProgress = setInterval(() => {
+      setValue((previousValue) => {
+        const newValue = previousValue + 1;
+        newValue >= 100 && clearInterval(updateProgress);
+        return newValue;
+      });
+    }, onePercent);
   });
 
   return (
@@ -71,11 +110,13 @@ const Progressbar: React.FC = () => {
               sx={{
                 animation: 'progress-bar linear',
                 animationDuration: `${duration}ms`,
+                value: 0,
               }}
             >
-              <Box className={classes.labelWrapper}>
-                <Text className={classes.label}>{label}</Text>
-              </Box>
+              <Grid className={classes.labelWrapper}>
+                <Grid.Col span={10}><Text className={classes.label}>{label}</Text></Grid.Col>
+                <Grid.Col span={2}><Text className={classes.value}>{value}%</Text></Grid.Col>
+              </Grid>
             </Box>
           </Box>
         </ScaleFade>

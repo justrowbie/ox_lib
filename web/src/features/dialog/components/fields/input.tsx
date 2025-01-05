@@ -12,7 +12,7 @@ interface Props {
 
 const useStyles = createStyles((theme) => ({
   eyeIcon: {
-    color: theme.colors.dark[2],
+    color: theme.primaryColor,
   },
 }));
 
@@ -33,6 +33,11 @@ const InputField: React.FC<Props> = (props) => {
           maxLength={props.row.max}
           disabled={props.row.disabled}
           withAsterisk={props.row.required}
+          styles={{
+            input:{
+              backgroundColor: 'transparent'
+            },
+          }}
         />
       ) : (
         <PasswordInput
@@ -55,6 +60,11 @@ const InputField: React.FC<Props> = (props) => {
               fixedWidth
             />
           )}
+          styles={{
+            input:{
+              backgroundColor: 'transparent'
+            },
+          }}
         />
       )}
     </>

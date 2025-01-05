@@ -35,6 +35,11 @@ const NumberField: React.FC<Props> = (props) => {
       disabled={props.row.disabled}
       icon={props.row.icon && <LibIcon icon={props.row.icon} fixedWidth />}
       withAsterisk={props.row.required}
+      styles={{
+        input:{
+          backgroundColor: 'transparent'
+        },
+      }}
     />
   );
 };

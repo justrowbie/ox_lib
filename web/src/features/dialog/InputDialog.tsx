@@ -1,4 +1,4 @@
-import { Button, Group, Modal, Stack } from '@mantine/core';
+import { Box, Button, createStyles, Group, Modal, Stack } from '@mantine/core';
 import React from 'react';
 import { useNuiEvent } from '../../hooks/useNuiEvent';
 import { useLocales } from '../../providers/LocaleProvider';
@@ -16,6 +16,8 @@ import DateField from './components/fields/date';
 import TextareaField from './components/fields/textarea';
 import TimeField from './components/fields/time';
 import dayjs from 'dayjs';
+import SlideTransition from '../../transitions/SlideTransition';
+import { theme } from '../../theme';
 
 export type FormValues = {
   test: {
@@ -23,7 +25,27 @@ export type FormValues = {
   }[];
 };
 
+const useStyles = createStyles((theme) => ({
+  background: {
+    width: '100%',
+    height: '100vh'
+  },
+  buttonsubmit: {
+    backgroundColor: theme.colors.green[6],
+    '&:hover': {
+      backgroundColor: theme.colors.green[9]
+    },
+  },
+  buttoncancel: {
+    backgroundColor: theme.colors.red[6],
+    '&:hover': {
+      backgroundColor: theme.colors.red[9]
+    },
+  },
+}));
+
 const InputDialog: React.FC = () => {
+  const { classes } = useStyles();
   const [fields, setFields] = React.useState<InputProps>({
     heading: '',
     rows: [{ type: 'input', label: '' }],
@@ -97,6 +119,14 @@ const InputDialog: React.FC = () => {
 
   return (
     <>
+      <SlideTransition visible={visible}>
+        <Box
+          className={classes.background}
+          style={{
+            backgroundImage: `linear-gradient(to right, rgba(16, 17, 19, 0.0) 0%, rgba(16, 17, 19, 0.8) 80%)`,
+          }}
+        />
+      </SlideTransition>
       <Modal
         opened={visible}
         onClose={handleClose}
@@ -104,12 +134,25 @@ const InputDialog: React.FC = () => {
         closeOnEscape={fields.options?.allowCancel !== false}
         closeOnClickOutside={false}
         size="xs"
-        styles={{ title: { textAlign: 'center', width: '100%', fontSize: 18 } }}
         title={fields.heading}
         withCloseButton={false}
-        overlayOpacity={0.5}
+        overlayOpacity={0}
         transition="fade"
         exitTransitionDuration={150}
+        styles={{
+          modal: {
+            backgroundColor: 'rgba(16, 17, 19, 0.6)',
+            borderRadius: '10px',
+            left: '70vh',
+            transform: "perspective(1000px) rotateY(-12deg)"
+          }, 
+          title: { 
+            textAlign: 'center',
+            width: '100%',
+            fontSize: 16,
+            fontWeight: 500,
+          },
+        }}
       >
         <form onSubmit={onSubmit}>
           <Stack>
@@ -158,16 +201,18 @@ const InputDialog: React.FC = () => {
                 onClick={() => handleClose()}
                 mr={3}
                 disabled={fields.options?.allowCancel === false}
+                className={classes.buttoncancel}
               >
                 {locale.ui.cancel}
               </Button>
-              <Button uppercase variant="light" type="submit">
+              <Button className={classes.buttonsubmit} uppercase type="submit">
                 {locale.ui.confirm}
               </Button>
             </Group>
           </Stack>
         </form>
       </Modal>
+      
     </>
   );
 };

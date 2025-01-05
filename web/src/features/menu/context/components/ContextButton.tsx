@@ -21,15 +21,25 @@ const useStyles = createStyles((theme, params: { disabled?: boolean; readOnly?: 
   },
   label: {
     width: '100%',
-    color: params.disabled ? theme.colors.dark[3] : theme.colors.dark[0],
+    color: params.disabled ? theme.colors.gray[6] : theme.colors.gray[0],
     whiteSpace: 'pre-wrap',
+    fontWeight: 400,
+    '&:hover': {
+      color: theme.colors.dark[9],
+    },
   },
   button: {
+    background: theme.colors.dark[9],
+    opacity: 0.8,
     height: 'fit-content',
     width: '100%',
     padding: 10,
+    '&:disabled' : {
+      background: theme.colors.dark[9],
+      opacity: 0.8,
+    },
     '&:hover': {
-      backgroundColor: params.readOnly ? theme.colors.dark[6] : undefined,
+      backgroundColor: theme.colors.gray[3],
       cursor: params.readOnly ? 'unset' : 'pointer',
     },
     '&:active': {
@@ -40,23 +50,24 @@ const useStyles = createStyles((theme, params: { disabled?: boolean; readOnly?: 
     maxWidth: '25px',
   },
   description: {
-    color: params.disabled ? theme.colors.dark[3] : theme.colors.dark[2],
     fontSize: 12,
   },
   dropdown: {
+    backgroundColor: 'rgba(16, 17, 19, 0.8)',
+    opacity: 0.8,
     padding: 10,
-    color: theme.colors.dark[0],
-    fontSize: 14,
+    color: theme.colors.gray[0],
+    fontSize: 12,
     maxWidth: 256,
     width: 'fit-content',
     border: 'none',
   },
   buttonStack: {
-    gap: 4,
+    gap: 2,
     flex: '1',
   },
   buttonGroup: {
-    gap: 4,
+    gap: 2,
     flexWrap: 'nowrap',
   },
   buttonIconContainer: {
@@ -67,6 +78,8 @@ const useStyles = createStyles((theme, params: { disabled?: boolean; readOnly?: 
   },
   buttonTitleText: {
     overflowWrap: 'break-word',
+    fontWeight: 500,
+    fontSize: 13,
   },
   buttonArrowContainer: {
     justifyContent: 'center',
@@ -92,7 +105,7 @@ const ContextButton: React.FC<{
       >
         <HoverCard.Target>
           <Button
-            classNames={{ inner: classes.inner, label: classes.label, root: classes.button }}
+            classNames={{ inner: classes.inner, root: classes.button }}
             onClick={() =>
               !button.disabled && !button.readOnly
                 ? button.menu
@@ -133,7 +146,12 @@ const ContextButton: React.FC<{
                   </Text>
                 )}
                 {button.progress !== undefined && (
-                  <Progress value={button.progress} size="sm" color={button.colorScheme || 'dark.3'} />
+                  <Progress 
+                    value={button.progress} 
+                    size="sm" 
+                    color={'gray.0'}
+                    styles={(theme) => ({ root: { backgroundColor: theme.colors.gray[8] } })}
+                  />
                 )}
               </Stack>
               {(button.menu || button.arrow) && button.arrow !== false && (
@@ -161,7 +179,8 @@ const ContextButton: React.FC<{
                     <Progress
                       value={metadata.progress}
                       size="sm"
-                      color={metadata.colorScheme || button.colorScheme || 'dark.3'}
+                      color={metadata.colorScheme || 'gray.3' || 'gray.3'}
+                      styles={(theme) => ({ root: { backgroundColor: theme.colors.gray[0] } })}
                     />
                   )}
                 </>

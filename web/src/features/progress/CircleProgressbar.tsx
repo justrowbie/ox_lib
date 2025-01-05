@@ -23,25 +23,28 @@ const useStyles = createStyles((theme, params: { position: 'middle' | 'bottom'; 
   },
   progress: {
     '> svg > circle:nth-child(1)': {
-      stroke: theme.colors.dark[5],
+      stroke: theme.colors.dark[7],
+      opacity: 0.9,
+      strokeWidth: 10,
     },
     // Scuffed way of grabbing the first section and animating it
     '> svg > circle:nth-child(2)': {
       transition: 'none',
       animation: `${progressCircle} linear forwards`,
       animationDuration: `${params.duration}ms`,
+      stroke: theme.colors.gray[3],
+      opacity: 0.9,
+      strokeWidth: 10,
     },
+
   },
   value: {
     textAlign: 'center',
-    fontFamily: 'roboto-mono',
-    textShadow: theme.shadows.sm,
-    color: theme.colors.gray[3],
+    color: theme.colors.gray[0],
   },
   label: {
     textAlign: 'center',
-    textShadow: theme.shadows.sm,
-    color: theme.colors.gray[3],
+    color: theme.colors.gray[0],
     height: 25,
   },
   wrapper: {

@@ -38,7 +38,15 @@ export const debugContext = () => {
             ],
           },
           {
-            title: 'Example button',
+            title: 'Readonly button',
+            description: 'Example button description',
+            icon: 'inbox',
+            image: 'https://i.imgur.com/YAe7k17.jpeg',
+            metadata: [{ label: 'Value 1', value: 300 }],
+            readOnly: true,
+          },
+          {
+            title: 'Disabled button',
             description: 'Example button description',
             icon: 'inbox',
             image: 'https://i.imgur.com/YAe7k17.jpeg',

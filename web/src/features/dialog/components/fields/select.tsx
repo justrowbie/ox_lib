@@ -1,4 +1,4 @@
-import { MultiSelect, Select } from '@mantine/core';
+import { BackgroundImage, MultiSelect, Select } from '@mantine/core';
 import { ISelect } from '../../../../typings';
 import { Control, useController } from 'react-hook-form';
 import { FormValues } from '../../InputDialog';
@@ -34,6 +34,11 @@ const SelectField: React.FC<Props> = (props) => {
           clearable={props.row.clearable}
           searchable={props.row.searchable}
           icon={props.row.icon && <LibIcon icon={props.row.icon} fixedWidth />}
+          styles={{
+            input:{
+              backgroundColor: 'transparent'
+            },
+          }}
         />
       ) : (
         <>
@@ -53,6 +58,11 @@ const SelectField: React.FC<Props> = (props) => {
               searchable={props.row.searchable}
               maxSelectedValues={props.row.maxSelectedValues}
               icon={props.row.icon && <LibIcon icon={props.row.icon} fixedWidth />}
+              styles={{
+                input:{
+                  backgroundColor: 'transparent'
+                },
+              }}
             />
           )}
         </>

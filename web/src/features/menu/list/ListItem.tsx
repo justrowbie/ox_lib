@@ -15,48 +15,57 @@ interface Props {
 
 const useStyles = createStyles((theme, params: { iconColor?: string }) => ({
   buttonContainer: {
-    backgroundColor: theme.colors.dark[6],
-    borderRadius: theme.radius.md,
-    padding: 2,
-    height: 60,
+    borderRadius: 4,
+    height: 43,
     scrollMargin: 8,
     '&:focus': {
-      backgroundColor: theme.colors.dark[4],
+      backgroundColor: theme.colors.gray[3] || theme.colors.dark[9],
+      color: theme.colors.dark[9],
+      fontWeight: 500,
       outline: 'none',
     },
   },
   iconImage: {
-    maxWidth: 32,
+    maxWidth: 20,
   },
   buttonWrapper: {
-    paddingLeft: 5,
-    paddingRight: 12,
+    paddingLeft: 20,
+    paddingRight: 20,
     height: '100%',
   },
   iconContainer: {
     display: 'flex',
     alignItems: 'center',
-    width: 32,
-    height: 32,
+    width: 20,
+    height: 20,
   },
   icon: {
-    fontSize: 24,
-    color: params.iconColor || theme.colors.dark[2],
+    fontSize: 14,
+    '&:focus': {
+      color: theme.colors.gray[3] || theme.colors.dark[9],
+    },
   },
   label: {
-    color: theme.colors.dark[2],
     textTransform: 'uppercase',
     fontSize: 12,
+    fontWeight: 500,
     verticalAlign: 'middle',
+    '&:focus': {
+      color: theme.colors.gray[3] || theme.colors.dark[9],
+    },
   },
   chevronIcon: {
     fontSize: 14,
-    color: theme.colors.dark[2],
+    '&:focus': {
+      color: theme.colors.gray[3] || theme.colors.dark[9],
+    },
   },
   scrollIndexValue: {
-    color: theme.colors.dark[2],
     textTransform: 'uppercase',
     fontSize: 14,
+    '&:focus': {
+      color: theme.colors.gray[3] || theme.colors.dark[9],
+    },
   },
   progressStack: {
     width: '100%',
@@ -126,8 +135,8 @@ const ListItem = forwardRef<Array<HTMLDivElement | null>, Props>(({ item, index,
             <Text className={classes.progressLabel}>{item.label}</Text>
             <Progress
               value={item.progress}
-              color={item.colorScheme || 'dark.0'}
-              styles={(theme) => ({ root: { backgroundColor: theme.colors.dark[3] } })}
+              color={'gray.0'}
+              styles={(theme) => ({ root: { backgroundColor: theme.colors.gray[8] } })}
             />
           </Stack>
         ) : (
