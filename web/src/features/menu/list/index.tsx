@@ -28,7 +28,8 @@ const useStyles = createStyles((theme, params: { position?: MenuPosition; itemCo
     right: params.position === 'top-right' || params.position === 'bottom-right' ? 1 : undefined,
     left: params.position === 'bottom-left' ? 1 : undefined,
     bottom: params.position === 'bottom-left' || params.position === 'bottom-right' ? 1 : undefined,
-    transform: params.position === 'bottom-left' || params.position === 'bottom-right' ? "perspective(1000px) rotateY(-12deg)" : "perspective(1000px) rotateY(12deg)",
+    transform: params.position === 'bottom-right' || params.position === 'top-right' ? 
+      "perspective(1000px) rotateY(-12deg)" : "perspective(1000px) rotateY(12deg)",
     fontSize: 12,
     width: 350,
   },
