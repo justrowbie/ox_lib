@@ -1,4 +1,4 @@
-import { Textarea } from '@mantine/core';
+import { Textarea, useMantineTheme } from '@mantine/core';
 import { UseFormRegisterReturn } from 'react-hook-form';
 import { ITextarea } from '../../../../typings/dialog';
 import React from 'react';
@@ -11,6 +11,7 @@ interface Props {
 }
 
 const TextareaField: React.FC<Props> = (props) => {
+  const theme = useMantineTheme();
   return (
     <Textarea
       {...props.register}
@@ -26,8 +27,15 @@ const TextareaField: React.FC<Props> = (props) => {
       maxRows={props.row.max}
       styles={{
         input:{
-          backgroundColor: 'transparent'
+          backgroundColor: 'transparent',
+          borderColor: theme.colors.gray[6]
         },
+        label:{
+          color: theme.colors.gray[0],
+        },
+        description:{
+          color: theme.colors.gray[4],
+        }
       }}
     />
   );

@@ -1,3 +1,4 @@
+import { useMantineTheme } from '@mantine/core';
 import { TimeInput } from '@mantine/dates';
 import { Control, useController } from 'react-hook-form';
 import { ITimeInput } from '../../../../typings/dialog';
@@ -11,6 +12,7 @@ interface Props {
 }
 
 const TimeField: React.FC<Props> = (props) => {
+  const theme = useMantineTheme();
   const controller = useController({
     name: `test.${props.index}.value`,
     control: props.control,
@@ -33,8 +35,15 @@ const TimeField: React.FC<Props> = (props) => {
       icon={props.row.icon && <LibIcon fixedWidth icon={props.row.icon} />}
       styles={{
         input:{
-          backgroundColor: 'transparent'
+          backgroundColor: 'transparent',
+          borderColor: theme.colors.gray[6]
         },
+        label:{
+          color: theme.colors.gray[0],
+        },
+        description:{
+          color: theme.colors.gray[4],
+        }
       }}
     />
   );

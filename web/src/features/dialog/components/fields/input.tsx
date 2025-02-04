@@ -1,4 +1,4 @@
-import { createStyles, PasswordInput, TextInput } from '@mantine/core';
+import { PasswordInput, TextInput, useMantineTheme } from '@mantine/core';
 import React from 'react';
 import { IInput } from '../../../../typings/dialog';
 import { UseFormRegisterReturn } from 'react-hook-form';
@@ -10,14 +10,8 @@ interface Props {
   index: number;
 }
 
-const useStyles = createStyles((theme) => ({
-  eyeIcon: {
-    color: theme.primaryColor,
-  },
-}));
-
 const InputField: React.FC<Props> = (props) => {
-  const { classes } = useStyles();
+  const theme = useMantineTheme();
 
   return (
     <>
@@ -35,8 +29,15 @@ const InputField: React.FC<Props> = (props) => {
           withAsterisk={props.row.required}
           styles={{
             input:{
-              backgroundColor: 'transparent'
+              backgroundColor: 'transparent',
+              borderColor: theme.colors.gray[6],
             },
+            label:{
+              color: theme.colors.gray[0],
+            },
+            description:{
+              color: theme.colors.gray[4],
+            }
           }}
         />
       ) : (
@@ -56,14 +57,20 @@ const InputField: React.FC<Props> = (props) => {
               icon={reveal ? 'eye-slash' : 'eye'}
               fontSize={size}
               cursor="pointer"
-              className={classes.eyeIcon}
               fixedWidth
             />
           )}
           styles={{
             input:{
-              backgroundColor: 'transparent'
+              backgroundColor: 'transparent',
+              borderColor: theme.colors.gray[6],
             },
+            label:{
+              color: theme.colors.gray[0],
+            },
+            description:{
+              color: theme.colors.gray[4],
+            }
           }}
         />
       )}

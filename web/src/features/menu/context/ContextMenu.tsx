@@ -18,6 +18,7 @@ const useStyles = createStyles((theme) => ({
   background: {
     width: '100%',
     height: '100vh',
+    backgroundImage: `linear-gradient(to right,`+ theme.colors[theme.primaryColor][8] +`00 40%,`+ theme.colors[theme.primaryColor][8] +`80 80%)`,
   },
   container: {
     position: 'absolute',
@@ -35,21 +36,24 @@ const useStyles = createStyles((theme) => ({
   },
   titleContainer: {
     flex: '1 85%',
-    background: theme.colors.dark[9],
-    opacity: 0.8,
+    backgroundColor: theme.colors.dark[6] + 'CC',
+    border: '1px solid ' + theme.colors[theme.primaryColor][8],
+    boxShadow: theme.colors[theme.primaryColor][8] + ' 0 0 5px 1px'
   },
   titleText: {
-    color: theme.colors.gray[0],
-    padding: 4,
+    color: theme.colors[theme.primaryColor][6],
+    textShadow: '0 0 10px' + theme.colors[theme.primaryColor][8],
+    padding: 6,
     textAlign: 'center',
-    fontWeight: 400,
+    fontSize: 14,
+    fontWeight: 600,
   },
   buttonsContainer: {
     height: 560,
     overflowY: 'scroll',
   },
   buttonsFlexWrapper: {
-    gap: 4,
+    gap: 6,
   },
 }));
 
@@ -97,9 +101,6 @@ const ContextMenu: React.FC = () => {
       <SlideTransition visible={visible}>
         <Box
           className={classes.background}
-          style={{
-            backgroundImage: `linear-gradient(to right, rgba(16, 17, 19, 0.0) 0%, rgba(16, 17, 19, 0.8) 80%)`,
-          }}
         />
       </SlideTransition>
       <Box className={classes.container}>

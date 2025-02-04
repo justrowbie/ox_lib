@@ -3,7 +3,7 @@ import { MantineThemeOverride } from '@mantine/core';
 export const theme: MantineThemeOverride = {
   colorScheme: 'dark',
   fontFamily: 'Roboto',
-  colors: {
+  // colors: {
     // green:[
     //   '#EBFBEE',
     //   '#D3F9D8',
@@ -16,7 +16,7 @@ export const theme: MantineThemeOverride = {
     //   '#2F9E44',
     //   '#4da527',
     // ]
-  },
+  // },
   fontSizes: {
     xs: 10,
     sm: 12,

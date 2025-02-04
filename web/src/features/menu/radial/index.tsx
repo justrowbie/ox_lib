@@ -17,31 +17,31 @@ const useStyles = createStyles((theme) => ({
     transform: 'translate(-50%, -50%)',
   },
   sector: {
-    fill: theme.colors.dark[9],
-    color: theme.colors.gray[3],
-    opacity: 0.9,
+    fill: theme.colors.dark[6] + 'CC',
     '&:hover': {
-      fill: theme.colors.gray[3],
+      fill: theme.colors[theme.primaryColor][8] + 'CC',
+      filter: 'drop-shadow(0 0 2px ' + theme.colors[theme.primaryColor][8] + ')',
       cursor: 'pointer',
       '> g > text, > g > svg > path': {
-        fill: theme.colors.dark[9],
+        fill: theme.colors.gray[0],
       },
     },
     '> g > text': {
-      fill: theme.colors.gray[3],
-      opacity: 0.9,
-      strokeWidth: 0,
+      fill: theme.colors.gray[6],
     },
   },
   backgroundCircle: {
-    fill: theme.colors.dark[9],
-    opacity: 0.1
+    fill: 'transparent',
+    strokeWidth: 2,
   },
   centerCircle: {
-    fill: theme.colors.dark[8],
+    fill: theme.colors.dark[6],
+    stroke: theme.colors[theme.primaryColor][8] + 'CC',
+    strokeWidth: '2px',
+    filter: 'drop-shadow(0 0 2px ' + theme.colors[theme.primaryColor][8] + ')',
     '&:hover': {
       cursor: 'pointer',
-      fill: theme.colors.dark[9],
+      fill: theme.colors[theme.primaryColor][8] + 'CC',
     },
   },
   centerIconContainer: {
@@ -50,7 +50,7 @@ const useStyles = createStyles((theme) => ({
     left: '50%',
     transform: 'translate(-50%, -50%)',
     pointerEvents: 'none',
-    color: theme.colors.gray[3]
+    color: theme.colors.gray[0]
   },
 }));
 
@@ -234,7 +234,7 @@ const RadialMenu: React.FC = () => {
                 }
               }}
             >
-              <circle r={28} className={classes.centerCircle} />
+              <circle r={20} className={classes.centerCircle} />
             </g>
           </svg>
           <div className={classes.centerIconContainer}>

@@ -1,4 +1,4 @@
-import { NumberInput } from '@mantine/core';
+import { NumberInput, useMantineTheme } from '@mantine/core';
 import { INumber } from '../../../../typings/dialog';
 import { Control, useController } from 'react-hook-form';
 import { FormValues } from '../../InputDialog';
@@ -11,6 +11,7 @@ interface Props {
 }
 
 const NumberField: React.FC<Props> = (props) => {
+  const theme = useMantineTheme();
   const controller = useController({
     name: `test.${props.index}.value`,
     control: props.control,
@@ -37,7 +38,14 @@ const NumberField: React.FC<Props> = (props) => {
       withAsterisk={props.row.required}
       styles={{
         input:{
-          backgroundColor: 'transparent'
+          backgroundColor: 'transparent',
+          borderColor: theme.colors.gray[6]
+        },
+        label:{
+          color: theme.colors.gray[0],
+        },
+        description:{
+          color: theme.colors.gray[4],
         },
       }}
     />

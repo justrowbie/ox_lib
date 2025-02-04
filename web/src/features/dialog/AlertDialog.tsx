@@ -12,21 +12,44 @@ import SlideTransition from '../../transitions/SlideTransition';
 const useStyles = createStyles((theme) => ({
   background: {
     width: '100%',
-    height: '100vh'
+    height: '100vh',
+    backgroundImage: `linear-gradient(to right,`+ theme.colors[theme.primaryColor][8] +`00 40%,`+ theme.colors[theme.primaryColor][8] +`80 80%)`,
   },
   contentStack: {
-    color: theme.colors.dark[0],
+    color: theme.colors.gray[0],
+    textAlign: 'justify',
+  },
+  modal: {
+    backgroundColor: theme.colors.dark[6] + 'CC',
+    boxShadow: theme.colors[theme.primaryColor][8] + ' 0 0 20px 1px',
+    borderRadius: '10px',
+    left: '70vh',
+    maxWidth: '400px',
+    maxHeight: '600px',
+    transform: "perspective(1000px) rotateY(-12deg)"
+  },
+  modalTitle: { 
+    width: '100%',
+    fontSize: 16,
+    fontWeight: 500,
+    color: theme.colors[theme.primaryColor][6],
+    textAlign: 'center',
+    textShadow: '0 0 10px' + theme.colors[theme.primaryColor][8],
+    borderBottom: '2px solid ' + theme.colors[theme.primaryColor][8],
+    boxShadow: theme.colors[theme.primaryColor][8] + ' 0 5px 5px -5px',
   },
   buttonsubmit: {
-    backgroundColor: theme.colors.green[6],
+    color: theme.colors.gray[0],
+    backgroundColor: theme.colors[theme.primaryColor][8],
     '&:hover': {
-      backgroundColor: theme.colors.green[9]
+      backgroundColor: theme.colors[theme.primaryColor][6]
     },
   },
   buttoncancel: {
-    backgroundColor: theme.colors.red[6],
+    color: theme.colors.gray[0],
+    backgroundColor: theme.colors.red[9],
     '&:hover': {
-      backgroundColor: theme.colors.red[9]
+      backgroundColor: theme.colors.red[6]
     },
   },
 }));
@@ -60,9 +83,6 @@ const AlertDialog: React.FC = () => {
       <SlideTransition visible={opened}>
         <Box
           className={classes.background}
-          style={{
-            backgroundImage: `linear-gradient(to right, rgba(16, 17, 19, 0.0) 0%, rgba(16, 17, 19, 0.8) 80%)`,
-          }}
         />
       </SlideTransition>
       <Modal
@@ -80,21 +100,9 @@ const AlertDialog: React.FC = () => {
         overlayOpacity={0}
         exitTransitionDuration={150}
         transition="fade"
-        styles={{
-          modal: {
-            backgroundColor: 'rgba(16, 17, 19, 0.6)',
-            borderRadius: '10px',
-            left: '70vh',
-            maxWidth: '400px',
-            maxHeight: '600px',
-            transform: "perspective(1000px) rotateY(-12deg)"
-          },
-          title: { 
-            width: '100%',
-            color: theme.colors.gray[1],
-            fontSize: 16,
-            fontWeight: 500,
-          }
+        classNames={{
+          modal: classes.modal,
+          title: classes.modalTitle
         }}
         title={<ReactMarkdown components={MarkdownComponents}>{dialogData.header}</ReactMarkdown>}
       >

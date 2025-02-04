@@ -1,4 +1,4 @@
-import { Checkbox } from '@mantine/core';
+import { Checkbox, useMantineTheme } from '@mantine/core';
 import { ICheckbox } from '../../../../typings/dialog';
 import { UseFormRegisterReturn } from 'react-hook-form';
 
@@ -9,6 +9,7 @@ interface Props {
 }
 
 const CheckboxField: React.FC<Props> = (props) => {
+const theme = useMantineTheme();
   return (
     <Checkbox
       {...props.register}
@@ -19,7 +20,8 @@ const CheckboxField: React.FC<Props> = (props) => {
       disabled={props.row.disabled}
       styles={{
         input:{
-          backgroundColor: 'transparent'
+          backgroundColor: 'transparent',
+          borderColor: theme.colors.gray[6]
         },
       }}
     />

@@ -53,7 +53,7 @@ export const debugInput = () => {
             label: 'Slide bar',
             min: 10,
             max: 50,
-            step: 2,
+            step: 1,
           },
           {
             type: 'textarea',

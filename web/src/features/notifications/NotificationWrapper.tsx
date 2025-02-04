@@ -1,7 +1,7 @@
 import { useNuiEvent } from '../../hooks/useNuiEvent';
 import { toast, Toaster } from 'react-hot-toast';
 import ReactMarkdown from 'react-markdown';
-import { Box, Center, createStyles, Group, keyframes, RingProgress, Stack, Text, ThemeIcon } from '@mantine/core';
+import { Box, Center, createStyles, Group, keyframes, RingProgress, Stack, Text, ThemeIcon, useMantineTheme } from '@mantine/core';
 import React, { useState } from 'react';
 import tinycolor from 'tinycolor2';
 import type { NotificationProps } from '../../typings';
@@ -12,8 +12,8 @@ const useStyles = createStyles((theme) => ({
   container: {
     width: 300,
     height: 'fit-content',
-    background: 'rgba(16, 17, 19, 0.9)',
-    color: theme.colors.gray[3],
+    background: theme.colors.dark[6] + 'CC',
+    color: theme.colors.gray[0],
     padding: 12,
     borderRadius: theme.radius.sm,
     fontFamily: 'Roboto',
@@ -22,16 +22,18 @@ const useStyles = createStyles((theme) => ({
   title: {
     fontWeight: 500,
     lineHeight: 'normal',
+    color: theme.colors[theme.primaryColor][6],
+    textShadow: '0 0 10px' + theme.colors[theme.primaryColor][8],
   },
   description: {
     fontSize: 12,
-    color: theme.colors.gray[3],
+    color: theme.colors.gray[0],
     fontFamily: 'Roboto',
     lineHeight: 'normal',
   },
   descriptionOnly: {
-    fontSize: 14,
-    color: theme.colors.gray[3],
+    fontSize: 12,
+    color: theme.colors.gray[0],
     fontFamily: 'Roboto',
     lineHeight: 'normal',
   },
@@ -78,6 +80,7 @@ const durationCircle = keyframes({
 
 const Notifications: React.FC = () => {
   const { classes } = useStyles();
+  const theme = useMantineTheme();
   const [toastKey, setToastKey] = useState(0);
 
   useNuiEvent<NotificationProps>('notify', (data) => {
@@ -123,16 +126,16 @@ const Notifications: React.FC = () => {
     if (!data.iconColor) {
       switch (data.type) {
         case 'error':
-          iconColor = 'red.6';
+          iconColor = theme.colors.red[6];
           break;
         case 'success':
-          iconColor = 'green.6';
+          iconColor = theme.colors.green[6];
           break;
         case 'warning':
-          iconColor = 'yellow.6';
+          iconColor = theme.colors.yellow[6];
           break;
         default:
-          iconColor = 'gray.6';
+          iconColor = theme.colors[theme.primaryColor][8];
           break;
       }
     } else {
@@ -146,7 +149,7 @@ const Notifications: React.FC = () => {
             animation: getAnimation(t.visible, position),
             ...data.style,
           }}
-          className={`${classes.container}`}
+          className={classes.container}
         >
           <Group noWrap spacing={12}>
             {data.icon && (

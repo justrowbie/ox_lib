@@ -23,8 +23,7 @@ const useStyles = createStyles((theme, params: { position: 'middle' | 'bottom'; 
   },
   progress: {
     '> svg > circle:nth-child(1)': {
-      stroke: theme.colors.dark[7],
-      opacity: 0.9,
+      stroke: theme.colors.dark[6] + 'CC',
       strokeWidth: 10,
     },
     // Scuffed way of grabbing the first section and animating it
@@ -32,7 +31,9 @@ const useStyles = createStyles((theme, params: { position: 'middle' | 'bottom'; 
       transition: 'none',
       animation: `${progressCircle} linear forwards`,
       animationDuration: `${params.duration}ms`,
-      stroke: theme.colors.gray[3],
+      stroke: theme.colors[theme.primaryColor][8],
+      boxShadow: theme.colors[theme.primaryColor][8] + ' 0 0 20px 1px',
+      filter: 'drop-shadow(0 0 2px ' + theme.colors[theme.primaryColor][8] + ')',
       opacity: 0.9,
       strokeWidth: 10,
     },
@@ -40,11 +41,13 @@ const useStyles = createStyles((theme, params: { position: 'middle' | 'bottom'; 
   },
   value: {
     textAlign: 'center',
-    color: theme.colors.gray[0],
+    color: theme.colors[theme.primaryColor][6],
+    textShadow: '0 0 10px' + theme.colors[theme.primaryColor][8],
   },
   label: {
     textAlign: 'center',
-    color: theme.colors.gray[0],
+    color: theme.colors[theme.primaryColor][6],
+    textShadow: '0 0 10px' + theme.colors[theme.primaryColor][8],
     height: 25,
   },
   wrapper: {

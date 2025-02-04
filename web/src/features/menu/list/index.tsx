@@ -10,9 +10,8 @@ import LibIcon from '../../../components/LibIcon';
 
 const useStyles = createStyles((theme, params: { position?: MenuPosition; itemCount: number; selected: number }) => ({
   tooltip: {
-    background: theme.colors.dark[7],
-    opacity: 0.9,
-    color: theme.colors.gray[3],
+    background: theme.colors.dark[6] + 'CC',
+    color: theme.colors.gray[0],
     maxWidth: 380,
     padding: 10,
     borderRadius: 4,
@@ -32,27 +31,26 @@ const useStyles = createStyles((theme, params: { position?: MenuPosition; itemCo
       "perspective(1000px) rotateY(-12deg)" : "perspective(1000px) rotateY(12deg)",
     fontSize: 12,
     width: 350,
+    boxShadow: theme.colors[theme.primaryColor][8] + ' 0 0 20px 1px',
   },
   buttonsWrapper: {
     height: 'fit-content',
     maxHeight: 315,
     overflow: 'hidden',
-    background: theme.colors.dark[7],
-    opacity: 0.9,
+    background: theme.colors.dark[6] + 'CC',
     borderRadius: params.itemCount <= 6 || params.selected === params.itemCount - 1 ? theme.radius.md : undefined,
     borderTopLeftRadius: 0,
     borderTopRightRadius: 0,
   },
   scrollArrow: {
-    background: theme.colors.dark[7],
-    opacity: 0.9,
+    background: theme.colors.dark[6] + 'CC',
     textAlign: 'center',
     borderBottomLeftRadius: 4,
     borderBottomRightRadius: 4,
     height: 25,
   },
   scrollArrowIcon: {
-    color: theme.colors.gray[3],
+    color: theme.colors.gray[0],
     padding: 5,
     fontSize: 14,
   },

@@ -18,11 +18,14 @@ const useStyles = createStyles((theme, params: { canClose?: boolean }) => ({
     textAlign: 'center',
     justifyContent: 'center',
     padding: 2,
-    background: theme.colors.dark[9],
-    opacity: 0.8,
+    backgroundColor: theme.colors.dark[6] + 'CC',
+    border: '1px solid ' + theme.colors[theme.primaryColor][8],
+    boxShadow: theme.colors[theme.primaryColor][8] + ' 0 0 5px 1px',
+    color: theme.colors[theme.primaryColor][6],
+    textShadow: '0 0 10px' + theme.colors[theme.primaryColor][8],
     '&:hover': {
-      background: theme.colors.gray[3],
-      color: theme.colors.dark[9]
+      backgroundColor: theme.colors[theme.primaryColor][8],
+      color: theme.colors.gray[9]
     },
   },
   root: {

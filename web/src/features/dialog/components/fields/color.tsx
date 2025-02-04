@@ -1,3 +1,4 @@
+import { useMantineTheme } from '@mantine/core';
 import { IColorInput } from '../../../../typings/dialog';
 import { Control, useController } from 'react-hook-form';
 import { FormValues } from '../../InputDialog';
@@ -11,6 +12,7 @@ interface Props {
 }
 
 const ColorField: React.FC<Props> = (props) => {
+  const theme = useMantineTheme();
   const controller = useController({
     name: `test.${props.index}.value`,
     control: props.control,
@@ -33,6 +35,18 @@ const ColorField: React.FC<Props> = (props) => {
       format={props.row.format}
       withAsterisk={props.row.required}
       icon={props.row.icon && <LibIcon icon={props.row.icon} fixedWidth />}
+      styles={{
+        input:{
+          backgroundColor: 'transparent',
+          borderColor: theme.colors.gray[6],
+        },
+        label:{
+          color: theme.colors.gray[0],
+        },
+        description:{
+          color: theme.colors.gray[4],
+        }
+      }}
     />
   );
 };

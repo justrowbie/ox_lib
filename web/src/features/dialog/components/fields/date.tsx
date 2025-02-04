@@ -1,3 +1,4 @@
+import { useMantineTheme } from '@mantine/core';
 import { IDateInput } from '../../../../typings/dialog';
 import { Control, useController } from 'react-hook-form';
 import { FormValues } from '../../InputDialog';
@@ -11,6 +12,7 @@ interface Props {
 }
 
 const DateField: React.FC<Props> = (props) => {
+  const theme = useMantineTheme();
   const controller = useController({
     name: `test.${props.index}.value`,
     control: props.control,
@@ -37,6 +39,18 @@ const DateField: React.FC<Props> = (props) => {
           icon={props.row.icon && <LibIcon fixedWidth icon={props.row.icon} />}
           minDate={props.row.min ? new Date(props.row.min) : undefined}
           maxDate={props.row.max ? new Date(props.row.max) : undefined}
+          styles={{
+            input:{
+              backgroundColor: 'transparent',
+              borderColor: theme.colors.gray[6],
+            },
+            label:{
+              color: theme.colors.gray[0],
+            },
+            description:{
+              color: theme.colors.gray[4],
+            }
+          }}
         />
       )}
       {props.row.type === 'date-range' && (
@@ -64,6 +78,18 @@ const DateField: React.FC<Props> = (props) => {
           icon={props.row.icon && <LibIcon fixedWidth icon={props.row.icon} />}
           minDate={props.row.min ? new Date(props.row.min) : undefined}
           maxDate={props.row.max ? new Date(props.row.max) : undefined}
+          styles={{
+            input:{
+              backgroundColor: 'transparent',
+              borderColor: theme.colors.gray[6],
+            },
+            label:{
+              color: theme.colors.gray[0],
+            },
+            description:{
+              color: theme.colors.gray[4],
+            }
+          }}
         />
       )}
     </>

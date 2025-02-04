@@ -1,4 +1,4 @@
-import { Box, Button, createStyles, Group, Modal, Stack } from '@mantine/core';
+import { Box, Button, createStyles, Group, Modal, Stack, useMantineTheme } from '@mantine/core';
 import React from 'react';
 import { useNuiEvent } from '../../hooks/useNuiEvent';
 import { useLocales } from '../../providers/LocaleProvider';
@@ -17,7 +17,6 @@ import TextareaField from './components/fields/textarea';
 import TimeField from './components/fields/time';
 import dayjs from 'dayjs';
 import SlideTransition from '../../transitions/SlideTransition';
-import { theme } from '../../theme';
 
 export type FormValues = {
   test: {
@@ -28,24 +27,45 @@ export type FormValues = {
 const useStyles = createStyles((theme) => ({
   background: {
     width: '100%',
-    height: '100vh'
+    height: '100vh',
+    backgroundImage: `linear-gradient(to right,`+ theme.colors[theme.primaryColor][8] +`00 40%,`+ theme.colors[theme.primaryColor][8] +`80 80%)`,
+  },
+  modal: {
+    backgroundColor: theme.colors.dark[6] + 'CC',
+    boxShadow: theme.colors[theme.primaryColor][8] + ' 0 0 20px 1px',
+    borderRadius: '10px',
+    left: '70vh',
+    transform: "perspective(1000px) rotateY(-12deg)"
+  },
+  modalTitle: {
+    width: '100%',
+    fontSize: 16,
+    fontWeight: 500,
+    color: theme.colors[theme.primaryColor][6],
+    textAlign: 'center',
+    textShadow: '0 0 10px' + theme.colors[theme.primaryColor][8],
+    borderBottom: '2px solid ' + theme.colors[theme.primaryColor][8],
+    boxShadow: theme.colors[theme.primaryColor][8] + ' 0 5px 5px -5px',
   },
   buttonsubmit: {
-    backgroundColor: theme.colors.green[6],
+    color: theme.colors.gray[0],
+    backgroundColor: theme.colors[theme.primaryColor][8],
     '&:hover': {
-      backgroundColor: theme.colors.green[9]
+      backgroundColor: theme.colors[theme.primaryColor][6]
     },
   },
   buttoncancel: {
-    backgroundColor: theme.colors.red[6],
+    color: theme.colors.gray[0],
+    backgroundColor: theme.colors.red[9],
     '&:hover': {
-      backgroundColor: theme.colors.red[9]
+      backgroundColor: theme.colors.red[6]
     },
   },
 }));
 
 const InputDialog: React.FC = () => {
   const { classes } = useStyles();
+  const theme = useMantineTheme();
   const [fields, setFields] = React.useState<InputProps>({
     heading: '',
     rows: [{ type: 'input', label: '' }],
@@ -64,20 +84,7 @@ const InputDialog: React.FC = () => {
     setVisible(true);
     data.rows.forEach((row, index) => {
       fieldForm.insert(
-        index,
-        {
-          value:
-            row.type !== 'checkbox'
-              ? row.type === 'date' || row.type === 'date-range' || row.type === 'time'
-                ? // Set date to current one if default is set to true
-                  row.default === true
-                  ? new Date().getTime()
-                  : Array.isArray(row.default)
-                  ? row.default.map((date) => new Date(date).getTime())
-                  : row.default && new Date(row.default).getTime()
-                : row.default
-              : row.checked,
-        } || { value: null }
+        index, { value: null }
       );
       // Backwards compat with new Select data type
       if (row.type === 'select' || row.type === 'multi-select') {
@@ -122,9 +129,6 @@ const InputDialog: React.FC = () => {
       <SlideTransition visible={visible}>
         <Box
           className={classes.background}
-          style={{
-            backgroundImage: `linear-gradient(to right, rgba(16, 17, 19, 0.0) 0%, rgba(16, 17, 19, 0.8) 80%)`,
-          }}
         />
       </SlideTransition>
       <Modal
@@ -139,19 +143,9 @@ const InputDialog: React.FC = () => {
         overlayOpacity={0}
         transition="fade"
         exitTransitionDuration={150}
-        styles={{
-          modal: {
-            backgroundColor: 'rgba(16, 17, 19, 0.6)',
-            borderRadius: '10px',
-            left: '70vh',
-            transform: "perspective(1000px) rotateY(-12deg)"
-          }, 
-          title: { 
-            textAlign: 'center',
-            width: '100%',
-            fontSize: 16,
-            fontWeight: 500,
-          },
+        classNames={{
+          modal: classes.modal,
+          title: classes.modalTitle
         }}
       >
         <form onSubmit={onSubmit}>

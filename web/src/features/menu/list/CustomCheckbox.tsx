@@ -7,12 +7,12 @@ const useStyles = createStyles((theme) => ({
   },
   input: {
     backgroundColor: 'transparent',
-    opacity: 0.8,
-    '&:checked': { backgroundColor: theme.colors.gray[3] },
+    borderColor: theme.colors.gray[3],
+    '&:checked': { backgroundColor: theme.colors[theme.primaryColor][8] },
   },
   inner: {
     '> svg > path': {
-      fill: theme.colors.dark[9],
+      fill: theme.colors.gray[3],
     },
   },
 }));

@@ -4,7 +4,7 @@ import React from 'react';
 const useStyles = createStyles((theme) => ({
   container: {
     textAlign: 'center',
-    background: theme.colors.dark[7],
+    background: theme.colors.dark[6] + 'CC',
     opacity: 0.9,
     borderTopLeftRadius: 5,
     borderTopRightRadius: 5,
@@ -14,14 +14,13 @@ const useStyles = createStyles((theme) => ({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    color: theme.colors.gray[0],
-    borderBottom: 'solid',
-    borderWidth: 2,
-    borderColor: theme.colors.gray[3]
+    borderBottom: '2px solid ' + theme.colors[theme.primaryColor][8],
+    boxShadow: theme.colors[theme.primaryColor][8] + ' 0 5px 5px -5px',
   },
   heading: {
     fontSize: 14,
-    color: theme.colors.gray[3],
+    color: theme.colors[theme.primaryColor][6],
+    textShadow: '0 0 10px' + theme.colors[theme.primaryColor][8],
     textTransform: 'uppercase',
     fontWeight: 600,
   },

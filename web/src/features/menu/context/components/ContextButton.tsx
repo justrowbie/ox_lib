@@ -21,25 +21,19 @@ const useStyles = createStyles((theme, params: { disabled?: boolean; readOnly?: 
   },
   label: {
     width: '100%',
-    color: params.disabled ? theme.colors.gray[6] : theme.colors.gray[0],
     whiteSpace: 'pre-wrap',
-    fontWeight: 400,
-    '&:hover': {
-      color: theme.colors.dark[9],
-    },
   },
   button: {
-    background: theme.colors.dark[9],
-    opacity: 0.8,
+    backgroundColor: theme.colors.dark[6] + 'CC',
     height: 'fit-content',
     width: '100%',
     padding: 10,
     '&:disabled' : {
-      background: theme.colors.dark[9],
-      opacity: 0.8,
+      backgroundColor: theme.colors.dark[3] + 'CC',
+      color: theme.colors.gray[5], 
     },
     '&:hover': {
-      backgroundColor: theme.colors.gray[3],
+      backgroundColor: theme.colors[theme.primaryColor][8] + 'CC',
       cursor: params.readOnly ? 'unset' : 'pointer',
     },
     '&:active': {
@@ -49,21 +43,16 @@ const useStyles = createStyles((theme, params: { disabled?: boolean; readOnly?: 
   iconImage: {
     maxWidth: '25px',
   },
-  description: {
-    fontSize: 12,
-  },
   dropdown: {
-    backgroundColor: 'rgba(16, 17, 19, 0.8)',
-    opacity: 0.8,
+    backgroundColor: theme.colors.dark[6] + 'CC',
     padding: 10,
     color: theme.colors.gray[0],
     fontSize: 12,
     maxWidth: 256,
     width: 'fit-content',
-    border: 'none',
   },
   buttonStack: {
-    gap: 2,
+    gap: 4,
     flex: '1',
   },
   buttonGroup: {
@@ -76,10 +65,14 @@ const useStyles = createStyles((theme, params: { disabled?: boolean; readOnly?: 
     justifyContent: 'center',
     alignItems: 'center',
   },
-  buttonTitleText: {
+  title: {
     overflowWrap: 'break-word',
     fontWeight: 500,
-    fontSize: 13,
+    fontSize: 14,
+  },
+  description: {
+    fontSize: 12,
+    fontWeight: 300
   },
   buttonArrowContainer: {
     justifyContent: 'center',
@@ -105,7 +98,7 @@ const ContextButton: React.FC<{
       >
         <HoverCard.Target>
           <Button
-            classNames={{ inner: classes.inner, root: classes.button }}
+            classNames={{ inner: classes.inner, label: classes.label, root: classes.button }}
             onClick={() =>
               !button.disabled && !button.readOnly
                 ? button.menu
@@ -135,7 +128,7 @@ const ContextButton: React.FC<{
                         )}
                       </Stack>
                     )}
-                    <Text className={classes.buttonTitleText}>
+                    <Text className={classes.title}>
                       <ReactMarkdown components={MarkdownComponents}>{button.title || buttonKey}</ReactMarkdown>
                     </Text>
                   </Group>
@@ -149,8 +142,6 @@ const ContextButton: React.FC<{
                   <Progress 
                     value={button.progress} 
                     size="sm" 
-                    color={'gray.0'}
-                    styles={(theme) => ({ root: { backgroundColor: theme.colors.gray[8] } })}
                   />
                 )}
               </Stack>

@@ -1,4 +1,4 @@
-import { BackgroundImage, MultiSelect, Select } from '@mantine/core';
+import { BackgroundImage, MultiSelect, Select, useMantineTheme } from '@mantine/core';
 import { ISelect } from '../../../../typings';
 import { Control, useController } from 'react-hook-form';
 import { FormValues } from '../../InputDialog';
@@ -11,6 +11,7 @@ interface Props {
 }
 
 const SelectField: React.FC<Props> = (props) => {
+  const theme = useMantineTheme();
   const controller = useController({
     name: `test.${props.index}.value`,
     control: props.control,
@@ -36,8 +37,31 @@ const SelectField: React.FC<Props> = (props) => {
           icon={props.row.icon && <LibIcon icon={props.row.icon} fixedWidth />}
           styles={{
             input:{
-              backgroundColor: 'transparent'
+              backgroundColor: 'transparent',
+              borderColor: theme.colors.gray[6]
             },
+            label:{
+              color: theme.colors.gray[0],
+            },
+            description:{
+              color: theme.colors.gray[4],
+            },
+            dropdown:{
+              backgroundColor: theme.colors[theme.primaryColor][8],
+              opacity: 0.95
+            },
+            item:{
+              color: theme.colors.gray[0],
+              '&[data-hovered]':{
+                backgroundColor: theme.colors[theme.primaryColor][9],
+              },
+              '&[data-selected]': {
+                '&, &:hover': {
+                  backgroundColor: theme.colors[theme.primaryColor][8],
+                  color: theme.colors.gray[0],
+                },
+              },
+            }
           }}
         />
       ) : (
@@ -60,8 +84,15 @@ const SelectField: React.FC<Props> = (props) => {
               icon={props.row.icon && <LibIcon icon={props.row.icon} fixedWidth />}
               styles={{
                 input:{
-                  backgroundColor: 'transparent'
+                  backgroundColor: 'transparent',
+                  borderColor: theme.colors.gray[6]
                 },
+                label:{
+                  color: theme.colors.gray[0],
+                },
+                description:{
+                  color: theme.colors.gray[4],
+                }
               }}
             />
           )}

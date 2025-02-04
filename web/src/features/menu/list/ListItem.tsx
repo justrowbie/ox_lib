@@ -19,8 +19,8 @@ const useStyles = createStyles((theme, params: { iconColor?: string }) => ({
     height: 43,
     scrollMargin: 8,
     '&:focus': {
-      backgroundColor: theme.colors.gray[3] || theme.colors.dark[9],
-      color: theme.colors.dark[9],
+      backgroundColor: theme.colors[theme.primaryColor][8] + 'CC',
+      color: theme.colors.gray[0],
       fontWeight: 500,
       outline: 'none',
     },
@@ -42,7 +42,7 @@ const useStyles = createStyles((theme, params: { iconColor?: string }) => ({
   icon: {
     fontSize: 14,
     '&:focus': {
-      color: theme.colors.gray[3] || theme.colors.dark[9],
+      color: theme.colors.gray[0],
     },
   },
   label: {
@@ -51,20 +51,20 @@ const useStyles = createStyles((theme, params: { iconColor?: string }) => ({
     fontWeight: 500,
     verticalAlign: 'middle',
     '&:focus': {
-      color: theme.colors.gray[3] || theme.colors.dark[9],
+      color: theme.colors.gray[0],
     },
   },
   chevronIcon: {
     fontSize: 14,
     '&:focus': {
-      color: theme.colors.gray[3] || theme.colors.dark[9],
+      color: theme.colors.gray[0],
     },
   },
   scrollIndexValue: {
     textTransform: 'uppercase',
     fontSize: 14,
     '&:focus': {
-      color: theme.colors.gray[3] || theme.colors.dark[9],
+      color: theme.colors.gray[0],
     },
   },
   progressStack: {
@@ -135,8 +135,6 @@ const ListItem = forwardRef<Array<HTMLDivElement | null>, Props>(({ item, index,
             <Text className={classes.progressLabel}>{item.label}</Text>
             <Progress
               value={item.progress}
-              color={'gray.0'}
-              styles={(theme) => ({ root: { backgroundColor: theme.colors.gray[8] } })}
             />
           </Stack>
         ) : (
