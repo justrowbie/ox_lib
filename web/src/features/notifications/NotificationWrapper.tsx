@@ -12,7 +12,7 @@ const useStyles = createStyles((theme) => ({
   container: {
     width: 300,
     height: 'fit-content',
-    background: theme.colors.dark[6] + 'CC',
+    background: theme.colors.dark[6] + 'E6',
     color: theme.colors.gray[0],
     padding: 12,
     borderRadius: theme.radius.sm,

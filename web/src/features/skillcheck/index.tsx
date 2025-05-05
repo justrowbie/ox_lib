@@ -27,7 +27,7 @@ const useStyles = createStyles((theme, params: { difficultyOffset: number }) => 
   },
   track: {
     fill: 'transparent',
-    stroke: theme.colors.dark[6] + 'CC',
+    stroke: theme.colors.dark[6] + 'E6',
     strokeWidth: 10,
     r: 50,
     cx: 250,
@@ -78,7 +78,7 @@ const useStyles = createStyles((theme, params: { difficultyOffset: number }) => 
     transform: 'translate(-50%, -50%)',
     color: theme.colors[theme.primaryColor][6],
     textShadow: '0 0 10px' + theme.colors[theme.primaryColor][8],
-    backgroundColor: theme.colors.dark[6] + 'CC',
+    backgroundColor: theme.colors.dark[6] + 'E6',
     width: 25,
     height: 25,
     textAlign: 'center',

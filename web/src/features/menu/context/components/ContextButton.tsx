@@ -24,7 +24,7 @@ const useStyles = createStyles((theme, params: { disabled?: boolean; readOnly?: 
     whiteSpace: 'pre-wrap',
   },
   button: {
-    backgroundColor: theme.colors.dark[6] + 'CC',
+    backgroundColor: theme.colors.dark[6] + 'E6',
     height: 'fit-content',
     width: '100%',
     padding: 10,
@@ -44,7 +44,7 @@ const useStyles = createStyles((theme, params: { disabled?: boolean; readOnly?: 
     maxWidth: '25px',
   },
   dropdown: {
-    backgroundColor: theme.colors.dark[6] + 'CC',
+    backgroundColor: theme.colors.dark[6] + 'E6',
     padding: 10,
     color: theme.colors.gray[0],
     fontSize: 12,

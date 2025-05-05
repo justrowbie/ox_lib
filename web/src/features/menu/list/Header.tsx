@@ -4,7 +4,7 @@ import React from 'react';
 const useStyles = createStyles((theme) => ({
   container: {
     textAlign: 'center',
-    background: theme.colors.dark[6] + 'CC',
+    background: theme.colors.dark[6] + 'E6',
     opacity: 0.9,
     borderTopLeftRadius: 5,
     borderTopRightRadius: 5,

@@ -35,7 +35,7 @@ const useStyles = createStyles((theme, params: { position?: TextUiPosition }) =>
     fontWeight: 500,
     padding: 9,
     margin: '4px',
-    backgroundColor: theme.colors.dark[6] + 'CC',
+    backgroundColor: theme.colors.dark[6] + 'E6',
     color: theme.colors.gray[0],
   },
   buttonContainer: {

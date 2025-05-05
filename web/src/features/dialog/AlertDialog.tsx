@@ -20,7 +20,7 @@ const useStyles = createStyles((theme) => ({
     textAlign: 'justify',
   },
   modal: {
-    backgroundColor: theme.colors.dark[6] + 'CC',
+    backgroundColor: theme.colors.dark[6] + 'E6',
     boxShadow: theme.colors[theme.primaryColor][8] + ' 0 0 20px 1px',
     borderRadius: '10px',
     left: '70vh',

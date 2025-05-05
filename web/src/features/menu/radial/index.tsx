@@ -17,7 +17,7 @@ const useStyles = createStyles((theme) => ({
     transform: 'translate(-50%, -50%)',
   },
   sector: {
-    fill: theme.colors.dark[6] + 'CC',
+    fill: theme.colors.dark[6] + 'E6',
     '&:hover': {
       fill: theme.colors[theme.primaryColor][8] + 'CC',
       filter: 'drop-shadow(0 0 2px ' + theme.colors[theme.primaryColor][8] + ')',

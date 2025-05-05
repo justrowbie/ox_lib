@@ -36,7 +36,7 @@ const useStyles = createStyles((theme) => ({
   },
   titleContainer: {
     flex: '1 85%',
-    backgroundColor: theme.colors.dark[6] + 'CC',
+    backgroundColor: theme.colors.dark[6] + 'E6',
     border: '1px solid ' + theme.colors[theme.primaryColor][8],
     boxShadow: theme.colors[theme.primaryColor][8] + ' 0 0 5px 1px'
   },

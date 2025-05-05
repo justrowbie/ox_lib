@@ -31,7 +31,7 @@ const useStyles = createStyles((theme) => ({
     backgroundImage: `linear-gradient(to right,`+ theme.colors[theme.primaryColor][8] +`00 40%,`+ theme.colors[theme.primaryColor][8] +`80 80%)`,
   },
   modal: {
-    backgroundColor: theme.colors.dark[6] + 'CC',
+    backgroundColor: theme.colors.dark[6] + 'E6',
     boxShadow: theme.colors[theme.primaryColor][8] + ' 0 0 20px 1px',
     borderRadius: '10px',
     left: '70vh',

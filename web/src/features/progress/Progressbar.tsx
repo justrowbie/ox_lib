@@ -11,7 +11,7 @@ const useStyles = createStyles((theme) => ({
     maxWidth: 350,
     width: 350,
     height: 10,
-    background: theme.colors.dark[6] + 'CC',
+    background: theme.colors.dark[6] + 'E6',
     overflow: 'hidden',
     borderRadius: 2,
   },
@@ -26,7 +26,7 @@ const useStyles = createStyles((theme) => ({
   },
   bar: {
     height: '100%',
-    backgroundColor: theme.colors.dark[6] + 'CC',
+    backgroundColor: theme.colors.dark[6] + 'E6',
     background: theme.colors[theme.primaryColor][8],
     backgroundSize: "2em 2em",
     backgroundPosition: "center",
