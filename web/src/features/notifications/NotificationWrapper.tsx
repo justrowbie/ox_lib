@@ -12,7 +12,7 @@ const useStyles = createStyles((theme) => ({
   container: {
     width: 300,
     height: 'fit-content',
-    background: theme.colors.dark[6] + 'E6',
+    background: theme.colors.dark[5] + 'E6',
     color: theme.colors.gray[0],
     padding: 12,
     borderRadius: theme.radius.sm,
@@ -22,8 +22,8 @@ const useStyles = createStyles((theme) => ({
   title: {
     fontWeight: 500,
     lineHeight: 'normal',
-    color: theme.colors[theme.primaryColor][6],
-    textShadow: '0 0 10px' + theme.colors[theme.primaryColor][8],
+    color: theme.colors[theme.primaryColor][5],
+    textShadow: '0 0 10px' + theme.colors[theme.primaryColor][5],
   },
   description: {
     fontSize: 12,
@@ -39,38 +39,72 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-const createAnimation = (from: string, to: string, visible: boolean) => keyframes({
+const createAnimation = (from: string, to: string, yaw: string, visible: boolean) => keyframes({
   from: {
     opacity: visible ? 0 : 1,
-    transform: `translate${from}`,
+    transform: `translate${from} perspective(1000px) rotateY(${yaw})`,
   },
   to: {
     opacity: visible ? 1 : 0,
-    transform: `translate${to}`,
+    transform: `translate${to} perspective(1000px) rotateY(${yaw})`,
   },
 });
 
 const getAnimation = (visible: boolean, position: string) => {
-  const animationOptions = visible ? '0.2s ease-out forwards' : '0.4s ease-in forwards'
-  let animation: { from: string; to: string };
+  const animationOptions = visible ? '0.2s ease-out forwards' : '0.4s ease-in forwards';
+  let animation: { from: string; to: string; yaw: string };
 
   if (visible) {
-    animation = position.includes('bottom') ? { from: 'Y(30px)', to: 'Y(0px)' } : { from: 'Y(-30px)', to:'Y(0px)' };
-  } else {
-    if (position.includes('right')) {
-      animation = { from: 'X(0px)', to: 'X(100%)' }
-    } else if (position.includes('left')) {
-      animation = { from: 'X(0px)', to: 'X(-100%)' };
+    if (position === 'bottom') {
+      animation = { from: 'Y(30px)', to: 'Y(0px)', yaw: '0deg' };
+    } else if (position === 'bottom-center') {
+      animation = { from: 'Y(30px)', to: 'Y(0px)', yaw: '0deg' };
+    } else if (position === 'bottom-left') {
+      animation = { from: 'Y(30px)', to: 'Y(0px)', yaw: '25deg' };
+    } else if (position === 'bottom-right') {
+      animation = { from: 'Y(30px)', to: 'Y(0px)', yaw: '-25deg' };
+    } else if (position === 'top') {
+      animation = { from: 'Y(-30px)', to:'Y(0px)', yaw: '0deg' };
     } else if (position === 'top-center') {
-      animation = { from: 'Y(0px)', to: 'Y(-100%)' };
-    } else if (position === 'bottom') {
-      animation = { from: 'Y(0px)', to: 'Y(100%)' };
+      animation = { from: 'Y(-30px)', to:'Y(0px)', yaw: '0deg' };
+    } else if (position === 'top-left') {
+      animation = { from: 'Y(-30px)', to:'Y(0px)', yaw: '25deg' };
+    } else if (position === 'top-right') {
+      animation = { from: 'Y(-30px)', to:'Y(0px)', yaw: '-25deg' };
+    } else if (position === 'center-left') {
+      animation = { from: 'Y(-30px)', to:'Y(0px)', yaw: '25deg' };
+    } else if (position === 'center-right') {
+      animation = { from: 'Y(-30px)', to:'Y(0px)', yaw: '-25deg' };
     } else {
-      animation = { from: 'X(0px)', to: 'X(100%)' };
+      animation = { from: 'Y(-30px)', to:'Y(0px)', yaw: '0deg' };
+    }
+  } else {
+    if (position === 'bottom') {
+      animation = { from: 'Y(0px)', to: 'Y(100%)', yaw: '0deg' };
+    } else if (position === 'bottom-center') {
+      animation = { from: 'Y(0px)', to: 'Y(100%)', yaw: '0deg' };
+    } else if (position === 'bottom-left') {
+      animation = { from: 'X(0px)', to: 'X(-100%)', yaw: '25deg' };
+    } else if (position === 'bottom-right') {
+      animation = { from: 'X(0px)', to: 'X(100%)', yaw: '-25deg' };
+    } else if (position === 'top') {
+      animation = { from: 'Y(0px)', to: 'Y(-100%)', yaw: '0deg' };
+    } else if (position === 'top-center') {
+      animation = { from: 'Y(0px)', to: 'Y(-100%)', yaw: '0deg' };
+    } else if (position === 'top-left') {
+      animation = { from: 'X(0px)', to: 'X(-100%)', yaw: '25deg' };
+    } else if (position === 'top-right') {
+      animation = { from: 'X(0px)', to: 'X(100%)', yaw: '-25deg' };
+    } else if (position === 'center-left') {
+      animation = { from: 'X(0px)', to: 'X(-100%)', yaw: '25deg' };
+    } else if (position === 'center-right') {
+      animation = { from: 'X(0px)', to: 'X(100%)', yaw: '-25deg' };
+    } else {
+      animation = { from: 'X(0px)', to: 'X(100%)', yaw: '0deg' };
     }
   }
 
-  return `${createAnimation(animation.from, animation.to, visible)} ${animationOptions}`
+  return `${createAnimation(animation.from, animation.to, animation.yaw, visible)} ${animationOptions}`;
 };
 
 const durationCircle = keyframes({
@@ -90,6 +124,7 @@ const Notifications: React.FC = () => {
     const duration = data.duration || 3000;
 
     let iconColor: string;
+    let boxColor: string;
     let position = data.position || 'top-right';
 
     data.showDuration = data.showDuration !== undefined ? data.showDuration : true;
@@ -126,26 +161,46 @@ const Notifications: React.FC = () => {
     if (!data.iconColor) {
       switch (data.type) {
         case 'error':
-          iconColor = theme.colors.red[6];
+          iconColor = theme.colors.red[3];
           break;
         case 'success':
-          iconColor = theme.colors.green[6];
+          iconColor = theme.colors.green[3];
           break;
         case 'warning':
-          iconColor = theme.colors.yellow[6];
+          iconColor = theme.colors.yellow[3];
           break;
         default:
-          iconColor = theme.colors[theme.primaryColor][8];
+          iconColor = theme.colors[theme.primaryColor][5];
           break;
       }
     } else {
       iconColor = tinycolor(data.iconColor).toRgbString();
     }
     
+    if (!data.boxColor) {
+      switch (data.type) {
+        case 'error':
+          boxColor = theme.colors.red[9] + 'E6';
+          break;
+        case 'success':
+          boxColor = theme.colors.green[9] + 'E6';
+          break;
+        case 'warning':
+          boxColor = theme.colors.yellow[9] + 'E6';
+          break;
+        default:
+          boxColor = theme.colors.dark[5] + 'E6';
+          break;
+      }
+    } else {
+      boxColor = tinycolor(data.boxColor).toRgbString();
+    }
+
     toast.custom(
       (t) => (
         <Box
           sx={{
+            backgroundColor: boxColor,
             animation: getAnimation(t.visible, position),
             ...data.style,
           }}
@@ -197,7 +252,7 @@ const Notifications: React.FC = () => {
               </>
             )}
             <Stack spacing={0}>
-              {data.title && <Text className={classes.title}>{data.title}</Text>}
+              {data.title && <Text style={{color: iconColor}}>{data.title}</Text>}
               {data.description && (
                 <ReactMarkdown
                   components={MarkdownComponents}

@@ -24,7 +24,7 @@ const useStyles = createStyles((theme, params: { disabled?: boolean; readOnly?: 
     whiteSpace: 'pre-wrap',
   },
   button: {
-    backgroundColor: theme.colors.dark[6] + 'E6',
+    backgroundColor: theme.colors.dark[5] + 'E6',
     height: 'fit-content',
     width: '100%',
     padding: 10,
@@ -33,7 +33,8 @@ const useStyles = createStyles((theme, params: { disabled?: boolean; readOnly?: 
       color: theme.colors.gray[5], 
     },
     '&:hover': {
-      backgroundColor: theme.colors[theme.primaryColor][8] + 'CC',
+      backgroundColor: theme.colors[theme.primaryColor][5] + 'CC',
+      color: theme.colors.dark[9] + 'CC',
       cursor: params.readOnly ? 'unset' : 'pointer',
     },
     '&:active': {
@@ -44,7 +45,7 @@ const useStyles = createStyles((theme, params: { disabled?: boolean; readOnly?: 
     maxWidth: '25px',
   },
   dropdown: {
-    backgroundColor: theme.colors.dark[6] + 'E6',
+    backgroundColor: theme.colors.dark[5] + 'E6',
     padding: 10,
     color: theme.colors.gray[0],
     fontSize: 12,
@@ -80,6 +81,9 @@ const useStyles = createStyles((theme, params: { disabled?: boolean; readOnly?: 
     width: 25,
     height: 25,
   },
+  progress: {
+    backgroundColor: theme.colors.gray[0]
+  }
 }));
 
 const ContextButton: React.FC<{
@@ -141,7 +145,11 @@ const ContextButton: React.FC<{
                 {button.progress !== undefined && (
                   <Progress 
                     value={button.progress} 
-                    size="sm" 
+                    size="md"
+                    styles={(theme) => ({
+                      root: { backgroundColor: theme.colors.gray[0] },
+                      bar: { backgroundColor: theme.colors[theme.primaryColor][7] }
+                    })}
                   />
                 )}
               </Stack>
@@ -170,7 +178,7 @@ const ContextButton: React.FC<{
                     <Progress
                       value={metadata.progress}
                       size="sm"
-                      color={metadata.colorScheme || 'gray.3' || 'gray.3'}
+                      color={metadata.colorScheme || 'green.5'}
                       styles={(theme) => ({ root: { backgroundColor: theme.colors.gray[0] } })}
                     />
                   )}

@@ -15,7 +15,7 @@ const useStyles = createStyles((theme) => ({
   label: {
     color: theme.colors.gray[0],
     fontWeight: 800,
-    backgroundColor: theme.colors[theme.primaryColor][8]
+    backgroundColor: theme.colors[theme.primaryColor][5]
   }
 }));
 

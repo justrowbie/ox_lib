@@ -31,8 +31,8 @@ const useStyles = createStyles((theme) => ({
     backgroundImage: `linear-gradient(to right,`+ theme.colors[theme.primaryColor][8] +`00 40%,`+ theme.colors[theme.primaryColor][8] +`80 80%)`,
   },
   modal: {
-    backgroundColor: theme.colors.dark[6] + 'E6',
-    boxShadow: theme.colors[theme.primaryColor][8] + ' 0 0 20px 1px',
+    backgroundColor: theme.colors.dark[5] + 'E6',
+    boxShadow: theme.colors[theme.primaryColor][5] + ' 0 0 20px 1px',
     borderRadius: '10px',
     left: '70vh',
     transform: "perspective(1000px) rotateY(-12deg)"
@@ -41,15 +41,15 @@ const useStyles = createStyles((theme) => ({
     width: '100%',
     fontSize: 16,
     fontWeight: 500,
-    color: theme.colors[theme.primaryColor][6],
+    color: theme.colors[theme.primaryColor][5],
     textAlign: 'center',
-    textShadow: '0 0 10px' + theme.colors[theme.primaryColor][8],
-    borderBottom: '2px solid ' + theme.colors[theme.primaryColor][8],
-    boxShadow: theme.colors[theme.primaryColor][8] + ' 0 5px 5px -5px',
+    textShadow: '0 0 10px' + theme.colors[theme.primaryColor][5],
+    borderBottom: '2px solid ' + theme.colors[theme.primaryColor][5],
+    boxShadow: theme.colors[theme.primaryColor][5] + ' 0 5px 5px -5px',
   },
   buttonsubmit: {
     color: theme.colors.gray[0],
-    backgroundColor: theme.colors[theme.primaryColor][8],
+    backgroundColor: theme.colors[theme.primaryColor][9],
     '&:hover': {
       backgroundColor: theme.colors[theme.primaryColor][6]
     },
