@@ -28,11 +28,12 @@ const useStyles = createStyles((theme) => ({
   background: {
     width: '100%',
     height: '100vh',
-    backgroundImage: `linear-gradient(to right,`+ theme.colors[theme.primaryColor][8] +`00 40%,`+ theme.colors[theme.primaryColor][8] +`80 80%)`,
+    backgroundImage: `linear-gradient(to right,`+ theme.colors.dark[9] +`00 0%,`+ theme.colors.dark[9] +`E6 80%)`,
   },
   modal: {
-    backgroundColor: theme.colors.dark[5] + 'E6',
-    boxShadow: theme.colors[theme.primaryColor][5] + ' 0 0 20px 1px',
+    border: '1px solid ' + theme.colors.gray[0] + '66',
+    backgroundColor: theme.colors.gray[0] + '1A',
+    backdropFilter: 'blur(8px)',
     borderRadius: '10px',
     left: '70vh',
     transform: "perspective(1000px) rotateY(-12deg)"
@@ -43,9 +44,7 @@ const useStyles = createStyles((theme) => ({
     fontWeight: 500,
     color: theme.colors[theme.primaryColor][5],
     textAlign: 'center',
-    textShadow: '0 0 10px' + theme.colors[theme.primaryColor][5],
     borderBottom: '2px solid ' + theme.colors[theme.primaryColor][5],
-    boxShadow: theme.colors[theme.primaryColor][5] + ' 0 5px 5px -5px',
   },
   buttonsubmit: {
     color: theme.colors.gray[0],
