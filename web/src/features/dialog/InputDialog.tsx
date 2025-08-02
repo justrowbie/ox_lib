@@ -1,4 +1,4 @@
-import { Button, Group, Modal, Stack } from '@mantine/core';
+import { Box, Button, Group, Modal, Stack, createStyles, useMantineTheme } from '@mantine/core';
 import React from 'react';
 import { useNuiEvent } from '../../hooks/useNuiEvent';
 import { useLocales } from '../../providers/LocaleProvider';
@@ -16,6 +16,7 @@ import DateField from './components/fields/date';
 import TextareaField from './components/fields/textarea';
 import TimeField from './components/fields/time';
 import dayjs from 'dayjs';
+import SlideTransition from '../../transitions/SlideTransition';
 
 export type FormValues = {
   test: {
@@ -23,7 +24,52 @@ export type FormValues = {
   }[];
 };
 
+const useStyles = createStyles((theme) => ({
+  background: {
+    width: '100%',
+    height: '100vh',
+    background: `linear-gradient(to right,`+ theme.colors.dark[9] +`00 0%,`+ theme.colors.dark[9] +`E6 80%)`,
+  },
+  modal: {
+    background: `radial-gradient(circle, `+theme.colors.gray[0]+`1A 0%, `+theme.colors.gray[0]+`1A 80%)`,
+    border: '1px solid ' + theme.colors.gray[0] + '33',
+    borderRadius: '2px',
+    left: '50vh',
+    transform: "perspective(1000px) rotateY(-12deg)"
+  },
+  modalTitle: {
+    width: '100%',
+    fontSize: 16,
+    fontWeight: 500,
+    color: theme.colors.gray[0],
+    textShadow: `1px 1px 2px `+theme.colors.dark[3],
+    textAlign: 'center',
+    backgroundColor: theme.colors[theme.primaryColor][5] + '80',
+    border: '1px solid ' + theme.colors[theme.primaryColor][5] + '80',
+  },
+  buttonsubmit: {
+    color: theme.colors.gray[0],
+    backgroundColor: theme.colors.green[6] + '80',
+    border: '1px solid ' + theme.colors.green[6] + '80',
+    '&:hover': {
+      backgroundColor: theme.colors.green[6] + 'CC',
+      border: '1px solid ' + theme.colors.green[6] + 'CC',
+    },
+  },
+  buttoncancel: {
+    color: theme.colors.gray[0],
+    backgroundColor: theme.colors.red[5] + '80',
+    border: '1px solid ' + theme.colors.red[5] + '80',
+    '&:hover': {
+      backgroundColor: theme.colors.red[6] + 'CC',
+      border: '1px solid ' + theme.colors.red[6] + 'CC',
+    },
+  },
+}))
+
 const InputDialog: React.FC = () => {
+  const { classes } = useStyles();
+  const theme = useMantineTheme();
   const [fields, setFields] = React.useState<InputProps>({
     heading: '',
     rows: [{ type: 'input', label: '' }],
@@ -97,6 +143,11 @@ const InputDialog: React.FC = () => {
 
   return (
     <>
+      <SlideTransition visible={visible}>
+        <Box
+          className={classes.background}
+        />
+      </SlideTransition>
       <Modal
         opened={visible}
         onClose={handleClose}
@@ -104,12 +155,15 @@ const InputDialog: React.FC = () => {
         closeOnEscape={fields.options?.allowCancel !== false}
         closeOnClickOutside={false}
         size={fields.options?.size || 'xs'}
-        styles={{ title: { textAlign: 'center', width: '100%', fontSize: 18 } }}
         title={fields.heading}
         withCloseButton={false}
         overlayOpacity={0.5}
         transition="fade"
         exitTransitionDuration={150}
+        classNames={{
+          modal: classes.modal,
+          title: classes.modalTitle
+        }}
       >
         <form onSubmit={onSubmit}>
           <Stack>
@@ -158,10 +212,16 @@ const InputDialog: React.FC = () => {
                 onClick={() => handleClose()}
                 mr={3}
                 disabled={fields.options?.allowCancel === false}
+                className={classes.buttoncancel}
               >
                 {locale.ui.cancel}
               </Button>
-              <Button uppercase variant="light" type="submit">
+              <Button 
+                uppercase
+                variant="light"
+                type="submit"
+                className={classes.buttonsubmit}
+              >
                 {locale.ui.confirm}
               </Button>
             </Group>

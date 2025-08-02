@@ -20,12 +20,28 @@ export const debugInput = () => {
             label: 'Locker Time',
             description: 'Description that tells you what this input field does',
           },
+          {
+            type: 'date',
+            label: 'Locker Date',
+            description: 'Description that tells you what this input field does',
+          },
+          {
+            type: 'color',
+            label: 'Choose Color',
+            description: 'Description that tells you what this input field does',
+          },
           { type: 'checkbox', label: 'Some checkbox' },
-          { type: 'input', label: 'Locker PIN', password: true, icon: 'lock' },
-          { type: 'checkbox', label: 'Some other checkbox', checked: true },
+          { 
+            type: 'input',
+            label: 'Locker PIN',
+            description: 'Description that tells you what this input field does',
+            password: true,
+            icon: 'lock'
+          },
           {
             type: 'select',
             label: 'Locker type',
+            description: 'Description that tells you what this input field does',
             options: [
               { value: 'option1' },
               { value: 'option2', label: 'Option 2' },
@@ -35,16 +51,9 @@ export const debugInput = () => {
           {
             type: 'number',
             label: 'Number counter',
+            description: 'Description that tells you what this input field does',
             default: 12,
             min: 3,
-            max: 10,
-            icon: 'receipt',
-          },
-          {
-            type: 'number',
-            label: 'Price',
-            default: 6.5,
-            min: 0,
             max: 10,
             icon: 'receipt',
           },
@@ -55,6 +64,11 @@ export const debugInput = () => {
             max: 50,
             step: 2,
           },
+          {
+            type: 'textarea',
+            label: 'Put the description here',
+            description: 'Description that tells you what this input field does',
+          }
         ],
       },
     },

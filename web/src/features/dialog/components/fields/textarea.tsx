@@ -1,4 +1,4 @@
-import { Textarea } from '@mantine/core';
+import { Textarea, createStyles } from '@mantine/core';
 import { UseFormRegisterReturn } from 'react-hook-form';
 import { ITextarea } from '../../../../typings/dialog';
 import React from 'react';
@@ -10,7 +10,31 @@ interface Props {
   index: number;
 }
 
+const useStyles = createStyles((theme) => ({
+  label: {
+    color: theme.colors.gray[0],
+    fontSize: '12px',
+    fontWeight: 500,
+    textTransform: 'uppercase'
+  },
+  description: {
+    color: theme.colors.gray[6],
+    fontSize: '12px',
+    fontWeight: 500,
+  },
+  input: {
+    backgroundColor: theme.colors.dark[3] + '80',
+    color: theme.colors.gray[0],
+    border: '1px solid ' + theme.colors.gray[0] + '80',
+    cursor: 'pointer',
+    '&:hover': {
+      border: '1px solid ' + theme.colors[theme.primaryColor][6] + 'CC',
+    },
+  },
+}));
+
 const TextareaField: React.FC<Props> = (props) => {
+  const { classes } = useStyles();
   return (
     <Textarea
       {...props.register}
@@ -26,6 +50,11 @@ const TextareaField: React.FC<Props> = (props) => {
       maxRows={props.row.max}
       minLength={props.row.minLength}
       maxLength={props.row.maxLength}
+      classNames={{
+        label: classes.label,
+        description: classes.description,
+        input: classes.input,
+      }}
     />
   );
 };
