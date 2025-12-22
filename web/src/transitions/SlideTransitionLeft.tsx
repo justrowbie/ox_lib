@@ -9,7 +9,7 @@ const SlideTransitionLeft: React.FC<{ visible: boolean; children: React.ReactNod
       <AnimatePresence onExitComplete={onExitComplete}>
         {visible && (
           <motion.div
-            initial={{ transform: 'translateX(100%)', opacity: 0 }}
+            initial={{ transform: 'translateX(-100%)', opacity: 0 }}
             animate={{ transform: 'translateX(0%)', opacity: 1, transition: { duration: 0.5, ease: [0, 0, 0.4, 1] } }}
             exit={{ transform: 'translateX(-100%)', opacity: 0, transition: { duration: 0.5, ease: [0.4, 0, 1, 1] } }}
           >

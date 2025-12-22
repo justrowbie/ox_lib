@@ -34,10 +34,10 @@ const useStyles = createStyles((theme, params: { disabled?: boolean; readOnly?: 
       [`& .labelText, & .descriptionText`]: {
         color: theme.colors[theme.primaryColor][9],
       },
-      [`& .progressbar`]: {
+      [`& .progressBar`]: {
         background: theme.colors[theme.primaryColor][9],
       },
-      [`& .progressroot`]: {
+      [`& .progressRoot`]: {
         background: theme.colors[theme.primaryColor][6],
       },
       cursor: params.readOnly ? 'unset' : 'pointer',
@@ -99,12 +99,12 @@ const useStyles = createStyles((theme, params: { disabled?: boolean; readOnly?: 
     width: 25,
     height: 25,
   },
-  progressbar: {
+  progressBar: {
     background: params.disabled
       ? theme.colors[theme.primaryColor][6]
       : theme.colors[theme.primaryColor][0]
   },
-  progressroot: {
+  progressRoot: {
     background: params.disabled
       ? theme.colors[theme.primaryColor][3] + '1A'
       : theme.colors[theme.primaryColor][0] + '1A'
@@ -172,8 +172,8 @@ const ContextButton: React.FC<{
                     value={button.progress}
                     size="sm"
                     classNames={{ 
-                      bar: `${classes.progressbar} progressbar`,
-                      root: `${classes.progressroot} progressroot`
+                      bar: `${classes.progressBar} progressBar`,
+                      root: `${classes.progressRoot} progressRoot`
                     }}
                   />
                 )}
@@ -205,8 +205,8 @@ const ContextButton: React.FC<{
                       size="sm"
                       color={metadata.colorScheme || button.colorScheme || 'gray.0'}
                       classNames={{ 
-                        bar: `${classes.progressbar} progressbar`,
-                        root: `${classes.progressroot} progressroot`
+                        bar: `${classes.progressBar} progressBar`,
+                        root: `${classes.progressRoot} progressRoot`
                       }}
                     />
                   )}

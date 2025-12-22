@@ -10,7 +10,8 @@ export const debugCustomNotification = () => {
         description: 'Notification description',
         type: 'success',
         id: 'pogchamp',
-        duration: 20000,
+        duration: 3000,
+        position: "top",
         style: {
           '.description': {
             color: 'red',
@@ -23,7 +24,7 @@ export const debugCustomNotification = () => {
     {
       action: 'notify',
       data: {
-        title: 'Error',
+        duration: 3000,
         description: 'Notification description',
         type: 'error',
         position: "bottom"
@@ -35,10 +36,50 @@ export const debugCustomNotification = () => {
       action: 'notify',
       data: {
         title: 'Custom icon success',
+        duration: 3000,
         description: 'Notification description',
         type: 'success',
         icon: 'microchip',
-        showDuration: false,
+        position: "top-left"
+      },
+    },
+  ]);
+  debugData<NotificationProps>([
+    {
+      action: 'notify',
+      data: {
+        title: 'Custom icon success',
+        duration: 3000,
+        description: 'Notification description',
+        type: 'success',
+        icon: 'microchip',
+        position: "bottom-left"
+      },
+    },
+  ]);
+  debugData<NotificationProps>([
+    {
+      action: 'notify',
+      data: {
+        title: 'Custom icon success',
+        duration: 3000,
+        description: 'Notification description',
+        type: 'success',
+        icon: 'microchip',
+        position: "top-right"
+      },
+    },
+  ]);
+  debugData<NotificationProps>([
+    {
+      action: 'notify',
+      data: {
+        title: 'Custom icon success',
+        duration: 3000,
+        description: 'Notification description',
+        type: 'success',
+        icon: 'microchip',
+        position: "bottom-right"
       },
     },
   ]);

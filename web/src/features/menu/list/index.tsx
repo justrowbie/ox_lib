@@ -1,4 +1,4 @@
-import { Box, createStyles, Stack, Tooltip } from '@mantine/core';
+import { Box, createStyles, Modal, Stack, Tooltip } from '@mantine/core';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useNuiEvent } from '../../../hooks/useNuiEvent';
 import ListItem from './ListItem';
@@ -21,48 +21,63 @@ const useStyles = createStyles((theme, params: { position?: MenuPosition; itemCo
     height: '100vh',
     background: `linear-gradient(to left,`+ theme.colors.dark[9] +`00 0%,`+ theme.colors.dark[9] +`E6 100%)`,
   },
-  wrapper: {
-transform: "perspective(1000px) rotateY(-12deg)",
-  },
   tooltip: {
-    backgroundColor: theme.colors.dark[6],
-    color: theme.colors.dark[2],
+    background: theme.colors[theme.primaryColor][0] + '1A',
+    border: '1px solid ' + theme.colors[theme.primaryColor][0] + '33',
+    color: theme.colors[theme.primaryColor][0],
     borderRadius: theme.radius.sm,
     maxWidth: 350,
     whiteSpace: 'normal',
   },
+  modal: {
+    display: 'flex',
+    width: '100%',
+    height: '100%',
+    background: 'transparent',
+    border: 'none',
+    boxShadow: 'none',
+    padding: 0,
+    position: 'fixed',
+    justifyContent: params.position === 'top-left'
+      || params.position === 'bottom-left' 
+      ? 'flex-start'
+      : 'flex-end',
+    top: 150,
+    right: params.position === 'top-right' || params.position === 'bottom-right' ? 150 : undefined,
+    left: params.position === 'bottom-left' || params.position === 'top-left'? 150 : undefined,
+  },
+  wrapper: {
+    transform: params.position === 'top-left' 
+      || params.position === 'bottom-left'
+      ? "perspective(1000px) rotateY(12deg)"
+      : "perspective(1000px) rotateY(-12deg)",
+  },
   container: {
-    position: 'absolute',
     pointerEvents: 'none',
-    marginTop: params.position === 'top-left' || params.position === 'top-right' ? 5 : 0,
-    marginLeft: params.position === 'top-left' || params.position === 'bottom-left' ? 5 : 0,
-    marginRight: params.position === 'top-right' || params.position === 'bottom-right' ? 5 : 0,
-    marginBottom: params.position === 'bottom-left' || params.position === 'bottom-right' ? 5 : 0,
-    right: params.position === 'top-right' || params.position === 'bottom-right' ? 1 : undefined,
-    left: params.position === 'bottom-left' ? 1 : undefined,
-    bottom: params.position === 'bottom-left' || params.position === 'bottom-right' ? 1 : undefined,
-    fontFamily: 'Roboto',
-    width: 384,
   },
   buttonsWrapper: {
     height: 'fit-content',
     maxHeight: 415,
     overflow: 'hidden',
     borderRadius: params.itemCount <= 6 || params.selected === params.itemCount - 1 ? theme.radius.md : undefined,
-    backgroundColor: theme.colors.dark[8],
+    background: theme.colors[theme.primaryColor][0] + '1A',
+    borderTop: '1px solid ' + theme.colors[theme.primaryColor][0] + '33',
+    borderLeft: '1px solid ' + theme.colors[theme.primaryColor][0] + '33',
+    borderRight: '1px solid ' + theme.colors[theme.primaryColor][0] + '33',
     borderTopLeftRadius: 0,
     borderTopRightRadius: 0,
   },
   scrollArrow: {
-    backgroundColor: theme.colors.dark[8],
+    background: theme.colors[theme.primaryColor][0] + '1A',
+    borderBottom: '1px solid ' + theme.colors[theme.primaryColor][0] + '33',
+    borderLeft: '1px solid ' + theme.colors[theme.primaryColor][0] + '33',
+    borderRight: '1px solid ' + theme.colors[theme.primaryColor][0] + '33',
     textAlign: 'center',
-    borderBottomLeftRadius: theme.radius.md,
-    borderBottomRightRadius: theme.radius.md,
     height: 25,
   },
   scrollArrowIcon: {
-    color: theme.colors.dark[2],
-    fontSize: 20,
+    color: theme.colors[theme.primaryColor][0],
+    fontSize: 16,
   },
 }));
 
@@ -214,24 +229,34 @@ const ListMenu: React.FC = () => {
   return (
     <>
       {menu.position === 'top-right' || menu.position === 'bottom-right' ? (
-        <SlideTransitionRight visible={visible}>
-          <Box className={classes.backgroundRight}>
-            <Box className={classes.wrapper}>
-              {visible && (
+        <>
+          <SlideTransitionRight visible={visible}>
+            <Box className={classes.backgroundRight} />
+          </SlideTransitionRight>
+          <Modal
+            opened={visible}
+            onClose={closeMenu}
+            closeOnClickOutside={false}
+            withCloseButton={false}
+            overlayOpacity={0.5}
+            transition="fade"
+            exitTransitionDuration={150}
+            classNames={{
+              modal: classes.modal,
+            }}>
+            {visible && (
+              <Box className={classes.wrapper}>
                 <Tooltip
-                  label={
-                    isValuesObject(menu.items[selected].values)
-                      ? // @ts-ignore
-                        menu.items[selected].values[indexStates[selected]].description
-                      : menu.items[selected].description
-                  }
-                  opened={
-                    isValuesObject(menu.items[selected].values)
-                      ? // @ts-ignore
-                        !!menu.items[selected].values[indexStates[selected]].description
-                      : !!menu.items[selected].description
-                  }
+                  label={isValuesObject(menu.items[selected].values)
+                    ? // @ts-ignore
+                    menu.items[selected].values[indexStates[selected]].description
+                    : menu.items[selected].description}
+                  opened={isValuesObject(menu.items[selected].values)
+                    ? // @ts-ignore
+                    !!menu.items[selected].values[indexStates[selected]].description
+                    : !!menu.items[selected].description}
                   transitionDuration={0}
+                  position='bottom'
                   classNames={{ tooltip: classes.tooltip }}
                 >
                   <Box className={classes.container}>
@@ -247,8 +272,7 @@ const ListMenu: React.FC = () => {
                                   item={item}
                                   scrollIndex={indexStates[index]}
                                   checked={checkedStates[index]}
-                                  ref={listRefs}
-                                />
+                                  ref={listRefs} />
                               )}
                             </React.Fragment>
                           ))}
@@ -262,61 +286,75 @@ const ListMenu: React.FC = () => {
                     )}
                   </Box>
                 </Tooltip>
-              )}
-            </Box>
-          </Box>
-        </SlideTransitionRight>
-      ) : (
-        <SlideTransitionLeft visible={visible}>
-          <Box className={classes.backgroundLeft}>
-            {visible && (
-              <Tooltip
-                label={
-                  isValuesObject(menu.items[selected].values)
-                    ? // @ts-ignore
-                      menu.items[selected].values[indexStates[selected]].description
-                    : menu.items[selected].description
-                }
-                opened={
-                  isValuesObject(menu.items[selected].values)
-                    ? // @ts-ignore
-                      !!menu.items[selected].values[indexStates[selected]].description
-                    : !!menu.items[selected].description
-                }
-                transitionDuration={0}
-                classNames={{ tooltip: classes.tooltip }}
-              >
-                <Box className={classes.container}>
-                  <Header title={menu.title} />
-                  <Box className={classes.buttonsWrapper} onKeyDown={(e: React.KeyboardEvent<HTMLDivElement>) => moveMenu(e)}>
-                    <FocusTrap active={visible}>
-                      <Stack spacing={8} p={8} sx={{ overflowY: 'scroll' }}>
-                        {menu.items.map((item, index) => (
-                          <React.Fragment key={`menu-item-${index}`}>
-                            {item.label && (
-                              <ListItem
-                                index={index}
-                                item={item}
-                                scrollIndex={indexStates[index]}
-                                checked={checkedStates[index]}
-                                ref={listRefs}
-                              />
-                            )}
-                          </React.Fragment>
-                        ))}
-                      </Stack>
-                    </FocusTrap>
-                  </Box>
-                  {menu.items.length > 6 && selected !== menu.items.length - 1 && (
-                    <Box className={classes.scrollArrow}>
-                      <LibIcon icon="chevron-down" className={classes.scrollArrowIcon} />
-                    </Box>
-                  )}
-                </Box>
-              </Tooltip>
+              </Box>
             )}
-          </Box>
-        </SlideTransitionLeft>
+          </Modal>
+        </>
+      ) : (
+<>
+          <SlideTransitionLeft visible={visible}>
+            <Box className={classes.backgroundLeft} />
+          </SlideTransitionLeft>
+          <Modal
+            opened={visible}
+            onClose={closeMenu}
+            centered
+            closeOnClickOutside={false}
+            size={'xs'}
+            title={null}
+            withCloseButton={false}
+            overlayOpacity={0.5}
+            transition="fade"
+            exitTransitionDuration={150}
+            classNames={{
+              modal: classes.modal,
+            }}>
+            {visible && (
+              <Box className={classes.wrapper}>
+                <Tooltip
+                  label={isValuesObject(menu.items[selected].values)
+                    ? // @ts-ignore
+                    menu.items[selected].values[indexStates[selected]].description
+                    : menu.items[selected].description}
+                  opened={isValuesObject(menu.items[selected].values)
+                    ? // @ts-ignore
+                    !!menu.items[selected].values[indexStates[selected]].description
+                    : !!menu.items[selected].description}
+                  transitionDuration={0}
+                  position='bottom'
+                  classNames={{ tooltip: classes.tooltip }}
+                >
+                  <Box className={classes.container}>
+                    <Header title={menu.title} />
+                    <Box className={classes.buttonsWrapper} onKeyDown={(e: React.KeyboardEvent<HTMLDivElement>) => moveMenu(e)}>
+                      <FocusTrap active={visible}>
+                        <Stack spacing={8} p={8} sx={{ overflowY: 'scroll' }}>
+                          {menu.items.map((item, index) => (
+                            <React.Fragment key={`menu-item-${index}`}>
+                              {item.label && (
+                                <ListItem
+                                  index={index}
+                                  item={item}
+                                  scrollIndex={indexStates[index]}
+                                  checked={checkedStates[index]}
+                                  ref={listRefs} />
+                              )}
+                            </React.Fragment>
+                          ))}
+                        </Stack>
+                      </FocusTrap>
+                    </Box>
+                    {menu.items.length > 6 && selected !== menu.items.length - 1 && (
+                      <Box className={classes.scrollArrow}>
+                        <LibIcon icon="chevron-down" className={classes.scrollArrowIcon} />
+                      </Box>
+                    )}
+                  </Box>
+                </Tooltip>
+              </Box>
+            )}
+          </Modal>
+        </>
       )}
     </>
   );

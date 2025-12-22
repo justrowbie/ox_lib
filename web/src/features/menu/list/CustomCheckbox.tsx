@@ -6,12 +6,15 @@ const useStyles = createStyles((theme) => ({
     alignItems: 'center',
   },
   input: {
-    backgroundColor: theme.colors.dark[7],
-    '&:checked': { backgroundColor: theme.colors.dark[2], borderColor: theme.colors.dark[2] },
+    background: theme.colors[theme.primaryColor][9] + '1A',
+    border: '1px solid ' + theme.colors[theme.primaryColor][0] + '33',
+    '&:checked': { 
+      background: theme.colors[theme.primaryColor][0],
+    },
   },
   inner: {
     '> svg > path': {
-      fill: theme.colors.dark[6],
+      fill: theme.colors[theme.primaryColor][9],
     },
   },
 }));
@@ -22,7 +25,10 @@ const CustomCheckbox: React.FC<{ checked: boolean }> = ({ checked }) => {
     <Checkbox
       checked={checked}
       size="md"
-      classNames={{ root: classes.root, input: classes.input, inner: classes.inner }}
+      classNames={{ 
+        root: classes.root, 
+        input: `${classes.input} checkboxInput`, 
+        inner: `${classes.inner} checkboxInner` }}
     />
   );
 };

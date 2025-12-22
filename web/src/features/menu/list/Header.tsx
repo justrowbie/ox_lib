@@ -4,9 +4,8 @@ import React from 'react';
 const useStyles = createStyles((theme) => ({
   container: {
     textAlign: 'center',
-    borderTopLeftRadius: theme.radius.md,
-    borderTopRightRadius: theme.radius.md,
-    backgroundColor: theme.colors.dark[6],
+    background: theme.colors[theme.primaryColor][0],
+    border: '1px solid ' + theme.colors[theme.primaryColor][0] + '33',
     height: 60,
     width: 384,
     display: 'flex',
@@ -14,9 +13,10 @@ const useStyles = createStyles((theme) => ({
     alignItems: 'center',
   },
   heading: {
-    fontSize: 24,
+    fontSize: 16,
+    color: theme.colors[theme.primaryColor][9],
     textTransform: 'uppercase',
-    fontWeight: 500,
+    fontWeight: 600,
   },
 }));
 

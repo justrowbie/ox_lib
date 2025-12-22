@@ -142,9 +142,7 @@ const InputDialog: React.FC = () => {
   return (
     <>
       <SlideTransitionRight visible={visible}>
-        <Box
-          className={classes.background}
-        />
+        <Box className={classes.background}/>
       </SlideTransitionRight>
       <Modal
         opened={visible}

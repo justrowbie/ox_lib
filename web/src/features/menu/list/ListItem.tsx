@@ -15,14 +15,33 @@ interface Props {
 
 const useStyles = createStyles((theme, params: { iconColor?: string }) => ({
   buttonContainer: {
-    backgroundColor: theme.colors.dark[6],
-    borderRadius: theme.radius.md,
+    background: theme.colors[theme.primaryColor][0] + '1A',
+    border: '1px solid ' + theme.colors[theme.primaryColor][0] + '33',
+    color: theme.colors[theme.primaryColor][0],
     padding: 2,
     height: 60,
     scrollMargin: 8,
     '&:focus': {
-      backgroundColor: theme.colors.dark[4],
+      background: theme.colors[theme.primaryColor][0],
+      color: theme.colors[theme.primaryColor][9],
       outline: 'none',
+      [`& .hoverText`]: {
+        color: theme.colors[theme.primaryColor][9],
+      },
+      [`& .progressBar`]: {
+        background: theme.colors[theme.primaryColor][9],
+      },
+      [`& .progressRoot`]: {
+        background: theme.colors[theme.primaryColor][6],
+      },
+      [`& .checkboxInput`]: {
+        background: theme.colors[theme.primaryColor][9],
+      },
+      [`& .checkboxInner`]: {
+        '> svg > path': {
+          fill: theme.colors[theme.primaryColor][0],
+        },
+      },
     },
   },
   iconImage: {
@@ -40,21 +59,21 @@ const useStyles = createStyles((theme, params: { iconColor?: string }) => ({
     height: 32,
   },
   icon: {
-    fontSize: 24,
-    color: params.iconColor || theme.colors.dark[2],
+    fontSize: 20,
+    color: params.iconColor || theme.colors[theme.primaryColor][0],
   },
   label: {
-    color: theme.colors.dark[2],
+    color: theme.colors[theme.primaryColor][0],
     textTransform: 'uppercase',
     fontSize: 12,
     verticalAlign: 'middle',
   },
   chevronIcon: {
     fontSize: 14,
-    color: theme.colors.dark[2],
+    color: theme.colors[theme.primaryColor][0],
   },
   scrollIndexValue: {
-    color: theme.colors.dark[2],
+    color: theme.colors[theme.primaryColor][0],
     textTransform: 'uppercase',
     fontSize: 14,
   },
@@ -66,6 +85,12 @@ const useStyles = createStyles((theme, params: { iconColor?: string }) => ({
     verticalAlign: 'middle',
     marginBottom: 3,
   },
+  progressBar: {
+    background: theme.colors[theme.primaryColor][0]
+  },
+  progressRoot: {
+    background: theme.colors[theme.primaryColor][0] + '1A'
+  }
 }));
 
 const ListItem = forwardRef<Array<HTMLDivElement | null>, Props>(({ item, index, scrollIndex, checked }, ref) => {
@@ -90,7 +115,7 @@ const ListItem = forwardRef<Array<HTMLDivElement | null>, Props>(({ item, index,
             ) : (
               <LibIcon
                 icon={item.icon as IconProp}
-                className={classes.icon}
+                className={`${classes.icon} hoverText`}
                 fixedWidth
                 animation={item.iconAnimation}
               />
@@ -100,7 +125,7 @@ const ListItem = forwardRef<Array<HTMLDivElement | null>, Props>(({ item, index,
         {Array.isArray(item.values) ? (
           <Group position="apart" w="100%">
             <Stack spacing={0} justify="space-between">
-              <Text className={classes.label}>{item.label}</Text>
+              <Text className={`${classes.label} hoverText`}>{item.label}</Text>
               <Text>
                 {typeof item.values[scrollIndex] === 'object'
                   ? // @ts-ignore for some reason even checking the type TS still thinks it's a string
@@ -109,11 +134,11 @@ const ListItem = forwardRef<Array<HTMLDivElement | null>, Props>(({ item, index,
               </Text>
             </Stack>
             <Group spacing={1} position="center">
-              <LibIcon icon="chevron-left" className={classes.chevronIcon} />
-              <Text className={classes.scrollIndexValue}>
+              <LibIcon icon="chevron-left" className={`${classes.chevronIcon} hoverText`} />
+              <Text className={`${classes.scrollIndexValue} hoverText`}>
                 {scrollIndex + 1}/{item.values.length}
               </Text>
-              <LibIcon icon="chevron-right" className={classes.chevronIcon} />
+              <LibIcon icon="chevron-right" className={`${classes.chevronIcon} hoverText`} />
             </Group>
           </Group>
         ) : item.checked !== undefined ? (
@@ -125,9 +150,13 @@ const ListItem = forwardRef<Array<HTMLDivElement | null>, Props>(({ item, index,
           <Stack className={classes.progressStack} spacing={0}>
             <Text className={classes.progressLabel}>{item.label}</Text>
             <Progress
+              classNames={{
+                bar: `${classes.progressBar} progressBar`,
+                root: `${classes.progressRoot} progressRoot`
+              }}
               value={item.progress}
-              color={item.colorScheme || 'dark.0'}
-              styles={(theme) => ({ root: { backgroundColor: theme.colors.dark[3] } })}
+              color={item.colorScheme || 'gray.0'}
+              // styles={(theme) => ({ root: { backgroundColor: theme.colors.gray[0] + 'A1' } })}
             />
           </Stack>
         ) : (

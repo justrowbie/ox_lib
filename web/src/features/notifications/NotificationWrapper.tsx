@@ -12,28 +12,33 @@ const useStyles = createStyles((theme) => ({
   container: {
     width: 300,
     height: 'fit-content',
-    backgroundColor: theme.colors.dark[6],
-    color: theme.colors.dark[0],
+    background: theme.colors[theme.primaryColor][0] + '80',
+    border: '1px solid ' + theme.colors[theme.primaryColor][0] + '33',
+    color: theme.colors[theme.primaryColor][9],
     padding: 12,
-    borderRadius: theme.radius.sm,
     fontFamily: 'Roboto',
     boxShadow: theme.shadows.sm,
   },
   title: {
-    fontWeight: 500,
+    fontSize: 12,
+    fontWeight: 600,
     lineHeight: 'normal',
+    textTransform: 'uppercase',
   },
   description: {
     fontSize: 12,
-    color: theme.colors.dark[2],
+    fontWeight: 300,
+    color: theme.colors[theme.primaryColor][9],
     fontFamily: 'Roboto',
     lineHeight: 'normal',
   },
   descriptionOnly: {
-    fontSize: 14,
-    color: theme.colors.dark[2],
+    fontSize: 12,
+    fontWeight: 600,
+    color: theme.colors[theme.primaryColor][9],
     fontFamily: 'Roboto',
     lineHeight: 'normal',
+    textTransform: 'uppercase',
   },
 }));
 
@@ -56,7 +61,7 @@ const getAnimation = (visible: boolean, position: string) => {
     animation = position.includes('bottom') ? { from: 'Y(30px)', to: 'Y(0px)' } : { from: 'Y(-30px)', to:'Y(0px)' };
   } else {
     if (position.includes('right')) {
-      animation = { from: 'X(0px)', to: 'X(100%)' }
+      animation = { from: 'X(0px)', to: 'X(100%)' };
     } else if (position.includes('left')) {
       animation = { from: 'X(0px)', to: 'X(-100%)' };
     } else if (position === 'top-center') {
@@ -123,16 +128,16 @@ const Notifications: React.FC = () => {
     if (!data.iconColor) {
       switch (data.type) {
         case 'error':
-          iconColor = 'red.6';
+          iconColor = 'red.5';
           break;
         case 'success':
-          iconColor = 'teal.6';
+          iconColor = 'teal.5';
           break;
         case 'warning':
-          iconColor = 'yellow.6';
+          iconColor = 'yellow.5';
           break;
         default:
-          iconColor = 'blue.6';
+          iconColor = 'blue.5';
           break;
       }
     } else {
