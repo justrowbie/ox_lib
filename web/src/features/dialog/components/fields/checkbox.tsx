@@ -1,6 +1,8 @@
 import { Checkbox, createStyles } from '@mantine/core';
 import { ICheckbox } from '../../../../typings/dialog';
 import { UseFormRegisterReturn } from 'react-hook-form';
+import { icon } from '@fortawesome/fontawesome-svg-core';
+import test from 'node:test';
 
 interface Props {
   row: ICheckbox;
@@ -10,22 +12,20 @@ interface Props {
 
 const useStyles = createStyles((theme) => ({
   label: {
-    color: theme.colors.gray[0],
+    color: theme.colors[theme.primaryColor][0],
     fontSize: '12px',
     fontWeight: 500,
     textTransform: 'uppercase'
   },
   input: {
-    color: theme.colors.gray[0],
-    backgroundColor: theme.colors.dark[3] + '80',
-    border: '1px solid ' + theme.colors.gray[0] + '80',
     cursor: 'pointer',
+    background: theme.colors[theme.primaryColor][0] + '1A',
     '&:hover': {
-      border: '1px solid ' + theme.colors[theme.primaryColor][6] + 'CC',
+      border: '1px solid ' + theme.colors[theme.primaryColor][0],
     },
     '&:checked': {
-      backgroundColor: theme.colors[theme.primaryColor][6] + 'CC',
-      border: '1px solid ' + theme.colors[theme.primaryColor][6] + 'CC',
+      backgroundColor: theme.colors.green[6],
+      borderColor: theme.colors.green[6],
     },
   },
 }))
@@ -42,7 +42,7 @@ const { classes } = useStyles();
       disabled={props.row.disabled}
       classNames={{
         label: classes.label,
-        input: classes.input
+        input: classes.input,
       }}
     />
   );

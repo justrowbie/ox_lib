@@ -11,29 +11,27 @@ interface Props {
 
 const useStyles = createStyles((theme) => ({
   label: {
-    color: theme.colors.gray[0],
+    color: theme.colors[theme.primaryColor][0],
     fontSize: '12px',
     fontWeight: 500,
     textTransform: 'uppercase'
   },
   description: {
-    color: theme.colors.gray[6],
+    color: theme.colors[theme.primaryColor][3],
     fontSize: '12px',
-    fontWeight: 500,
+    fontWeight: 300,
   },
   thumb: {
-    backgroundColor: theme.colors[theme.primaryColor][6],
-    border: `2px solid `+theme.colors[theme.primaryColor][5],
+    background: theme.colors[theme.primaryColor][0],
   },
   thumbLabel: {
-    fontWeight: 600,
+    fontWeight: 800,
     fontSize: '12px',
-    color: theme.colors.gray[0],
-    backgroundColor: theme.colors[theme.primaryColor][5] + '80',
-    border: `1px solid `+theme.colors[theme.primaryColor][5] + 'CC',
+    color: theme.colors[theme.primaryColor][9],
+    background: theme.colors[theme.primaryColor][0],
   },
   markLabel:{
-    color: theme.colors.gray[0]
+    color: theme.colors[theme.primaryColor][0]
   },
 }))
 
@@ -49,10 +47,12 @@ const SliderField: React.FC<Props> = (props) => {
       <Global
         styles={(theme) => ({
           '.mantine-Slider-track::before': {
-            backgroundColor: theme.colors.dark[3] + 'E9',
+            background: theme.colors[theme.primaryColor][0] + '1A',
+            border: '1px solid ' + theme.colors[theme.primaryColor][0] + '33',
           },
           '.mantine-Slider-track::after': {
-            backgroundColor: theme.colors.dark[3] + 'E9',
+            background: theme.colors[theme.primaryColor][0] + 'E9',
+            border: '1px solid ' + theme.colors[theme.primaryColor][0] + '33',
           },
         })}
       />

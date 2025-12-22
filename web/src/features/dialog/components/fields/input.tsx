@@ -12,32 +12,32 @@ interface Props {
 
 const useStyles = createStyles((theme) => ({
   eyeIcon: {
-    color: theme.colors.dark[3],
+    color: theme.colors[theme.primaryColor][0],
     '&:hover': {
-      color: theme.colors.dark[0],
+      color: theme.colors[theme.primaryColor][5],
     },
   },
   lockIcon: {
-    color: theme.colors[theme.primaryColor][5],
+    color: theme.colors[theme.primaryColor][0],
   },
   label: {
-    color: theme.colors.gray[0],
+    color: theme.colors[theme.primaryColor][0],
     fontSize: '12px',
     fontWeight: 500,
     textTransform: 'uppercase'
   },
   description: {
-    color: theme.colors.gray[6],
+    color: theme.colors[theme.primaryColor][3],
     fontSize: '12px',
-    fontWeight: 500,
+    fontWeight: 300,
   },
   input: {
-    backgroundColor: theme.colors.dark[3] + '80',
-    color: theme.colors.gray[0],
-    border: '1px solid ' + theme.colors.gray[0] + '80',
+    color: theme.colors[theme.primaryColor][0],
+    background: theme.colors[theme.primaryColor][0] + '1A',
+    border: '1px solid ' + theme.colors[theme.primaryColor][0] + '33',
     cursor: 'pointer',
     '&:hover': {
-      border: '1px solid ' + theme.colors[theme.primaryColor][6] + 'CC',
+      border: '1px solid ' + theme.colors[theme.primaryColor][0],
     },
   },
 }));

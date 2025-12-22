@@ -4,6 +4,7 @@ import { FormValues } from '../../InputDialog';
 import { DatePicker, DateRangePicker } from '@mantine/dates';
 import LibIcon from '../../../../components/LibIcon';
 import { createStyles } from '@mantine/core';
+import { YearPicker } from '@mantine/dates/lib/components/CalendarBase/YearPicker/YearPicker';
 
 interface Props {
   row: IDateInput;
@@ -13,28 +14,89 @@ interface Props {
 
 const useStyles = createStyles((theme) => ({
   dropdown: {
-    backgroundColor: theme.colors.dark[3] + 'E9',
+    background: theme.colors[theme.primaryColor][0] + 'E6',
+    color: theme.colors[theme.primaryColor][9],
+    border: 'none',
   },
   label: {
-    color: theme.colors.gray[0],
+    color: theme.colors[theme.primaryColor][0],
     fontSize: '12px',
     fontWeight: 500,
     textTransform: 'uppercase'
   },
   description: {
-    color: theme.colors.gray[6],
+    color: theme.colors[theme.primaryColor][3],
     fontSize: '12px',
-    fontWeight: 500,
+    fontWeight: 300,
   },
   input: {
-    backgroundColor: theme.colors.dark[3] + '80',
-    color: theme.colors.gray[0],
-    border: '1px solid ' + theme.colors.gray[0] + '80',
+    color: theme.colors[theme.primaryColor][0],
+    background: theme.colors[theme.primaryColor][0] + '1A',
+    border: '1px solid ' + theme.colors[theme.primaryColor][0] + '33',
     cursor: 'pointer',
+  },
+  datestyle: {
+    color: theme.colors[theme.primaryColor][9],
     '&:hover': {
-      border: '1px solid ' + theme.colors[theme.primaryColor][6] + 'CC',
+      background: theme.colors[theme.primaryColor][0],
+    },
+    '&[data-selected]': {
+      background: theme.colors[theme.primaryColor][9],
+    }
+  },
+  weekday: {
+    color: theme.colors[theme.primaryColor][9],
+  },
+  monthpicker: {
+    color: theme.colors[theme.primaryColor][9],
+    '&:hover': {
+      background: theme.colors[theme.primaryColor][0],
+    },
+    '&[data-selected]': {
+      background: theme.colors[theme.primaryColor][9],
+    }
+  },
+  monthactive: {
+    background: theme.colors[theme.primaryColor][9],
+    '&:hover': {
+      background: theme.colors[theme.primaryColor][0],
+      color: theme.colors[theme.primaryColor][9],
     },
   },
+  yearpicker: {
+    color: theme.colors[theme.primaryColor][9],
+    '&:hover': {
+      background: theme.colors[theme.primaryColor][0],
+    },
+    '&[data-selected]': {
+      background: theme.colors[theme.primaryColor][9],
+    }
+  },
+  yearactive: {
+    background: theme.colors[theme.primaryColor][9],
+    '&:hover': {
+      background: theme.colors[theme.primaryColor][0],
+      color: theme.colors[theme.primaryColor][9],
+    },
+  },
+  calheader: {
+    marginLeft: 4,
+    marginRight: 4,
+    background: theme.colors[theme.primaryColor][9],
+    color: theme.colors[theme.primaryColor][0],
+    '&:hover': {
+      background: theme.colors[theme.primaryColor][0],
+      color: theme.colors[theme.primaryColor][9],
+    },
+  },
+  calicon: {
+    background: theme.colors[theme.primaryColor][9],
+    color: theme.colors[theme.primaryColor][0],
+    '&:hover': {
+      background: theme.colors[theme.primaryColor][0],
+      color: theme.colors[theme.primaryColor][9],
+    },
+  }
 }))
 
 const DateField: React.FC<Props> = (props) => {
@@ -68,7 +130,15 @@ const DateField: React.FC<Props> = (props) => {
             label: classes.label,
             description: classes.description,
             input: classes.input,
-            dropdown: classes.dropdown
+            dropdown: classes.dropdown,
+            day: classes.datestyle,
+            weekday: classes.weekday,
+            monthPickerControlActive: classes.monthactive,
+            monthPickerControl: classes.monthpicker,
+            yearPickerControlActive: classes.yearactive,
+            yearPickerControl: classes.yearpicker,
+            calendarHeaderLevel: classes.calheader,
+            calendarHeaderControl: classes.calicon,
           }}
         />
       )}

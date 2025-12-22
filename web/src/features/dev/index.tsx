@@ -1,4 +1,4 @@
-import { ActionIcon, Button, Divider, Drawer, Stack, Tooltip } from '@mantine/core';
+import { ActionIcon, Button, Divider, Drawer, Stack, Tooltip, useMantineTheme } from '@mantine/core';
 import { debugAlert } from './debug/alert';
 import { debugContext } from './debug/context';
 import { debugInput } from './debug/input';
@@ -13,6 +13,7 @@ import LibIcon from '../../components/LibIcon';
 
 const Dev: React.FC = () => {
   const [opened, setOpened] = useState(false);
+  const theme = useMantineTheme();
 
   return (
     <>
@@ -21,52 +22,52 @@ const Dev: React.FC = () => {
           onClick={() => setOpened(true)}
           radius="xl"
           variant="filled"
-          color="orange"
+          color={theme.colors.gray[0]}
           sx={{ position: 'absolute', bottom: 0, right: 0, width: 50, height: 50 }}
           size="xl"
           mr={50}
           mb={50}
         >
-          <LibIcon icon="wrench" fontSize={24} />
+          <LibIcon icon="wrench" fontSize={24} color={theme.colors.gray[9]} />
         </ActionIcon>
       </Tooltip>
 
       <Drawer position="left" onClose={() => setOpened(false)} opened={opened} title="Developer drawer" padding="xl">
         <Stack>
           <Divider />
-          <Button fullWidth onClick={() => debugInput()}>
+          <Button fullWidth color="gray.0" sx={{ color: theme.colors.gray[9] }} onClick={() => debugInput()}>
             Open input dialog
           </Button>
-          <Button fullWidth onClick={() => debugAlert()}>
+          <Button fullWidth color="gray.0" sx={{ color: theme.colors.gray[9] }} onClick={() => debugAlert()}>
             Open alert dialog
           </Button>
           <Divider />
-          <Button fullWidth onClick={() => debugContext()}>
+          <Button fullWidth color="gray.0" sx={{ color: theme.colors.gray[9] }} onClick={() => debugContext()}>
             Open context menu
           </Button>
-          <Button fullWidth onClick={() => debugMenu()}>
+          <Button fullWidth color="gray.0" sx={{ color: theme.colors.gray[9] }} onClick={() => debugMenu()}>
             Open list menu
           </Button>
-          <Button fullWidth onClick={() => debugRadial()}>
+          <Button fullWidth color="gray.0" sx={{ color: theme.colors.gray[9] }} onClick={() => debugRadial()}>
             Open radial menu
           </Button>
           <Divider />
-          <Button fullWidth onClick={() => debugCustomNotification()}>
+          <Button fullWidth color="gray.0" sx={{ color: theme.colors.gray[9] }} onClick={() => debugCustomNotification()}>
             Send notification
           </Button>
           <Divider />
-          <Button fullWidth onClick={() => debugProgressbar()}>
+          <Button fullWidth color="gray.0" sx={{ color: theme.colors.gray[9] }} onClick={() => debugProgressbar()}>
             Activate progress bar
           </Button>
-          <Button fullWidth onClick={() => debugCircleProgressbar()}>
+          <Button fullWidth color="gray.0" sx={{ color: theme.colors.gray[9] }} onClick={() => debugCircleProgressbar()}>
             Activate progress circle
           </Button>
           <Divider />
-          <Button fullWidth onClick={() => debugTextUI()}>
+          <Button fullWidth color="gray.0" sx={{ color: theme.colors.gray[9] }} onClick={() => debugTextUI()}>
             Show TextUI
           </Button>
           <Divider />
-          <Button fullWidth onClick={() => debugSkillCheck()}>
+          <Button fullWidth color="gray.0" sx={{ color: theme.colors.gray[9] }} onClick={() => debugSkillCheck()}>
             Run skill check
           </Button>
         </Stack>

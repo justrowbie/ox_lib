@@ -21,35 +21,60 @@ const useStyles = createStyles((theme, params: { disabled?: boolean; readOnly?: 
   },
   label: {
     width: '100%',
-    color: params.disabled ? theme.colors.dark[3] : theme.colors.dark[0],
     whiteSpace: 'pre-wrap',
-  },
-  button: {
-    height: 'fit-content',
-    width: '100%',
     padding: 10,
+    fontSize: 14,
+    fontWeight: 500,
+    color: params.disabled
+      ? theme.colors[theme.primaryColor][6]
+      : theme.colors[theme.primaryColor][3],
     '&:hover': {
-      backgroundColor: params.readOnly ? theme.colors.dark[6] : undefined,
+      background: theme.colors[theme.primaryColor][0],
+      color: theme.colors[theme.primaryColor][9],
+      [`& .labelText, & .descriptionText`]: {
+        color: theme.colors[theme.primaryColor][9],
+      },
+      [`& .progressbar`]: {
+        background: theme.colors[theme.primaryColor][9],
+      },
+      [`& .progressroot`]: {
+        background: theme.colors[theme.primaryColor][6],
+      },
       cursor: params.readOnly ? 'unset' : 'pointer',
     },
-    '&:active': {
-      transform: params.readOnly ? 'unset' : undefined,
+  },
+  button: {
+    cursor: params.readOnly ? 'unset' : 'pointer',
+    background: theme.colors[theme.primaryColor][0] + '1A',
+    '&:disabled': {
+      background: theme.colors[theme.primaryColor][0] + '0D',
     },
+    border: '1px solid ' + theme.colors[theme.primaryColor][0] + '33',
+    borderRadius: 0,
+    height: 'fit-content',
+    width: '100%',
+    padding: 0
   },
   iconImage: {
     maxWidth: '25px',
   },
   description: {
-    color: params.disabled ? theme.colors.dark[3] : theme.colors.dark[2],
-    fontSize: 12,
+    color: params.disabled
+      ? theme.colors[theme.primaryColor][6]
+      : theme.colors[theme.primaryColor][3],
+    fontSize: '12px',
+    fontWeight: 300,
   },
   dropdown: {
     padding: 10,
-    color: theme.colors.dark[0],
+    color: theme.colors[theme.primaryColor][0],
     fontSize: 14,
-    maxWidth: 256,
-    width: 'fit-content',
-    border: 'none',
+    fontWeight: 500,
+    maxWidth: 400,
+    minWidth: 200,
+    background: theme.colors[theme.primaryColor][0] + '1A',
+    border: '1px solid ' + theme.colors[theme.primaryColor][0] + '33',
+    borderRadius: 0,
   },
   buttonStack: {
     gap: 4,
@@ -63,7 +88,7 @@ const useStyles = createStyles((theme, params: { disabled?: boolean; readOnly?: 
     width: 25,
     height: 25,
     justifyContent: 'center',
-    alignItems: 'center',
+    alignItems: 'left',
   },
   buttonTitleText: {
     overflowWrap: 'break-word',
@@ -74,6 +99,16 @@ const useStyles = createStyles((theme, params: { disabled?: boolean; readOnly?: 
     width: 25,
     height: 25,
   },
+  progressbar: {
+    background: params.disabled
+      ? theme.colors[theme.primaryColor][6]
+      : theme.colors[theme.primaryColor][0]
+  },
+  progressroot: {
+    background: params.disabled
+      ? theme.colors[theme.primaryColor][3] + '1A'
+      : theme.colors[theme.primaryColor][0] + '1A'
+  }
 }));
 
 const ContextButton: React.FC<{
@@ -92,7 +127,7 @@ const ContextButton: React.FC<{
       >
         <HoverCard.Target>
           <Button
-            classNames={{ inner: classes.inner, label: classes.label, root: classes.button }}
+            classNames={{ inner: classes.inner, label: `${classes.label} labelText`, root: classes.button }}
             onClick={() =>
               !button.disabled && !button.readOnly
                 ? button.menu
@@ -128,17 +163,24 @@ const ContextButton: React.FC<{
                   </Group>
                 )}
                 {button.description && (
-                  <Text className={classes.description}>
+                  <Text className={`${classes.description} descriptionText`}>
                     <ReactMarkdown components={MarkdownComponents}>{button.description}</ReactMarkdown>
                   </Text>
                 )}
                 {button.progress !== undefined && (
-                  <Progress value={button.progress} size="sm" color={button.colorScheme || 'dark.3'} />
+                  <Progress 
+                    value={button.progress}
+                    size="sm"
+                    classNames={{ 
+                      bar: `${classes.progressbar} progressbar`,
+                      root: `${classes.progressroot} progressroot`
+                    }}
+                  />
                 )}
               </Stack>
               {(button.menu || button.arrow) && button.arrow !== false && (
                 <Stack className={classes.buttonArrowContainer}>
-                  <LibIcon icon="chevron-right" fixedWidth />
+                  <LibIcon icon="chevron-down" fixedWidth />
                 </Stack>
               )}
             </Group>
@@ -161,7 +203,11 @@ const ContextButton: React.FC<{
                     <Progress
                       value={metadata.progress}
                       size="sm"
-                      color={metadata.colorScheme || button.colorScheme || 'dark.3'}
+                      color={metadata.colorScheme || button.colorScheme || 'gray.0'}
+                      classNames={{ 
+                        bar: `${classes.progressbar} progressbar`,
+                        root: `${classes.progressroot} progressroot`
+                      }}
                     />
                   )}
                 </>

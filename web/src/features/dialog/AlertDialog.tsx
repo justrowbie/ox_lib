@@ -1,4 +1,4 @@
-import { Button, createStyles, Group, Modal, Stack, useMantineTheme } from '@mantine/core';
+import { Box, Button, createStyles, Group, Modal, Stack, useMantineTheme } from '@mantine/core';
 import { useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import { useNuiEvent } from '../../hooks/useNuiEvent';
@@ -7,14 +7,58 @@ import { useLocales } from '../../providers/LocaleProvider';
 import remarkGfm from 'remark-gfm';
 import type { AlertProps } from '../../typings';
 import MarkdownComponents from '../../config/MarkdownComponents';
+import SlideTransitionRight from '../../transitions/SlideTransitionRight';
+import React from 'react';
 
 const useStyles = createStyles((theme) => ({
   contentStack: {
-    color: theme.colors.dark[2],
+    color: theme.colors[theme.primaryColor][0],
+  },
+  background: {
+    width: '100%',
+    height: '100vh',
+    background: `linear-gradient(to right,`+ theme.colors.dark[9] +`00 50%,`+ theme.colors.dark[9] +`E6 100%)`,
+  },
+  modal: {
+    background: theme.colors[theme.primaryColor][0] + '1A',
+    border: '1px solid ' + theme.colors[theme.primaryColor][0] + '33',
+    borderRadius: '1px',
+    left: '60vh',
+    maxWidth: '30vw',
+    maxHeight: '50vh',
+    transform: "perspective(1000px) rotateY(-12deg)"
+  },
+  modalTitle: {
+    width: '100%',
+    padding: '5px 10px',
+    fontSize: 16,
+    fontWeight: 500,
+    color: theme.colors[theme.primaryColor][9],
+    textAlign: 'center',
+    backgroundColor: theme.colors[theme.primaryColor][0],
+  },
+  buttonsubmit: {
+    color: theme.colors[theme.primaryColor][0],
+    backgroundColor: theme.colors.green[5] + '80',
+    border: '1px solid ' + theme.colors.green[5] + '80',
+    '&:hover': {
+      backgroundColor: theme.colors.green[5] + 'CC',
+      border: '1px solid ' + theme.colors.green[5] + 'CC',
+    },
+  },
+  buttoncancel: {
+    color: theme.colors[theme.primaryColor][0],
+    backgroundColor: theme.colors.red[5] + '80',
+    border: '1px solid ' + theme.colors.red[5] + '80',
+    '&:hover': {
+      backgroundColor: theme.colors.red[5] + 'CC',
+      border: '1px solid ' + theme.colors.red[5] + 'CC',
+    },
   },
 }));
 
 const AlertDialog: React.FC = () => {
+  const [visible, setVisible] = React.useState(false);
   const { locale } = useLocales();
   const { classes } = useStyles();
   const theme = useMantineTheme();
@@ -26,24 +70,32 @@ const AlertDialog: React.FC = () => {
 
   const closeAlert = (button: string) => {
     setOpened(false);
+    setVisible(false);
     fetchNui('closeAlert', button);
   };
 
   useNuiEvent('sendAlert', (data: AlertProps) => {
     setDialogData(data);
+    setVisible(true);
     setOpened(true);
   });
 
   useNuiEvent('closeAlertDialog', () => {
+    setVisible(false);
     setOpened(false);
   });
 
   return (
     <>
+      <SlideTransitionRight visible={visible}>
+        <Box
+          className={classes.background}
+        />
+      </SlideTransitionRight>
       <Modal
         opened={opened}
         centered={dialogData.centered}
-        size={dialogData.size || 'md'}
+        size={dialogData.size || 'xl'}
         overflow={dialogData.overflow ? 'inside' : 'outside'}
         closeOnClickOutside={false}
         onClose={() => {
@@ -52,8 +104,12 @@ const AlertDialog: React.FC = () => {
         }}
         withCloseButton={false}
         overlayOpacity={0.5}
-        exitTransitionDuration={150}
         transition="fade"
+        exitTransitionDuration={150}
+        classNames={{
+          modal: classes.modal,
+          title: classes.modalTitle
+        }}
         title={<ReactMarkdown components={MarkdownComponents}>{dialogData.header}</ReactMarkdown>}
       >
         <Stack className={classes.contentStack}>
@@ -68,7 +124,12 @@ const AlertDialog: React.FC = () => {
           </ReactMarkdown>
           <Group position="right" spacing={10}>
             {dialogData.cancel && (
-              <Button uppercase variant="default" onClick={() => closeAlert('cancel')} mr={3}>
+              <Button
+                uppercase
+                variant="default"
+                onClick={() => closeAlert('cancel')} mr={3}
+                className={classes.buttoncancel}
+              >
                 {dialogData.labels?.cancel || locale.ui.cancel}
               </Button>
             )}
@@ -77,6 +138,7 @@ const AlertDialog: React.FC = () => {
               variant={dialogData.cancel ? 'light' : 'default'}
               color={dialogData.cancel ? theme.primaryColor : undefined}
               onClick={() => closeAlert('confirm')}
+              className={classes.buttonsubmit}
             >
               {dialogData.labels?.confirm || locale.ui.confirm}
             </Button>

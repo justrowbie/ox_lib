@@ -1,5 +1,6 @@
 import { ContextMenuProps } from '../../../typings';
 import { debugData } from '../../../utils/debugData';
+import mule from '../debug/images/mule.png';
 
 export const debugContext = () => {
   debugData<ContextMenuProps>([
@@ -11,7 +12,7 @@ export const debugContext = () => {
           { title: 'Empty button' },
           {
             title: 'Karin Kuruma',
-            image: 'https://cdn.discordapp.com/attachments/1063098499027173461/1064276343585505330/screenshot.jpg',
+            image: mule,
             arrow: true,
             colorScheme: 'blue',
             metadata: [
@@ -52,6 +53,53 @@ export const debugContext = () => {
             icon: 'oil-can',
             metadata: [{ label: 'Remaining Oil', value: '30%' }],
             arrow: true,
+            disabled: true,
+          },
+          {
+            title: 'Durability',
+            progress: 80,
+            icon: 'car-side',
+            metadata: [{ label: 'Durability', value: '80%' }],
+            colorScheme: 'blue',
+          },
+          {
+            title: 'Menu button',
+            icon: 'bars',
+            menu: 'other_example_menu',
+            arrow: false,
+            description: 'Takes you to another menu',
+            metadata: ['It also has metadata support'],
+          },
+          {
+            title: 'Event button',
+            description: 'Open a menu and send event data',
+            icon: 'check',
+            arrow: true,
+            event: 'some_event',
+            args: { value1: 300, value2: 'Other value' },
+          },
+          {
+            title: 'Durability',
+            progress: 80,
+            icon: 'car-side',
+            metadata: [{ label: 'Durability', value: '80%' }],
+            colorScheme: 'blue',
+          },
+          {
+            title: 'Menu button',
+            icon: 'bars',
+            menu: 'other_example_menu',
+            arrow: false,
+            description: 'Takes you to another menu',
+            metadata: ['It also has metadata support'],
+          },
+          {
+            title: 'Event button',
+            description: 'Open a menu and send event data',
+            icon: 'check',
+            arrow: true,
+            event: 'some_event',
+            args: { value1: 300, value2: 'Other value' },
           },
           {
             title: 'Durability',

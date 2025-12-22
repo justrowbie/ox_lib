@@ -12,41 +12,42 @@ interface Props {
 
 const useStyles = createStyles((theme) => ({
   dropdown: {
-    backgroundColor: theme.colors.dark[3] + 'E9',
+    background: theme.colors[theme.primaryColor][0] + 'E6',
+    border: 'none',
   },
   item:{
-    marginBottom: '.5vh',
-    color: theme.colors.gray[0],
-    border: `1px solid `+theme.colors.gray[0] + '33',
+    marginBottom: '.4vh',
+    color: theme.colors[theme.primaryColor][9],
+    background: theme.colors[theme.primaryColor][0] + 'E6',
     '&[data-hovered]':{
-      backgroundColor: theme.colors[theme.primaryColor][5] + 'CC',
-      borderColor: theme.colors[theme.primaryColor][5] + 'CC',
+      background: theme.colors[theme.primaryColor][9],
+      color: theme.colors[theme.primaryColor][0],
     },
     '&[data-selected]': {
       '&, &:hover': {
-        backgroundColor: theme.colors[theme.primaryColor][5] + '80',
-        border: `1px solid `+theme.colors[theme.primaryColor][5] + 'CC',
+        background: theme.colors[theme.primaryColor][9],
+        color: theme.colors[theme.primaryColor][0],
       },
     },
   },
   label: {
-    color: theme.colors.gray[0],
+    color: theme.colors[theme.primaryColor][0],
     fontSize: '12px',
     fontWeight: 500,
     textTransform: 'uppercase'
   },
   description: {
-    color: theme.colors.gray[6],
+    color: theme.colors[theme.primaryColor][3],
     fontSize: '12px',
-    fontWeight: 500,
+    fontWeight: 300,
   },
   input: {
-    backgroundColor: theme.colors.dark[3] + '80',
-    color: theme.colors.gray[0],
-    border: '1px solid ' + theme.colors.gray[0] + '80',
+    color: theme.colors[theme.primaryColor][0],
+    background: theme.colors[theme.primaryColor][0] + '1A',
+    border: '1px solid ' + theme.colors[theme.primaryColor][0] + '33',
     cursor: 'pointer',
     '&:hover': {
-      border: '1px solid ' + theme.colors[theme.primaryColor][6] + 'CC',
+      border: '1px solid ' + theme.colors[theme.primaryColor][0],
     },
   },
 }))
