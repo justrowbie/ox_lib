@@ -24,7 +24,7 @@ const useStyles = createStyles((theme) => ({
     position: 'absolute',
     transform: "perspective(1000px) rotateY(-12deg)",
     top: '15%',
-    right: '5%',
+    right: '8%',
     width: 320,
     height: 580,
   },

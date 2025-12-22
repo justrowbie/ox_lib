@@ -18,8 +18,11 @@ const useStyles = createStyles((theme, params: { iconColor?: string }) => ({
     background: theme.colors[theme.primaryColor][0] + '1A',
     border: '1px solid ' + theme.colors[theme.primaryColor][0] + '33',
     color: theme.colors[theme.primaryColor][0],
-    padding: 2,
-    height: 60,
+    padding: 5,
+    height: 45,
+    textTransform: 'uppercase',
+    fontSize: 12,
+    fontWeight: 300,
     scrollMargin: 8,
     '&:focus': {
       background: theme.colors[theme.primaryColor][0],
@@ -55,27 +58,29 @@ const useStyles = createStyles((theme, params: { iconColor?: string }) => ({
   iconContainer: {
     display: 'flex',
     alignItems: 'center',
-    width: 32,
-    height: 32,
+    width: 25,
+    height: 25,
   },
   icon: {
-    fontSize: 20,
+    fontSize: 16,
     color: params.iconColor || theme.colors[theme.primaryColor][0],
   },
   label: {
     color: theme.colors[theme.primaryColor][0],
     textTransform: 'uppercase',
     fontSize: 12,
+    fontWeight: 500,
     verticalAlign: 'middle',
   },
   chevronIcon: {
-    fontSize: 14,
+    fontSize: 12,
     color: theme.colors[theme.primaryColor][0],
   },
   scrollIndexValue: {
     color: theme.colors[theme.primaryColor][0],
     textTransform: 'uppercase',
-    fontSize: 14,
+    fontSize: 10,
+    fontWeight: 500,
   },
   progressStack: {
     width: '100%',
@@ -150,6 +155,7 @@ const ListItem = forwardRef<Array<HTMLDivElement | null>, Props>(({ item, index,
           <Stack className={classes.progressStack} spacing={0}>
             <Text className={classes.progressLabel}>{item.label}</Text>
             <Progress
+              size='sm'
               classNames={{
                 bar: `${classes.progressBar} progressBar`,
                 root: `${classes.progressRoot} progressRoot`

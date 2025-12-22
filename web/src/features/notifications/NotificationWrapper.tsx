@@ -12,12 +12,12 @@ const useStyles = createStyles((theme) => ({
   container: {
     width: 300,
     height: 'fit-content',
-    background: theme.colors[theme.primaryColor][0] + '80',
+    background: theme.colors[theme.primaryColor][0] + 'CC',
     border: '1px solid ' + theme.colors[theme.primaryColor][0] + '33',
     color: theme.colors[theme.primaryColor][9],
     padding: 12,
     fontFamily: 'Roboto',
-    boxShadow: theme.shadows.sm,
+    transformStyle: 'preserve-3d',
   },
   title: {
     fontSize: 12,
@@ -42,23 +42,39 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-const createAnimation = (from: string, to: string, visible: boolean) => keyframes({
-  from: {
-    opacity: visible ? 0 : 1,
-    transform: `translate${from}`,
-  },
-  to: {
-    opacity: visible ? 1 : 0,
-    transform: `translate${to}`,
-  },
-});
+const createAnimation = (from: string, to: string, visible: boolean, position: string) => {
+  let baseTransform = 'perspective(1000px)';
+  
+  if (position.includes('center')) {
+    baseTransform += '';
+  } else if (position.includes('right')) {
+    baseTransform += ' rotateY(-24deg)';
+  } else if (position.includes('left')) {
+    baseTransform += ' rotateY(24deg)';
+  } else {
+    baseTransform += '';
+  }
+  
+  return keyframes({
+    from: {
+      opacity: visible ? 0 : 1,
+      transform: `${baseTransform} translate${from}`,
+    },
+    to: {
+      opacity: visible ? 1 : 0,
+      transform: `${baseTransform} translate${to}`,
+    },
+  });
+};
 
 const getAnimation = (visible: boolean, position: string) => {
   const animationOptions = visible ? '0.2s ease-out forwards' : '0.4s ease-in forwards'
   let animation: { from: string; to: string };
 
   if (visible) {
-    animation = position.includes('bottom') ? { from: 'Y(30px)', to: 'Y(0px)' } : { from: 'Y(-30px)', to:'Y(0px)' };
+    animation = position.includes('bottom') 
+      ? { from: 'Y(30px)', to: 'Y(0px)' } 
+      : { from: 'Y(-30px)', to:'Y(0px)' };
   } else {
     if (position.includes('right')) {
       animation = { from: 'X(0px)', to: 'X(100%)' };
@@ -73,7 +89,7 @@ const getAnimation = (visible: boolean, position: string) => {
     }
   }
 
-  return `${createAnimation(animation.from, animation.to, visible)} ${animationOptions}`
+  return `${createAnimation(animation.from, animation.to, visible, position)} ${animationOptions}`
 };
 
 const durationCircle = keyframes({
@@ -93,6 +109,7 @@ const Notifications: React.FC = () => {
 
     let iconColor: string;
     let position = data.position || 'top-right';
+    let boxShadow: string;
 
     data.showDuration = data.showDuration !== undefined ? data.showDuration : true;
 
@@ -129,15 +146,19 @@ const Notifications: React.FC = () => {
       switch (data.type) {
         case 'error':
           iconColor = 'red.5';
+          boxShadow = 'red.5' + '0px 8px 8px -8px';
           break;
         case 'success':
-          iconColor = 'teal.5';
+          iconColor = 'green.5';
+          boxShadow = 'green.5' + '0px 8px 8px -8px';
           break;
         case 'warning':
           iconColor = 'yellow.5';
+          boxShadow = 'yellow.5' + '0px 8px 8px -8px';
           break;
         default:
           iconColor = 'blue.5';
+          boxShadow = 'blue.5' + '0px 8px 8px -8px';
           break;
       }
     } else {
@@ -149,6 +170,7 @@ const Notifications: React.FC = () => {
         <Box
           sx={{
             animation: getAnimation(t.visible, position),
+            boxShadow: boxShadow,
             ...data.style,
           }}
           className={`${classes.container}`}

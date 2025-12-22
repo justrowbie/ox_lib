@@ -24,7 +24,7 @@ const CustomCheckbox: React.FC<{ checked: boolean }> = ({ checked }) => {
   return (
     <Checkbox
       checked={checked}
-      size="md"
+      size="xs"
       classNames={{ 
         root: classes.root, 
         input: `${classes.input} checkboxInput`, 
