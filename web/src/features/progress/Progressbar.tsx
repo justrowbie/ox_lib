@@ -6,19 +6,11 @@ import ScaleFade from '../../transitions/ScaleFade';
 import type { ProgressbarProps } from '../../typings';
 
 const slideIn = keyframes({
-  '0%': { transform: 'translateY(20px)', opacity: 0 },
+  '0%': { transform: 'translateX(-20px)', opacity: 0 },
   '100%': { transform: 'translateY(0)', opacity: 1 },
 });
 
 const useStyles = createStyles((theme) => ({
-  container: {
-    width: 350,
-    height: 10,
-    borderRadius: theme.radius.sm,
-    background: theme.colors[theme.primaryColor][0] + '1A',
-    border: '1px solid ' + theme.colors[theme.primaryColor][0] + '33',
-    overflow: 'hidden',
-  },
   wrapper: {
     width: '100%',
     height: '20%',
@@ -27,6 +19,34 @@ const useStyles = createStyles((theme) => ({
     justifyContent: 'center',
     bottom: 0,
     position: 'absolute',
+  },
+  container: {
+    width: 350,
+    height: 20,
+    borderRadius: theme.radius.sm,
+    background: theme.colors[theme.primaryColor][0] + '1A',
+    overflow: 'hidden',
+  },
+  barWrapper: {
+    width: 350,
+    height: 20,
+    position: 'absolute',
+    display: 'flex',
+    alignItems: 'flex-start',
+    justifyContent: 'flex-start',
+    border: '1px solid ' + theme.colors[theme.primaryColor][0] + '33',
+  },
+  percent: {
+    position: 'relative',
+    textAlign: 'center',
+    width: 30,
+    height: 18,
+    marginLeft: -30,
+    fontSize: 12,
+    fontWeight: 500,
+    color: theme.colors[theme.primaryColor][0],
+    background: theme.colors[theme.primaryColor][9],
+    transition: 'opacity 0.5s ease',
   },
   bar: {
     height: '100%',
@@ -61,23 +81,28 @@ const Progressbar: React.FC = () => {
   const [visible, setVisible] = React.useState(false);
   const [label, setLabel] = React.useState('');
   const [duration, setDuration] = React.useState(0);
-  const [percent, setPercent] = React.useState(0);
+  const [value, setValue] = React.useState(0);
+  const [percentVisible, setPercentVisible] = React.useState(true);
 
-  useNuiEvent('progressCancel', () => setVisible(false));
+  useNuiEvent('progressCancel', () => {
+    setValue(99);
+    setVisible(false);
+  });
 
   useNuiEvent<ProgressbarProps>('progress', (data) => {
     setVisible(true);
     setLabel(data.label);
     setDuration(data.duration);
-    setPercent(0);
+    setValue(0);
 
-    const start = Date.now();
-    const interval = setInterval(() => {
-      const elapsed = Date.now() - start;
-      const percentage = Math.min((elapsed / data.duration) * 100, 100);
-      setPercent(percentage);
-      if (percentage >= 100) clearInterval(interval);
-    }, 100);
+    const onePercent = data.duration * 0.01;
+    const updateProgress = setInterval(() => {
+      setValue((previousValue) => {
+        const newValue = previousValue + 1;
+        newValue >= 100 && clearInterval(updateProgress);
+        return newValue;
+      });
+    }, onePercent);
   });
 
   return (
@@ -89,19 +114,22 @@ const Progressbar: React.FC = () => {
               className={classes.labelWrapper}
               sx={{
                 animation: `${slideIn} 0.5s ease-out`,
-              }}  
-            >
-              <Text className={classes.label}>{label}  {Math.round(percent)}%</Text>
-            </Box>
-            <Box
-              className={classes.bar}
-              onAnimationEnd={() => setVisible(false)}
-              sx={{
-                animation: 'progress-bar linear',
-                animationDuration: `${duration}ms`,
               }}
             >
-
+              <Text className={classes.label}>{label}</Text>
+            </Box>
+            <Box className={classes.barWrapper}>
+              <Box
+                className={classes.bar}
+                onAnimationEnd={() => setVisible(false)}
+                sx={{
+                  animation: 'progress-bar linear',
+                  animationDuration: `${duration}ms`,
+                }}
+              ></Box>
+              <Text
+                className={classes.percent}
+              >{value}%</Text>
             </Box>
           </Box>
         </ScaleFade>

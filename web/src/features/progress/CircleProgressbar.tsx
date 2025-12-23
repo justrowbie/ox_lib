@@ -11,6 +11,11 @@ const progressCircle = keyframes({
   '100%': { strokeDasharray: `${33.5 * 2 * Math.PI}, 0` },
 });
 
+const slideIn = keyframes({
+  '0%': { transform: 'translateX(-5px)', opacity: 0 },
+  '100%': { transform: 'translateY(0)', opacity: 1 },
+});
+
 const useStyles = createStyles((theme, params: { position: 'middle' | 'bottom'; duration: number }) => ({
   container: {
     width: '100%',
@@ -23,7 +28,7 @@ const useStyles = createStyles((theme, params: { position: 'middle' | 'bottom'; 
   },
   progress: {
     '> svg > circle:nth-child(1)': {
-      stroke: theme.colors.dark[5],
+      stroke: theme.colors[theme.primaryColor][9],
     },
     // Scuffed way of grabbing the first section and animating it
     '> svg > circle:nth-child(2)': {
@@ -31,21 +36,41 @@ const useStyles = createStyles((theme, params: { position: 'middle' | 'bottom'; 
       animation: `${progressCircle} linear forwards`,
       animationDuration: `${params.duration}ms`,
     },
+    zIndex: 99,
   },
   value: {
     textAlign: 'center',
+    fontSize: 20,
+    fontWeight: 600,
     fontFamily: 'Roboto Mono',
     textShadow: theme.shadows.sm,
-    color: theme.colors.gray[3],
+    color: theme.colors[theme.primaryColor][0],
   },
   label: {
-    textAlign: 'center',
+    position: 'absolute',
+    display: 'flex',
+    justifyContent: 'flex-end',
+    alignItems: 'flex-end',
+    fontSize: 14,
+    fontWeight: 500,
+    textTransform: 'uppercase',
+    textOverflow: 'ellipsis',
+    overflow: 'hidden',
+    whiteSpace: 'nowrap',
+    marginLeft: 75,
+    marginTop: -60,
     textShadow: theme.shadows.sm,
-    color: theme.colors.gray[3],
-    height: 25,
+    color: theme.colors[theme.primaryColor][0],
+    background: theme.colors[theme.primaryColor][9],
+    width: 'fit-content',
+    paddingLeft: 20,
+    paddingRight: 20,
+    paddingTop: 5,
+    paddingBottom: 5,
+    zIndex: 1,
   },
   wrapper: {
-    marginTop: params.position === 'middle' ? 25 : undefined,
+    marginTop: params.position === 'middle' ? 0 : undefined,
   },
 }));
 
@@ -93,8 +118,12 @@ const CircleProgressbar: React.FC = () => {
               className={classes.progress}
               label={<Text className={classes.value}>{value}%</Text>}
             />
-            {label && <Text className={classes.label}>{label}</Text>}
           </Stack>
+            {label && <Text 
+              className={classes.label}
+              sx={{
+                animation: `${slideIn} 0.2s ease-out`,
+              }}>{label}</Text>}
         </ScaleFade>
       </Stack>
     </>
