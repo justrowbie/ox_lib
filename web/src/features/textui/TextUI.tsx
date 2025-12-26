@@ -11,21 +11,33 @@ const useStyles = createStyles((theme, params: { position?: TextUiPosition }) =>
   wrapper: {
     height: '100%',
     width: '100%',
+    position: 'absolute',
+    border: '1px solid ' + theme.colors[theme.primaryColor][0],
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    alignContent: 'center',
+    justifyContent: 'center'
+  },
+  controlContainer: {
+    height: 'fit-content',
+    width: 'fit-content', 
     position: 'relative',
     display: 'flex',
+    gap: 5,
+    padding: 5,
+    flexDirection: 'row',
     alignItems: params.position?.startsWith('right') ? 'right'
       : params.position?.startsWith('left') ? 'left' : 'center',
     alignContent: params.position?.startsWith('right') ? 'right'
       : params.position?.startsWith('left') ? 'left' : 'center',
     justifyContent: params.position?.startsWith('right') ? 'right'
       : params.position?.startsWith('left') ? 'left' : 'center',
-    top: params.position?.startsWith('top') ? -120 : 0,
-    border: '1px solid ' + theme.colors[theme.primaryColor][0] + '33',
+    // border: '1px solid ' + theme.colors[theme.primaryColor][0],
   },
-  container: {
+  text: {
     position: 'relative',
     display: 'flex',
-    justifyContent: 'flex-start',
     alignItems: 'center',
     padding: 10,
     width: 'fit-content',
@@ -34,11 +46,6 @@ const useStyles = createStyles((theme, params: { position?: TextUiPosition }) =>
     fontFamily: 'Roboto',
     color: theme.colors[theme.primaryColor][0],
     fontSize: 15,
-  },
-  controlcontainer: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
   },
   control: {
     display: 'flex',
@@ -67,28 +74,25 @@ const TextUI: React.FC<{ data: TextUiProps; visible: boolean; onHidden: () => vo
   }, [visible, onHidden]);
 
   return (
-    <Box className={classes.wrapper}>
       <ScaleFade visible={visible}>
-        <Flex direction={'row'} align={'center'} gap={5}>
-          {data.control && (
-            <div className={classes.controlcontainer}>
-              <span className={classes.control}>{data.control}</span>
-            </div>
-          )}
-          <Box style={data.style} className={classes.container}>
-            <Group spacing={5}>
-              <ReactMarkdown components={MarkdownComponents} remarkPlugins={[remarkGfm]}>
-                {data.text}
-              </ReactMarkdown>
-            </Group>
-          </Box>
-        </Flex>
-      </ScaleFade>
+    <Box className={classes.controlContainer}>
+        {data.control && (
+          <Box className={classes.control}>{data.control}</Box>
+        )}
+        <Box style={data.style} className={classes.text}>
+          <Group spacing={5}>
+            <ReactMarkdown components={MarkdownComponents} remarkPlugins={[remarkGfm]}>
+              {data.text}
+            </ReactMarkdown>
+          </Group>
+        </Box>
     </Box>
+      </ScaleFade>
   );
 };
 
 const TextUIContainer: React.FC = () => {
+  const { classes } = useStyles({});
   const [textUis, setTextUis] = React.useState<{ id: number; data: TextUiProps; visible: boolean }[]>([]);
 
   useNuiEvent<TextUiProps>('textUi', (newData) => {
@@ -109,15 +113,17 @@ const TextUIContainer: React.FC = () => {
       setTextUis((current) => current.map((ui) => ({ ...ui, visible: false })));
     }
   });
+
   const handleHidden = (id: number) => {
     setTextUis((current) => current.filter((ui) => ui.id !== id));
   };
+
   return (
-    <Flex direction={'column'} gap={5}>
+    <Box className={classes.wrapper}>
       {textUis.map(({ id, data, visible }) => (
         <TextUI key={id} data={data} visible={visible} onHidden={() => handleHidden(id)} />
       ))}
-    </Flex>
+    </Box>
   );
 };
 
