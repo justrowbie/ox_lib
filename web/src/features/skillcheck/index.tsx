@@ -95,9 +95,9 @@ const useStyles = createStyles((theme, params: { difficultyOffset: number }) => 
     justifyContent: 'center',
     alignItems: 'center',
     boxShadow: `0 0 0 0 ${theme.fn.rgba(theme.colors[theme.primaryColor][0], 0.5)}`,
-    animation: `${pulse} 1s infinite ease-in-out`, // Add the animation here
+    animation: `${pulse} 1s infinite ease-in-out`,
     '@media (min-height: 1440px)': {
-      width: 100, // Adjusted for better visibility
+      width: 100,
       height: 100,
       fontSize: 22,
     },
