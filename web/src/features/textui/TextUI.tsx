@@ -12,28 +12,24 @@ const useStyles = createStyles((theme, params: { position?: TextUiPosition }) =>
     height: '100%',
     width: '100%',
     position: 'absolute',
-    border: '1px solid ' + theme.colors[theme.primaryColor][0],
     display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    alignContent: 'center',
-    justifyContent: 'center'
+    flexDirection: params.position?.startsWith('top')
+      || params.position?.startsWith('bottom')
+      ? 'row' : 'column',
+    alignItems: params.position?.startsWith('right') ? 'flex-end' 
+      : params.position?.startsWith('left') ? 'flex-start' : 'center',
+    justifyContent: 'center',
+    bottom: params.position?.startsWith('top') ? '45%' : undefined,
+    top: params.position?.startsWith('bottom') ? '45%' : undefined,
   },
   controlContainer: {
     height: 'fit-content',
     width: 'fit-content', 
     position: 'relative',
     display: 'flex',
-    gap: 5,
+    gap: 10,
     padding: 5,
     flexDirection: 'row',
-    alignItems: params.position?.startsWith('right') ? 'right'
-      : params.position?.startsWith('left') ? 'left' : 'center',
-    alignContent: params.position?.startsWith('right') ? 'right'
-      : params.position?.startsWith('left') ? 'left' : 'center',
-    justifyContent: params.position?.startsWith('right') ? 'right'
-      : params.position?.startsWith('left') ? 'left' : 'center',
-    // border: '1px solid ' + theme.colors[theme.primaryColor][0],
   },
   text: {
     position: 'relative',
@@ -42,21 +38,21 @@ const useStyles = createStyles((theme, params: { position?: TextUiPosition }) =>
     padding: 10,
     width: 'fit-content',
     height: 30,
-    background: theme.colors[theme.primaryColor][9],
     fontFamily: 'Roboto',
+    fontSize: 14,
+    background: theme.colors[theme.primaryColor][9],
     color: theme.colors[theme.primaryColor][0],
-    fontSize: 15,
   },
   control: {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    padding: 4,
-    width: 30,
+    padding: 10,
+    width: 'fit-content',
     height: 30,
     fontFamily: 'Roboto',
     fontWeight: 800,
-    fontSize: 18,
+    fontSize: 16,
     background: theme.colors[theme.primaryColor][0],
     color: theme.colors[theme.primaryColor][9],
     border: '2px solid ' + theme.colors[theme.primaryColor][9] + '1A',
@@ -92,9 +88,9 @@ const TextUI: React.FC<{ data: TextUiProps; visible: boolean; onHidden: () => vo
 };
 
 const TextUIContainer: React.FC = () => {
-  const { classes } = useStyles({});
   const [textUis, setTextUis] = React.useState<{ id: number; data: TextUiProps; visible: boolean }[]>([]);
-
+  const { classes } = useStyles({ position: textUis[0]?.data.position });
+  
   useNuiEvent<TextUiProps>('textUi', (newData) => {
     if (!newData.position) newData.position = 'right-center';
 

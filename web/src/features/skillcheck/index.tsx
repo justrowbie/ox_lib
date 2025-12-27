@@ -2,7 +2,7 @@ import { useRef, useState } from 'react';
 import { useNuiEvent } from '../../hooks/useNuiEvent';
 import Indicator from './indicator';
 import { fetchNui } from '../../utils/fetchNui';
-import { Box, createStyles } from '@mantine/core';
+import { Box, createStyles, keyframes } from '@mantine/core';
 import type { GameDifficulty, SkillCheckProps } from '../../typings';
 
 export const circleCircumference = 2 * 50 * Math.PI;
@@ -14,6 +14,13 @@ const difficultyOffsets = {
   medium: 40,
   hard: 25,
 };
+
+// Define the pulse animation
+const pulse = keyframes({
+  '0%': { transform: 'translate(-50%, -50%) scale(1)', opacity: 1 },
+  '50%': { transform: 'translate(-50%, -50%) scale(1.1)', opacity: 0.8 },
+  '100%': { transform: 'translate(-50%, -50%) scale(1)', opacity: 1 },
+});
 
 const useStyles = createStyles((theme, params: { difficultyOffset: number }) => ({
   svg: {
@@ -27,8 +34,8 @@ const useStyles = createStyles((theme, params: { difficultyOffset: number }) => 
   },
   track: {
     fill: 'transparent',
-    stroke: theme.colors.dark[5],
-    strokeWidth: 8,
+    stroke: theme.colors[theme.primaryColor][9],
+    strokeWidth: 10,
     r: 50,
     cx: 250,
     cy: 250,
@@ -41,8 +48,8 @@ const useStyles = createStyles((theme, params: { difficultyOffset: number }) => 
   },
   skillArea: {
     fill: 'transparent',
-    stroke: theme.fn.primaryColor(),
-    strokeWidth: 8,
+    stroke: theme.colors[theme.primaryColor][0],
+    strokeWidth: 10,
     r: 50,
     cx: 250,
     cy: 250,
@@ -56,8 +63,8 @@ const useStyles = createStyles((theme, params: { difficultyOffset: number }) => 
     },
   },
   indicator: {
-    stroke: 'red',
-    strokeWidth: 16,
+    stroke: theme.colors[theme.primaryColor][0],
+    strokeWidth: 20,
     fill: 'transparent',
     r: 50,
     cx: 250,
@@ -76,22 +83,39 @@ const useStyles = createStyles((theme, params: { difficultyOffset: number }) => 
     left: '50%',
     top: '50%',
     transform: 'translate(-50%, -50%)',
-    backgroundColor: theme.colors.dark[5],
-    width: 25,
-    height: 25,
+    backgroundColor: theme.colors[theme.primaryColor][0],
+    color: theme.colors[theme.primaryColor][9],
+    width: 60,
+    height: 60,
     textAlign: 'center',
-    borderRadius: 5,
-    fontSize: 16,
-    fontWeight: 500,
+    borderRadius: 100,
+    fontSize: 30,
+    fontWeight: 800,
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
+    boxShadow: `0 0 0 0 ${theme.fn.rgba(theme.colors[theme.primaryColor][0], 0.5)}`,
+    animation: `${pulse} 1s infinite ease-in-out`, // Add the animation here
     '@media (min-height: 1440px)': {
-      width: 30,
-      height: 30,
+      width: 100, // Adjusted for better visibility
+      height: 100,
       fontSize: 22,
     },
   },
+  pulseRing: {
+    position: 'absolute',
+    left: '50%',
+    top: '50%',
+    width: 60,
+    height: 60,
+    borderRadius: '50%',
+    border: `2px solid ${theme.colors[theme.primaryColor][0]}`,
+    transform: 'translate(-50%, -50%)',
+    animation: `${keyframes({
+      '0%': { transform: 'translate(-50%, -50%) scale(1)', opacity: 0.5 },
+      '100%': { transform: 'translate(-50%, -50%) scale(2)', opacity: 0 }
+    })} 2s infinite`,
+  }
 }));
 
 const SkillCheck: React.FC = () => {
@@ -159,6 +183,7 @@ const SkillCheck: React.FC = () => {
     <>
       {visible && (
         <>
+         <Box className={classes.pulseRing} />
           <svg className={classes.svg}>
             {/*Circle track*/}
             <circle className={classes.track} />
