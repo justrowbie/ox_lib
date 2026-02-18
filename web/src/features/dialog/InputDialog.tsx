@@ -28,11 +28,11 @@ const useStyles = createStyles((theme) => ({
   background: {
     width: '100%',
     height: '100vh',
-    background: `linear-gradient(to right,`+ theme.colors.dark[9] +`00 50%,`+ theme.colors.dark[9] +`E6 100%)`,
+    background: `linear-gradient(to right,`+ theme.colors.dark[9] +`00 50%,`+ theme.colors.dark[9] +`CC 100%)`,
   },
   modal: {
-    background: theme.colors[theme.primaryColor][0] + '1A',
-    border: '1px solid ' + theme.colors[theme.primaryColor][0] + '33',
+    background: theme.colors.dark[9] + 'CC',
+    border: '1px solid ' + theme.colors.dark[9] + 'CC',
     borderRadius: '1px',
     left: '70vh',
     transform: "perspective(1000px) rotateY(-12deg)"
@@ -42,26 +42,28 @@ const useStyles = createStyles((theme) => ({
     padding: '5px 10px',
     fontSize: 16,
     fontWeight: 500,
-    color: theme.colors[theme.primaryColor][9],
+    color: theme.colors.dark[9],
     textAlign: 'center',
-    background: theme.colors[theme.primaryColor][0],
+    background: theme.colors.dark[0],
   },
   buttonsubmit: {
-    color: theme.colors[theme.primaryColor][0],
-    background: theme.colors.green[5] + '80',
-    border: '1px solid ' + theme.colors.green[5] + '80',
+    color: theme.colors.dark[0],
+    background: theme.colors.green[8] + 'CC',
+    border: '1px solid ' + theme.colors.green[8] + 'CC',
+    borderRadius: '1px',
     '&:hover': {
-      background: theme.colors.green[5] + 'CC',
-      border: '1px solid ' + theme.colors.green[5] + 'CC',
+      background: theme.colors.green[6] + 'E6',
+      border: '1px solid ' + theme.colors.green[6] + 'E6',
     },
   },
   buttoncancel: {
-    color: theme.colors[theme.primaryColor][0],
-    background: theme.colors.red[5] + '80',
-    border: '1px solid ' + theme.colors.red[5] + '80',
+    color: theme.colors.dark[0],
+    background: theme.colors.red[8] + 'CC',
+    border: '1px solid ' + theme.colors.red[8] + 'CC',
+    borderRadius: '1px',
     '&:hover': {
-      background: theme.colors.red[5] + 'CC',
-      border: '1px solid ' + theme.colors.red[5] + 'CC',
+      background: theme.colors.red[6] + 'E6',
+      border: '1px solid ' + theme.colors.red[6] + 'E6',
     },
   },
 }))
@@ -141,9 +143,9 @@ const InputDialog: React.FC = () => {
 
   return (
     <>
-      <SlideTransitionRight visible={visible}>
+      {/* <SlideTransitionRight visible={visible}>
         <Box className={classes.background}/>
-      </SlideTransitionRight>
+      </SlideTransitionRight> */}
       <Modal
         opened={visible}
         onClose={handleClose}

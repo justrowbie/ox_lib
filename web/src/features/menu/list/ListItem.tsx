@@ -15,9 +15,7 @@ interface Props {
 
 const useStyles = createStyles((theme, params: { iconColor?: string }) => ({
   buttonContainer: {
-    background: theme.colors[theme.primaryColor][0] + '1A',
-    border: '1px solid ' + theme.colors[theme.primaryColor][0] + '33',
-    color: theme.colors[theme.primaryColor][0],
+    color: theme.colors.dark[0],
     padding: 5,
     height: 45,
     textTransform: 'uppercase',
@@ -25,24 +23,25 @@ const useStyles = createStyles((theme, params: { iconColor?: string }) => ({
     fontWeight: 300,
     scrollMargin: 8,
     '&:focus': {
-      background: theme.colors[theme.primaryColor][0],
-      color: theme.colors[theme.primaryColor][9],
+      background: theme.colors.dark[0],
+      border: '1px solid ' + theme.colors.dark[0],
+      color: theme.colors.dark[9],
       outline: 'none',
       [`& .hoverText`]: {
-        color: theme.colors[theme.primaryColor][9],
+        color: theme.colors.dark[9],
       },
       [`& .progressBar`]: {
-        background: theme.colors[theme.primaryColor][9],
+        background: theme.colors.dark[9],
       },
       [`& .progressRoot`]: {
-        background: theme.colors[theme.primaryColor][6],
+        background: theme.colors.dark[2],
       },
       [`& .checkboxInput`]: {
-        background: theme.colors[theme.primaryColor][9],
+        background: theme.colors.dark[9],
       },
       [`& .checkboxInner`]: {
         '> svg > path': {
-          fill: theme.colors[theme.primaryColor][0],
+          fill: theme.colors.dark[0],
         },
       },
     },
@@ -63,10 +62,10 @@ const useStyles = createStyles((theme, params: { iconColor?: string }) => ({
   },
   icon: {
     fontSize: 16,
-    color: params.iconColor || theme.colors[theme.primaryColor][0],
+    color: params.iconColor || theme.colors.dark[0],
   },
   label: {
-    color: theme.colors[theme.primaryColor][0],
+    color: theme.colors.dark[0],
     textTransform: 'uppercase',
     fontSize: 12,
     fontWeight: 500,
@@ -74,10 +73,10 @@ const useStyles = createStyles((theme, params: { iconColor?: string }) => ({
   },
   chevronIcon: {
     fontSize: 12,
-    color: theme.colors[theme.primaryColor][0],
+    color: theme.colors.dark[0],
   },
   scrollIndexValue: {
-    color: theme.colors[theme.primaryColor][0],
+    color: theme.colors.dark[0],
     textTransform: 'uppercase',
     fontSize: 10,
     fontWeight: 500,
@@ -91,10 +90,10 @@ const useStyles = createStyles((theme, params: { iconColor?: string }) => ({
     marginBottom: 3,
   },
   progressBar: {
-    background: theme.colors[theme.primaryColor][0]
+    background: theme.colors.dark[0]
   },
   progressRoot: {
-    background: theme.colors[theme.primaryColor][0] + '1A'
+    background: theme.colors.dark[9] + 'CC'
   }
 }));
 
@@ -161,7 +160,7 @@ const ListItem = forwardRef<Array<HTMLDivElement | null>, Props>(({ item, index,
                 root: `${classes.progressRoot} progressRoot`
               }}
               value={item.progress}
-              color={item.colorScheme || 'gray.0'}
+              color={item.colorScheme || 'dark.0'}
               // styles={(theme) => ({ root: { backgroundColor: theme.colors.gray[0] + 'A1' } })}
             />
           </Stack>

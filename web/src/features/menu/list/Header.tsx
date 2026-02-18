@@ -4,17 +4,17 @@ import React from 'react';
 const useStyles = createStyles((theme) => ({
   container: {
     textAlign: 'center',
-    background: theme.colors[theme.primaryColor][0],
-    border: '1px solid ' + theme.colors[theme.primaryColor][0] + '33',
+    background: theme.colors.dark[0],
+    border: '1px solid ' + theme.colors.dark[0],
     height: 40,
-    width: 320,
+    width: 350,
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
   },
   heading: {
     fontSize: 14,
-    color: theme.colors[theme.primaryColor][9],
+    color: theme.colors.dark[9],
     textTransform: 'uppercase',
     fontWeight: 600,
   },

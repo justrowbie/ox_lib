@@ -24,24 +24,24 @@ const useStyles = createStyles((theme) => ({
     transform: 'translate(-50%, -50%)',
   },
   sector: {
-    fill: theme.colors[theme.primaryColor][9] + '80',
-    color: theme.colors[theme.primaryColor][0],
+    fill: theme.colors.dark[9] + 'CC',
+    color: theme.colors.dark[0],
     transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
     stroke: 'transparent',
     strokeWidth: 2,
     '&:hover': {
       cursor: 'pointer',
-      fill: theme.colors[theme.primaryColor][0],
-      stroke: theme.colors[theme.primaryColor][0] + '33',
+      fill: theme.colors.dark[0],
+      stroke: theme.colors.dark[0] + 'CC',
       strokeWidth: 1.5,
       '& g > svg > path': {
-        fill: theme.colors[theme.primaryColor][9],
+        fill: theme.colors.dark[9],
       },
     },
     '&[data-selected="true"]': {
-      fill: theme.colors[theme.primaryColor][0],
-      stroke: theme.colors[theme.primaryColor][0] + '33',
-      color: theme.colors[theme.primaryColor][9],
+      fill: theme.colors.dark[0],
+      stroke: theme.colors.dark[0] + 'CC',
+      color: theme.colors.dark[9],
       strokeWidth: 1.5,
     },
   },
@@ -49,15 +49,15 @@ const useStyles = createStyles((theme) => ({
     fill: 'transparent',
   },
   centerCircle: {
-    fill: theme.colors[theme.primaryColor][9] + '80',
-    stroke: theme.colors[theme.primaryColor][9] + '33',
+    fill: theme.colors.dark[9] + 'CC',
+    stroke: theme.colors.dark[9] + 'CC',
     strokeWidth: 1,
     pointerEvents: 'auto',
     cursor: 'pointer',
     transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
     '&:hover': {
-      fill: theme.colors[theme.primaryColor][0],
-      stroke: theme.colors[theme.primaryColor][0] + '33',
+      fill: theme.colors.dark[0],
+      stroke: theme.colors.dark[0] + 'CC',
       strokeWidth: 0.5,
     },
   },
@@ -83,16 +83,16 @@ const useStyles = createStyles((theme) => ({
     maxWidth: '200px',
   },
   centerTextSpan: {
-    color: theme.colors[theme.primaryColor][0],
+    color: theme.colors.dark[0],
     fontSize: '14px',
     fontWeight: 500,
     textTransform: 'uppercase',
   },
   centerIcon: {
-    color: theme.colors[theme.primaryColor][0],
+    color: theme.colors.dark[9],
   },
   closeIcon: {
-    color: theme.colors[theme.primaryColor][9],
+    color: theme.colors.dark[9],
   },
 }));
 

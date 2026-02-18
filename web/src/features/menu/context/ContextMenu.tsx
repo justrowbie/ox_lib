@@ -36,10 +36,10 @@ const useStyles = createStyles((theme) => ({
   },
   titleContainer: {
     flex: '1 85%',
-    background: theme.colors[theme.primaryColor][0],
+    background: theme.colors.dark[0],
   },
   titleText: {
-    color: theme.colors[theme.primaryColor][9],
+    color: theme.colors.dark[9],
     padding: 6,
     fontWeight: 600,
     textAlign: 'center',
@@ -95,11 +95,11 @@ const ContextMenu: React.FC = () => {
 
   return (
     <>
-      <SlideTransitionRight visible={visible}>
+      {/* <SlideTransitionRight visible={visible}>
         <Box
           className={classes.background}
         />
-      </SlideTransitionRight>
+      </SlideTransitionRight> */}
       <Box className={classes.container}>
         <ScaleFade visible={visible}>
           <Flex className={classes.header}>

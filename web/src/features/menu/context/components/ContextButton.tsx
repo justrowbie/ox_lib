@@ -26,30 +26,30 @@ const useStyles = createStyles((theme, params: { disabled?: boolean; readOnly?: 
     fontSize: 14,
     fontWeight: 500,
     color: params.disabled
-      ? theme.colors[theme.primaryColor][6]
-      : theme.colors[theme.primaryColor][3],
+      ? theme.colors.dark[2]
+      : theme.colors.dark[0],
     '&:hover': {
-      background: theme.colors[theme.primaryColor][0],
-      color: theme.colors[theme.primaryColor][9],
+      background: theme.colors.dark[0],
+      color: theme.colors.dark[9],
       [`& .labelText, & .descriptionText`]: {
-        color: theme.colors[theme.primaryColor][9],
+        color: theme.colors.dark[9],
       },
       [`& .progressBar`]: {
-        background: theme.colors[theme.primaryColor][9],
+        background: theme.colors.dark[9],
       },
       [`& .progressRoot`]: {
-        background: theme.colors[theme.primaryColor][6],
+        background: theme.colors.dark[2],
       },
       cursor: params.readOnly ? 'unset' : 'pointer',
     },
   },
   button: {
     cursor: params.readOnly ? 'unset' : 'pointer',
-    background: theme.colors[theme.primaryColor][0] + '1A',
+    background: theme.colors.dark[9] + 'CC',
     '&:disabled': {
-      background: theme.colors[theme.primaryColor][0] + '0D',
+      background: theme.colors.dark[9] + 'CC',
     },
-    border: '1px solid ' + theme.colors[theme.primaryColor][0] + '33',
+    // border: '1px solid ' + theme.colors.dark[9] + 'CC',
     borderRadius: 0,
     height: 'fit-content',
     width: '100%',
@@ -59,21 +59,19 @@ const useStyles = createStyles((theme, params: { disabled?: boolean; readOnly?: 
     maxWidth: '25px',
   },
   description: {
-    color: params.disabled
-      ? theme.colors[theme.primaryColor][6]
-      : theme.colors[theme.primaryColor][3],
+    color: theme.colors.dark[0],
     fontSize: '12px',
     fontWeight: 300,
   },
   dropdown: {
     padding: 10,
-    color: theme.colors[theme.primaryColor][0],
+    color: theme.colors.dark[0],
     fontSize: 14,
     fontWeight: 500,
     maxWidth: 400,
     minWidth: 200,
-    background: theme.colors[theme.primaryColor][0] + '1A',
-    border: '1px solid ' + theme.colors[theme.primaryColor][0] + '33',
+    background: theme.colors.dark[9] + 'CC',
+    border: '1px solid ' + theme.colors.dark[9] + 'CC',
     borderRadius: 0,
   },
   buttonStack: {
@@ -100,14 +98,10 @@ const useStyles = createStyles((theme, params: { disabled?: boolean; readOnly?: 
     height: 25,
   },
   progressBar: {
-    background: params.disabled
-      ? theme.colors[theme.primaryColor][6]
-      : theme.colors[theme.primaryColor][0]
+    background: theme.colors.dark[0]
   },
   progressRoot: {
-    background: params.disabled
-      ? theme.colors[theme.primaryColor][3] + '1A'
-      : theme.colors[theme.primaryColor][0] + '1A'
+    background: theme.colors.dark[9] + 'CC'
   }
 }));
 
@@ -121,7 +115,8 @@ const ContextButton: React.FC<{
   return (
     <>
       <HoverCard
-        position="right-start"
+        position="left-start"
+        withinPortal
         disabled={button.disabled || !(button.metadata || button.image)}
         openDelay={200}
       >

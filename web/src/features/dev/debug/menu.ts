@@ -9,7 +9,7 @@ export const debugMenu = () => {
         //   position: "bottom-left",
         title: 'Vehicle garage',
         items: [
-          { label: 'Option 1', icon: 'heart' },
+          { label: 'Option 1 For Very Very Long Label and For Sure This Is Very Long', icon: 'heart' },
           {
             label: 'Option 2',
             icon: 'basket-shopping',

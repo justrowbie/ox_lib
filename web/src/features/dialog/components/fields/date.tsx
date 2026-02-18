@@ -14,87 +14,91 @@ interface Props {
 
 const useStyles = createStyles((theme) => ({
   dropdown: {
-    background: theme.colors[theme.primaryColor][0] + 'E6',
-    color: theme.colors[theme.primaryColor][9],
+    background: theme.colors.dark[9],
+    color: theme.colors.dark[0],
     border: 'none',
   },
   label: {
-    color: theme.colors[theme.primaryColor][0],
+    color: theme.colors.dark[0],
     fontSize: '12px',
     fontWeight: 500,
     textTransform: 'uppercase'
   },
   description: {
-    color: theme.colors[theme.primaryColor][3],
+    color: theme.colors.dark[2],
     fontSize: '12px',
     fontWeight: 300,
   },
   input: {
-    color: theme.colors[theme.primaryColor][0],
-    background: theme.colors[theme.primaryColor][0] + '1A',
-    border: '1px solid ' + theme.colors[theme.primaryColor][0] + '33',
+    color: theme.colors.dark[0],
+    background: theme.colors.dark[9] + 'CC',
+    border: '1px solid ' + theme.colors.dark[9] + 'CC',
     cursor: 'pointer',
+    '&:hover': {
+      border: '1px solid ' + theme.colors.dark[0],
+    },
   },
   datestyle: {
-    color: theme.colors[theme.primaryColor][9],
+    color: theme.colors.dark[0],
     '&:hover': {
-      background: theme.colors[theme.primaryColor][0],
+      background: theme.colors.dark[0],
+      color: theme.colors.dark[9],
     },
     '&[data-selected]': {
-      background: theme.colors[theme.primaryColor][9],
+      background: theme.colors.dark[0],
+      color: theme.colors.dark[9],
     }
   },
   weekday: {
-    color: theme.colors[theme.primaryColor][9],
+    color: theme.colors.dark[0],
   },
   monthpicker: {
-    color: theme.colors[theme.primaryColor][9],
+    color: theme.colors.dark[0],
     '&:hover': {
-      background: theme.colors[theme.primaryColor][0],
+      background: theme.colors.dark[0],
+      color: theme.colors.dark[9],
     },
-    '&[data-selected]': {
-      background: theme.colors[theme.primaryColor][9],
-    }
   },
   monthactive: {
-    background: theme.colors[theme.primaryColor][9],
+    background: theme.colors.dark[0],
+    color: theme.colors.dark[9],
     '&:hover': {
-      background: theme.colors[theme.primaryColor][0],
-      color: theme.colors[theme.primaryColor][9],
+      background: theme.colors.dark[0],
+      color: theme.colors.dark[9],
     },
   },
   yearpicker: {
-    color: theme.colors[theme.primaryColor][9],
+    color: theme.colors.dark[0],
     '&:hover': {
-      background: theme.colors[theme.primaryColor][0],
+      background: theme.colors.dark[0],
+      color: theme.colors.dark[9],
     },
-    '&[data-selected]': {
-      background: theme.colors[theme.primaryColor][9],
-    }
   },
   yearactive: {
-    background: theme.colors[theme.primaryColor][9],
+    color: theme.colors.dark[9],
     '&:hover': {
-      background: theme.colors[theme.primaryColor][0],
-      color: theme.colors[theme.primaryColor][9],
+      background: theme.colors.dark[0],
+      color: theme.colors.dark[9],
     },
   },
   calheader: {
     marginLeft: 4,
     marginRight: 4,
-    background: theme.colors[theme.primaryColor][9],
-    color: theme.colors[theme.primaryColor][0],
+    background: theme.colors.dark[0],
+    color: theme.colors.dark[9],
+    cursor: 'pointer',
     '&:hover': {
-      background: theme.colors[theme.primaryColor][0],
-      color: theme.colors[theme.primaryColor][9],
+      background: theme.colors.dark[0],
+      color: theme.colors.dark[9],
     },
   },
   calicon: {
-    background: theme.colors[theme.primaryColor][9],
-    color: theme.colors[theme.primaryColor][0],
+    background: theme.colors.dark[0],
+    color: theme.colors.dark[9],
+    cursor: 'pointer',
     '&:hover': {
-      background: theme.colors[theme.primaryColor][0],
-      color: theme.colors[theme.primaryColor][9],
+      background: theme.colors.dark[0],
+      color: theme.colors.dark[9],
     },
   }
 }))
@@ -138,7 +142,7 @@ const DateField: React.FC<Props> = (props) => {
             yearPickerControlActive: classes.yearactive,
             yearPickerControl: classes.yearpicker,
             calendarHeaderLevel: classes.calheader,
-            calendarHeaderControl: classes.calicon,
+            calendarHeaderControl: classes.calicon
           }}
         />
       )}
@@ -171,7 +175,15 @@ const DateField: React.FC<Props> = (props) => {
             label: classes.label,
             description: classes.description,
             input: classes.input,
-            dropdown: classes.dropdown
+            dropdown: classes.dropdown,
+            day: classes.datestyle,
+            weekday: classes.weekday,
+            monthPickerControlActive: classes.monthactive,
+            monthPickerControl: classes.monthpicker,
+            yearPickerControlActive: classes.yearactive,
+            yearPickerControl: classes.yearpicker,
+            calendarHeaderLevel: classes.calheader,
+            calendarHeaderControl: classes.calicon,
           }}
         />
       )}

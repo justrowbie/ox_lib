@@ -18,10 +18,11 @@ const useStyles = createStyles((theme, params: { canClose?: boolean }) => ({
     justifyContent: 'center',
     borderRadius: 0,
     padding: 0,
-    background: params.canClose === false ? theme.colors[theme.primaryColor][0] + '1A' : theme.colors[theme.primaryColor][9] + '1A',
-    border: '1px solid ' + theme.colors[theme.primaryColor][0] + '33',
+    background: params.canClose === false ? theme.colors.dark[0] + 'CC' : theme.colors.dark[9] + 'CC',
+    border: '1px solid ' + theme.colors.dark[9] + 'CC',
     '&:hover': {
-      background: theme.colors[theme.primaryColor][0],
+      background: theme.colors.dark[0],
+      border: '1px solid ' + theme.colors.dark[0],
     }
   },
   root: {
@@ -35,9 +36,9 @@ const useStyles = createStyles((theme, params: { canClose?: boolean }) => ({
     alignItems: 'center',
     justifyContent: 'center',
     padding: 0,
-    color: params.canClose === false ? theme.colors[theme.primaryColor][0] : theme.colors[theme.primaryColor][0],
+    color: params.canClose === false ? theme.colors.dark[0] : theme.colors.dark[0],
     '&:hover': {
-      color: theme.colors[theme.primaryColor][9],
+      color: theme.colors.dark[9],
     }
   },
 }));

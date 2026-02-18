@@ -22,16 +22,17 @@ const useStyles = createStyles((theme, params: { position?: MenuPosition; itemCo
     background: `linear-gradient(to left,`+ theme.colors.dark[9] +`00 0%,`+ theme.colors.dark[9] +`E6 100%)`,
   },
   tooltip: {
-    background: theme.colors[theme.primaryColor][0] + '1A',
-    border: '1px solid ' + theme.colors[theme.primaryColor][0] + '33',
-    color: theme.colors[theme.primaryColor][0],
+    background: theme.colors.dark[9] + 'CC',
+    border: '1px solid ' + theme.colors.dark[9] + 'CC',
+    color: theme.colors.dark[0],
     borderRadius: theme.radius.sm,
-    maxWidth: 350,
+    width: 'fit-content',
+    textAlign: 'center',
     whiteSpace: 'normal',
   },
   modal: {
     display: 'flex',
-    width: '100%',
+    width: 350,
     height: '100%',
     background: 'transparent',
     border: 'none',
@@ -60,23 +61,23 @@ const useStyles = createStyles((theme, params: { position?: MenuPosition; itemCo
     maxHeight: 430,
     overflow: 'hidden',
     borderRadius: params.itemCount <= 6 || params.selected === params.itemCount - 1 ? theme.radius.md : undefined,
-    background: theme.colors[theme.primaryColor][0] + '1A',
-    borderTop: '1px solid ' + theme.colors[theme.primaryColor][0] + '33',
-    borderLeft: '1px solid ' + theme.colors[theme.primaryColor][0] + '33',
-    borderRight: '1px solid ' + theme.colors[theme.primaryColor][0] + '33',
+    background: theme.colors.dark[9] + 'CC',
+    borderTop: '1px solid ' + theme.colors.dark[9] + 'CC',
+    borderLeft: '1px solid ' + theme.colors.dark[9] + 'CC',
+    borderRight: '1px solid ' + theme.colors.dark[9] + 'CC',
     borderTopLeftRadius: 0,
     borderTopRightRadius: 0,
   },
   scrollArrow: {
-    background: theme.colors[theme.primaryColor][0] + '1A',
-    borderBottom: '1px solid ' + theme.colors[theme.primaryColor][0] + '33',
-    borderLeft: '1px solid ' + theme.colors[theme.primaryColor][0] + '33',
-    borderRight: '1px solid ' + theme.colors[theme.primaryColor][0] + '33',
+    background: theme.colors.dark[9] + 'CC',
+    borderBottom: '1px solid ' + theme.colors.dark[9] + 'CC',
+    borderLeft: '1px solid ' + theme.colors.dark[9] + 'CC',
+    borderRight: '1px solid ' + theme.colors.dark[9] + 'CC',
     textAlign: 'center',
     height: 25,
   },
   scrollArrowIcon: {
-    color: theme.colors[theme.primaryColor][0],
+    color: theme.colors.dark[0],
     fontSize: 16,
   },
 }));
@@ -230,9 +231,9 @@ const ListMenu: React.FC = () => {
     <>
       {menu.position === 'top-right' || menu.position === 'bottom-right' ? (
         <>
-          <SlideTransitionRight visible={visible}>
+          {/* <SlideTransitionRight visible={visible}>
             <Box className={classes.backgroundRight} />
-          </SlideTransitionRight>
+          </SlideTransitionRight> */}
           <Modal
             opened={visible}
             onClose={closeMenu}
@@ -292,9 +293,9 @@ const ListMenu: React.FC = () => {
         </>
       ) : (
 <>
-          <SlideTransitionLeft visible={visible}>
+          {/* <SlideTransitionLeft visible={visible}>
             <Box className={classes.backgroundLeft} />
-          </SlideTransitionLeft>
+          </SlideTransitionLeft> */}
           <Modal
             opened={visible}
             onClose={closeMenu}

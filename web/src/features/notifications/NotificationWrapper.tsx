@@ -12,9 +12,8 @@ const useStyles = createStyles((theme) => ({
   container: {
     width: 300,
     height: 'fit-content',
-    background: theme.colors[theme.primaryColor][0] + 'CC',
-    border: '1px solid ' + theme.colors[theme.primaryColor][0] + '33',
-    color: theme.colors[theme.primaryColor][9],
+    background: theme.colors.dark[9] + 'CC',
+    color: theme.colors.dark[0],
     padding: 12,
     fontFamily: 'Roboto',
     transformStyle: 'preserve-3d',
@@ -27,15 +26,15 @@ const useStyles = createStyles((theme) => ({
   },
   description: {
     fontSize: 12,
-    fontWeight: 300,
-    color: theme.colors[theme.primaryColor][9],
+    fontWeight: 400,
+    color: theme.colors.dark[0],
     fontFamily: 'Roboto',
     lineHeight: 'normal',
   },
   descriptionOnly: {
     fontSize: 12,
     fontWeight: 600,
-    color: theme.colors[theme.primaryColor][9],
+    color: theme.colors.dark[0],
     fontFamily: 'Roboto',
     lineHeight: 'normal',
     textTransform: 'uppercase',
@@ -145,20 +144,20 @@ const Notifications: React.FC = () => {
     if (!data.iconColor) {
       switch (data.type) {
         case 'error':
-          iconColor = 'red.5';
-          boxShadow = 'red.5' + '0px 8px 8px -8px';
+          iconColor = 'red.8';
+          boxShadow = 'red.8' + '0px 8px 8px -8px';
           break;
         case 'success':
-          iconColor = 'green.5';
-          boxShadow = 'green.5' + '0px 8px 8px -8px';
+          iconColor = 'green.8';
+          boxShadow = 'green.8' + '0px 8px 8px -8px';
           break;
         case 'warning':
-          iconColor = 'yellow.5';
-          boxShadow = 'yellow.5' + '0px 8px 8px -8px';
+          iconColor = 'yellow.8';
+          boxShadow = 'yellow.8' + '0px 8px 8px -8px';
           break;
         default:
-          iconColor = 'blue.5';
-          boxShadow = 'blue.5' + '0px 8px 8px -8px';
+          iconColor = 'blue.8';
+          boxShadow = 'blue.8' + '0px 8px 8px -8px';
           break;
       }
     } else {
