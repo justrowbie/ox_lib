@@ -48,7 +48,7 @@ const useStyles = createStyles((theme, params: { difficultyOffset: number }) => 
   },
   skillArea: {
     fill: 'transparent',
-    stroke: theme.colors.dark[0],
+    stroke: theme.colors.gray[0],
     strokeWidth: 10,
     r: 50,
     cx: 250,
@@ -63,7 +63,7 @@ const useStyles = createStyles((theme, params: { difficultyOffset: number }) => 
     },
   },
   indicator: {
-    stroke: theme.colors.dark[0],
+    stroke: theme.colors.gray[0],
     strokeWidth: 20,
     fill: 'transparent',
     r: 50,
@@ -83,7 +83,7 @@ const useStyles = createStyles((theme, params: { difficultyOffset: number }) => 
     left: '50%',
     top: '50%',
     transform: 'translate(-50%, -50%)',
-    backgroundColor: theme.colors.dark[0],
+    backgroundColor: theme.colors.gray[0],
     color: theme.colors.dark[9],
     width: 60,
     height: 60,
@@ -94,7 +94,7 @@ const useStyles = createStyles((theme, params: { difficultyOffset: number }) => 
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    boxShadow: `0 0 0 0 ${theme.fn.rgba(theme.colors.dark[0], 0.5)}`,
+    boxShadow: `0 0 0 0 ${theme.fn.rgba(theme.colors.gray[0], 0.5)}`,
     animation: `${pulse} 1s infinite ease-in-out`,
     '@media (min-height: 1440px)': {
       width: 100,
@@ -109,7 +109,7 @@ const useStyles = createStyles((theme, params: { difficultyOffset: number }) => 
     width: 60,
     height: 60,
     borderRadius: '50%',
-    border: `2px solid ${theme.colors.dark[0]}`,
+    border: `2px solid ${theme.colors.gray[0]}`,
     transform: 'translate(-50%, -50%)',
     animation: `${keyframes({
       '0%': { transform: 'translate(-50%, -50%) scale(1)', opacity: 0.5 },

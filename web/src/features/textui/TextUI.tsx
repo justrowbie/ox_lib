@@ -29,7 +29,7 @@ const useStyles = createStyles((theme, params: { position?: TextUiPosition }) =>
     padding: 5,
     margin: 5,
     background: theme.colors.dark[9] + 'CC',
-    color: theme.colors.dark[0],
+    color: theme.colors.gray[0],
     fontFamily: 'Roboto',
   },
   control: {
@@ -40,7 +40,7 @@ const useStyles = createStyles((theme, params: { position?: TextUiPosition }) =>
     padding: 5,
     height: 30,
     minWidth: 30,
-    background: theme.colors.dark[0],
+    background: theme.colors.gray[0],
     color: theme.colors.dark[9],
     fontFamily: 'Roboto',
     fontWeight: 600,

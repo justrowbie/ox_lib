@@ -6,8 +6,8 @@ export const debugAlert = () => {
     {
       action: 'sendAlert',
       data: {
-        header: 'Hello there',
-        content: 'General kenobi  \n Markdown works',
+        header: 'Hello there this is long text',
+        content: 'General kenobi  \n Markdown works \n So this is the longest text that we give to you',
         centered: true,
         size: 'lg',
         overflow: true,

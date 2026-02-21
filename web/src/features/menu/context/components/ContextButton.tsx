@@ -27,9 +27,9 @@ const useStyles = createStyles((theme, params: { disabled?: boolean; readOnly?: 
     fontWeight: 500,
     color: params.disabled
       ? theme.colors.dark[2]
-      : theme.colors.dark[0],
+      : theme.colors.gray[0],
     '&:hover': {
-      background: theme.colors.dark[0],
+      background: theme.colors.gray[0],
       color: theme.colors.dark[9],
       [`& .labelText, & .descriptionText`]: {
         color: theme.colors.dark[9],
@@ -59,13 +59,13 @@ const useStyles = createStyles((theme, params: { disabled?: boolean; readOnly?: 
     maxWidth: '25px',
   },
   description: {
-    color: theme.colors.dark[0],
+    color: theme.colors.gray[0],
     fontSize: '12px',
     fontWeight: 300,
   },
   dropdown: {
     padding: 10,
-    color: theme.colors.dark[0],
+    color: theme.colors.gray[0],
     fontSize: 14,
     fontWeight: 500,
     maxWidth: 400,
@@ -98,7 +98,7 @@ const useStyles = createStyles((theme, params: { disabled?: boolean; readOnly?: 
     height: 25,
   },
   progressBar: {
-    background: theme.colors.dark[0]
+    background: theme.colors.gray[0]
   },
   progressRoot: {
     background: theme.colors.dark[9] + 'CC'

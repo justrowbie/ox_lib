@@ -15,11 +15,11 @@ interface Props {
 const useStyles = createStyles((theme) => ({
   dropdown: {
     background: theme.colors.dark[9],
-    color: theme.colors.dark[0],
+    color: theme.colors.gray[0],
     border: 'none',
   },
   label: {
-    color: theme.colors.dark[0],
+    color: theme.colors.gray[0],
     fontSize: '12px',
     fontWeight: 500,
     textTransform: 'uppercase'
@@ -30,74 +30,74 @@ const useStyles = createStyles((theme) => ({
     fontWeight: 300,
   },
   input: {
-    color: theme.colors.dark[0],
+    color: theme.colors.gray[0],
     background: theme.colors.dark[9] + 'CC',
     border: '1px solid ' + theme.colors.dark[9] + 'CC',
     cursor: 'pointer',
     '&:hover': {
-      border: '1px solid ' + theme.colors.dark[0],
+      border: '1px solid ' + theme.colors.gray[0],
     },
   },
   datestyle: {
-    color: theme.colors.dark[0],
+    color: theme.colors.gray[0],
     '&:hover': {
-      background: theme.colors.dark[0],
+      background: theme.colors.gray[0],
       color: theme.colors.dark[9],
     },
     '&[data-selected]': {
-      background: theme.colors.dark[0],
+      background: theme.colors.gray[0],
       color: theme.colors.dark[9],
     }
   },
   weekday: {
-    color: theme.colors.dark[0],
+    color: theme.colors.gray[0],
   },
   monthpicker: {
-    color: theme.colors.dark[0],
+    color: theme.colors.gray[0],
     '&:hover': {
-      background: theme.colors.dark[0],
+      background: theme.colors.gray[0],
       color: theme.colors.dark[9],
     },
   },
   monthactive: {
-    background: theme.colors.dark[0],
+    background: theme.colors.gray[0],
     color: theme.colors.dark[9],
     '&:hover': {
-      background: theme.colors.dark[0],
+      background: theme.colors.gray[0],
       color: theme.colors.dark[9],
     },
   },
   yearpicker: {
-    color: theme.colors.dark[0],
+    color: theme.colors.gray[0],
     '&:hover': {
-      background: theme.colors.dark[0],
+      background: theme.colors.gray[0],
       color: theme.colors.dark[9],
     },
   },
   yearactive: {
     color: theme.colors.dark[9],
     '&:hover': {
-      background: theme.colors.dark[0],
+      background: theme.colors.gray[0],
       color: theme.colors.dark[9],
     },
   },
   calheader: {
     marginLeft: 4,
     marginRight: 4,
-    background: theme.colors.dark[0],
+    background: theme.colors.gray[0],
     color: theme.colors.dark[9],
     cursor: 'pointer',
     '&:hover': {
-      background: theme.colors.dark[0],
+      background: theme.colors.gray[0],
       color: theme.colors.dark[9],
     },
   },
   calicon: {
-    background: theme.colors.dark[0],
+    background: theme.colors.gray[0],
     color: theme.colors.dark[9],
     cursor: 'pointer',
     '&:hover': {
-      background: theme.colors.dark[0],
+      background: theme.colors.gray[0],
       color: theme.colors.dark[9],
     },
   }

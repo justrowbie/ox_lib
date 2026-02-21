@@ -11,7 +11,7 @@ interface Props {
 
 const useStyles = createStyles((theme) => ({
   label: {
-    color: theme.colors.dark[0],
+    color: theme.colors.gray[0],
     fontSize: '12px',
     fontWeight: 500,
     textTransform: 'uppercase'
@@ -28,10 +28,10 @@ const useStyles = createStyles((theme) => ({
     fontWeight: 500,
     fontSize: '12px',
     color: theme.colors.dark[9],
-    background: theme.colors.dark[0],
+    background: theme.colors.gray[0],
   },
   markLabel:{
-    color: theme.colors.dark[0]
+    color: theme.colors.gray[0]
   },
 }))
 
@@ -48,11 +48,11 @@ const SliderField: React.FC<Props> = (props) => {
         styles={(theme) => ({
           '.mantine-Slider-track::before': {
             background: theme.colors.dark[9] + 'CC',
-            // border: '1px solid ' + theme.colors.dark[0],
+            // border: '1px solid ' + theme.colors.gray[0],
           },
           '.mantine-Slider-track::after': {
-            background: theme.colors.dark[0] + 'CC',
-            // border: '1px solid ' + theme.colors.dark[0],
+            background: theme.colors.gray[0] + 'CC',
+            // border: '1px solid ' + theme.colors.gray[0],
           },
         })}
       />

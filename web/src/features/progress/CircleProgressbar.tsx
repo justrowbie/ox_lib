@@ -44,7 +44,7 @@ const useStyles = createStyles((theme, params: { position: 'middle' | 'bottom'; 
     fontWeight: 600,
     fontFamily: 'Roboto, sans-serif',
     textShadow: theme.shadows.sm,
-    color: theme.colors.dark[0],
+    color: theme.colors.gray[0],
   },
   label: {
     position: 'absolute',
@@ -60,7 +60,7 @@ const useStyles = createStyles((theme, params: { position: 'middle' | 'bottom'; 
     marginLeft: 75,
     marginTop: -60,
     textShadow: theme.shadows.sm,
-    color: theme.colors.dark[0],
+    color: theme.colors.gray[0],
     background: theme.colors.dark[9],
     width: 'fit-content',
     paddingLeft: 20,
@@ -113,7 +113,7 @@ const CircleProgressbar: React.FC = () => {
             <RingProgress
               size={90}
               thickness={7}
-              sections={[{ value: 0, color: theme.primaryColor }]}
+              sections={[{ value: 0, color: theme.colors.gray[0] }]}
               onAnimationEnd={() => setVisible(false)}
               className={classes.progress}
               label={<Text className={classes.value}>{value}%</Text>}

@@ -7,9 +7,9 @@ const useStyles = createStyles((theme) => ({
   },
   input: {
     background: theme.colors.dark[9] + '1A',
-    border: '1px solid ' + theme.colors.dark[0] + '33',
+    border: '1px solid ' + theme.colors.gray[0] + '33',
     '&:checked': { 
-      background: theme.colors.dark[0],
+      background: theme.colors.gray[0],
     },
   },
   inner: {

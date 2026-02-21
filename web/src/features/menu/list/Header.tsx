@@ -4,8 +4,8 @@ import React from 'react';
 const useStyles = createStyles((theme) => ({
   container: {
     textAlign: 'center',
-    background: theme.colors.dark[0],
-    border: '1px solid ' + theme.colors.dark[0],
+    background: theme.colors.gray[0],
+    border: '1px solid ' + theme.colors.gray[0],
     height: 40,
     width: 350,
     display: 'flex',

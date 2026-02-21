@@ -25,22 +25,22 @@ const useStyles = createStyles((theme) => ({
   },
   sector: {
     fill: theme.colors.dark[9] + 'CC',
-    color: theme.colors.dark[0],
+    color: theme.colors.gray[0],
     transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
     stroke: 'transparent',
     strokeWidth: 2,
     '&:hover': {
       cursor: 'pointer',
-      fill: theme.colors.dark[0],
-      stroke: theme.colors.dark[0] + 'CC',
+      fill: theme.colors.gray[0],
+      stroke: theme.colors.gray[0] + 'CC',
       strokeWidth: 1.5,
       '& g > svg > path': {
         fill: theme.colors.dark[9],
       },
     },
     '&[data-selected="true"]': {
-      fill: theme.colors.dark[0],
-      stroke: theme.colors.dark[0] + 'CC',
+      fill: theme.colors.gray[0],
+      stroke: theme.colors.gray[0] + 'CC',
       color: theme.colors.dark[9],
       strokeWidth: 1.5,
     },
@@ -56,8 +56,8 @@ const useStyles = createStyles((theme) => ({
     cursor: 'pointer',
     transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
     '&:hover': {
-      fill: theme.colors.dark[0],
-      stroke: theme.colors.dark[0] + 'CC',
+      fill: theme.colors.gray[0],
+      stroke: theme.colors.gray[0] + 'CC',
       strokeWidth: 0.5,
     },
   },
@@ -83,7 +83,7 @@ const useStyles = createStyles((theme) => ({
     maxWidth: '200px',
   },
   centerTextSpan: {
-    color: theme.colors.dark[0],
+    color: theme.colors.gray[0],
     fontSize: '14px',
     fontWeight: 500,
     textTransform: 'uppercase',

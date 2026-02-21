@@ -15,7 +15,7 @@ interface Props {
 
 const useStyles = createStyles((theme, params: { iconColor?: string }) => ({
   buttonContainer: {
-    color: theme.colors.dark[0],
+    color: theme.colors.gray[0],
     padding: 5,
     height: 45,
     textTransform: 'uppercase',
@@ -23,8 +23,8 @@ const useStyles = createStyles((theme, params: { iconColor?: string }) => ({
     fontWeight: 300,
     scrollMargin: 8,
     '&:focus': {
-      background: theme.colors.dark[0],
-      border: '1px solid ' + theme.colors.dark[0],
+      background: theme.colors.gray[0],
+      border: '1px solid ' + theme.colors.gray[0],
       color: theme.colors.dark[9],
       outline: 'none',
       [`& .hoverText`]: {
@@ -41,7 +41,7 @@ const useStyles = createStyles((theme, params: { iconColor?: string }) => ({
       },
       [`& .checkboxInner`]: {
         '> svg > path': {
-          fill: theme.colors.dark[0],
+          fill: theme.colors.gray[0],
         },
       },
     },
@@ -62,10 +62,10 @@ const useStyles = createStyles((theme, params: { iconColor?: string }) => ({
   },
   icon: {
     fontSize: 16,
-    color: params.iconColor || theme.colors.dark[0],
+    color: params.iconColor || theme.colors.gray[0],
   },
   label: {
-    color: theme.colors.dark[0],
+    color: theme.colors.gray[0],
     textTransform: 'uppercase',
     fontSize: 12,
     fontWeight: 500,
@@ -73,10 +73,10 @@ const useStyles = createStyles((theme, params: { iconColor?: string }) => ({
   },
   chevronIcon: {
     fontSize: 12,
-    color: theme.colors.dark[0],
+    color: theme.colors.gray[0],
   },
   scrollIndexValue: {
-    color: theme.colors.dark[0],
+    color: theme.colors.gray[0],
     textTransform: 'uppercase',
     fontSize: 10,
     fontWeight: 500,
@@ -90,7 +90,7 @@ const useStyles = createStyles((theme, params: { iconColor?: string }) => ({
     marginBottom: 3,
   },
   progressBar: {
-    background: theme.colors.dark[0]
+    background: theme.colors.gray[0]
   },
   progressRoot: {
     background: theme.colors.dark[9] + 'CC'

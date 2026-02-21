@@ -34,10 +34,10 @@ const useStyles = createStyles((theme) => ({
     fontWeight: 500,
     color: theme.colors.dark[9],
     textAlign: 'center',
-    background: theme.colors.dark[0],
+    background: theme.colors.gray[0],
   },
   buttonsubmit: {
-    color: theme.colors.dark[0],
+    color: theme.colors.gray[0],
     background: theme.colors.green[8] + 'CC',
     border: '1px solid ' + theme.colors.green[8] + 'CC',
     borderRadius: '1px',
@@ -47,7 +47,7 @@ const useStyles = createStyles((theme) => ({
     },
   },
   buttoncancel: {
-    color: theme.colors.dark[0],
+    color: theme.colors.gray[0],
     background: theme.colors.red[8] + 'CC',
     border: '1px solid ' + theme.colors.red[8] + 'CC',
     borderRadius: '1px',

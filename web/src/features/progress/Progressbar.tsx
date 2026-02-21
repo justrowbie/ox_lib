@@ -42,13 +42,13 @@ const useStyles = createStyles((theme) => ({
     marginLeft: -30,
     fontSize: 12,
     fontWeight: 500,
-    color: theme.colors.dark[0],
+    color: theme.colors.gray[0],
     background: theme.colors.dark[9],
     transition: 'opacity 0.5s ease',
   },
   bar: {
     height: '100%',
-    background: theme.colors.dark[0],
+    background: theme.colors.gray[0],
   },
   labelWrapper: {
     position: 'absolute',
@@ -69,7 +69,7 @@ const useStyles = createStyles((theme) => ({
     fontWeight: 500,
     marginBottom: 30,
     textTransform: 'uppercase',
-    color: theme.colors.dark[0],
+    color: theme.colors.gray[0],
     textShadow: theme.shadows.sm,
   },
 }));

@@ -36,7 +36,7 @@ const useStyles = createStyles((theme) => ({
   },
   titleContainer: {
     flex: '1 85%',
-    background: theme.colors.dark[0],
+    background: theme.colors.gray[0],
   },
   titleText: {
     color: theme.colors.dark[9],

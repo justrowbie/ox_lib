@@ -17,7 +17,7 @@ const useStyles = createStyles((theme) => ({
     border: 'none',
   },
   label: {
-    color: theme.colors.dark[0],
+    color: theme.colors.gray[0],
     fontSize: '12px',
     fontWeight: 500,
     textTransform: 'uppercase'
@@ -28,12 +28,12 @@ const useStyles = createStyles((theme) => ({
     fontWeight: 300,
   },
   input: {
-    color: theme.colors.dark[0],
+    color: theme.colors.gray[0],
     background: theme.colors.dark[9] + 'CC',
     border: '1px solid ' + theme.colors.dark[9] + 'CC',
     cursor: 'pointer',
     '&:hover': {
-      border: '1px solid ' + theme.colors.dark[0],
+      border: '1px solid ' + theme.colors.gray[0],
     },
   },
 }))

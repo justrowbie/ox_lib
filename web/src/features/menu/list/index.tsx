@@ -24,7 +24,7 @@ const useStyles = createStyles((theme, params: { position?: MenuPosition; itemCo
   tooltip: {
     background: theme.colors.dark[9] + 'CC',
     border: '1px solid ' + theme.colors.dark[9] + 'CC',
-    color: theme.colors.dark[0],
+    color: theme.colors.gray[0],
     borderRadius: theme.radius.sm,
     width: 'fit-content',
     textAlign: 'center',
@@ -77,7 +77,7 @@ const useStyles = createStyles((theme, params: { position?: MenuPosition; itemCo
     height: 25,
   },
   scrollArrowIcon: {
-    color: theme.colors.dark[0],
+    color: theme.colors.gray[0],
     fontSize: 16,
   },
 }));
